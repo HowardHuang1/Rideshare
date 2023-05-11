@@ -1,0 +1,30 @@
+.header__wrapper {
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+  }
+  
+  .menuItems {
+    
+  }
+  
+  .menuItems a {
+    background-color: black;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    padding: 0 20px;
+  }
+  
+  .menuItems a:hover,
+  .menuItems a:active {
+    color: #5AC53B;
+  }
+  
+  a:first-of-type {
+    color: #5AC53B;
+  }
+  
