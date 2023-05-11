@@ -1,10 +1,11 @@
 import React from 'react';
+import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import CreateRide from './components/CreateRide';
 import Dashboard from './components/Dashboard';
-import './App.css';
+import Tesla from './Tesla.jpeg'
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
           <Route path="/dashboard" component={Dashboard} />
         </Routes>
       </Router>
+      <div className="container">
+          <img src={Tesla} alt="tesla" />
+      </div>
     </div>
   );
 }
