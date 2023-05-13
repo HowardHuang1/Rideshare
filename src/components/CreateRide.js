@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CreateRide = () => {
+function CreateRide() {
   return <h1>Create Ride Page</h1>;
 };
 

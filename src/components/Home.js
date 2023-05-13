@@ -1,7 +1,14 @@
 import React from 'react';
+import Tesla from '../Tesla.jpeg'
 
-const Home = () => {
-  return <h1>Home Page</h1>;
+function Home() {
+  return( 
+    <div className="container">
+      <div className="bannerImage">
+        <img src={Tesla} alt="tesla" />
+      </div>
+    </div>
+  );
 };
 
 export default Home;

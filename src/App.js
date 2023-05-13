@@ -5,7 +5,6 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import CreateRide from './components/CreateRide';
 import Dashboard from './components/Dashboard';
-import Tesla from './Tesla.jpeg'
 
 function App() {
   return (
@@ -13,14 +12,11 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route exact path="/" component={Home} />
-          <Route path="/createRide" component={CreateRide} />
-          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/" element={<Home/>} />
+          <Route path="/createRide" element={<CreateRide/>} />
+          <Route path="/dashboard" element={<Dashboard/>} />
         </Routes>
       </Router>
-      <div className="container">
-          <img src={Tesla} alt="tesla" />
-      </div>
     </div>
   );
 }

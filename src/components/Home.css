@@ -1,0 +1,16 @@
+.container {
+    background-color: black;
+}
+
+.bannerImage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Adjust the height as needed */
+  }
+  
+  .image {
+    width: 100%;
+    height: auto;
+  }
