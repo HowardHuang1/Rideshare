@@ -107,7 +107,17 @@ app.post("/create-user", async (req, res) => {
     const error = "Please fill out all fields";
     res.send(error);
     return;
+  } else if (password.length < 3) {
+    const error = "Password must be at least 3 characters";
+    res.send(error);
+  } else if (!fullName.includes(" ")) {
+    const error = "Please enter your full name";
+    res.send(error);
+  } else if (!validator.isEmail(email)) {
+    const error = "Please enter a valid email";
+    res.send(error);
   }
+
   // save new user to database
   try {
     let foundUser = await User.findOne({ username: username });
