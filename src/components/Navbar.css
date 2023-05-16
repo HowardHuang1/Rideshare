@@ -7,9 +7,6 @@
     height: 70px;
   }
   
-  .menuItems {
-    
-  }
   
   .menuItems a {
     background-color: black;
@@ -24,4 +21,6 @@
     color: #BA0F30;
   }
   
-  
+  body {
+    margin: 0px;
+  }
