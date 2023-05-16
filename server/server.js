@@ -29,9 +29,8 @@ main().catch((err) => console.log(err));
 
 // connect to mongoDB database
 async function main() {
-  // local connection string: "mongodb://127.0.0.1:27017/trips_db"
   mongoose.connect(
-    "mongodb+srv://cs35l:eggert@easyrideone.0gqx4ay.mongodb.net/rides_db?retryWrites=true&w=majority"
+    "mongodb+srv://rohil:pass@cluster0.j9oshqr.mongodb.net/rides_db?retryWrites=true&w=majority"
   );
 }
 
@@ -292,3 +291,7 @@ app.post(
     });
   }
 );
+
+app.listen(8000, function (req, res) {
+  console.log("Listening on port 8000");
+});
