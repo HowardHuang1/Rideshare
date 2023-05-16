@@ -84,6 +84,7 @@ const getDistance = async (origin, destination, apiKey) => {
     const distance = response.data.rows[0].elements[0].distance.text;
     console.log(`Distance: ${distance}`);
     console.log(`Duration: ${duration}`);
+
     return distance;
   } catch (error) {
     console.error("Error:", error.message);
