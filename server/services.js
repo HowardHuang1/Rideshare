@@ -1,5 +1,10 @@
 const axios = require("axios");
 const express = require("express");
+const {
+  body,
+  validationResult,
+  ValidationError,
+} = require("express-validator");
 const google_api_key = "AIzaSyDErGxdZK14gqrGZG0TXDnqooOgOQVGGyY";
 
 const getPlaceInfo = async (location) => {
@@ -58,4 +63,31 @@ const dateTimeValidator = (dateArray, timeArray, AM) => {
   return dateObj;
 };
 
-module.exports = { getPlaceInfo, dateTimeValidator };
+const getDistance = async (origin, destination, apiKey) => {
+  originInfo = await getPlaceInfo(origin);
+  destinationInfo = await getPlaceInfo(destination);
+
+  try {
+    const response = await axios.get(
+      "https://maps.googleapis.com/maps/api/distancematrix/json",
+      {
+        params: {
+          origins: originInfo.address,
+          destinations: destinationInfo.address,
+          mode: "driving",
+          units: "imperial",
+          key: apiKey,
+        },
+      }
+    );
+
+    const distance = response.data.rows[0].elements[0].distance.text;
+    console.log(`Distance: ${distance}`);
+    console.log(`Duration: ${duration}`);
+    return distance;
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
+};
+
+module.exports = { getPlaceInfo, dateTimeValidator, getDistance };
