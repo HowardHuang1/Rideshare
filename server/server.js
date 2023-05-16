@@ -234,46 +234,7 @@ app.post("/create-ride", async (req, res) => {
   if (!foundUser) {
     res.send(null); // user not found
   }
-
-  dateArray = date.split("/").map((x) => parseInt(x));
-  timeArray = time.split(":").map((x) => parseInt(x));
-
-  if (
-    dateArray.length != 3 ||
-    dateArray[0] > 12 ||
-    dateArray[1] > 31 ||
-    dateArray[2] < 2023 ||
-    dateArray[0] < 0 ||
-    dateArray[1] < 0 ||
-    dateArray[2] < 0
-  ) {
-    const error = new ValidationError("Invalid date");
-    return res.status(400).json({ errors: error.array() });
-  } else if (
-    timeArray.length != 2 ||
-    timeArray[0] > 12 ||
-    timeArray[1] > 59 ||
-    timeArray[0] < 0 ||
-    timeArray[1] < 0
-  ) {
-    const error = new ValidationError("Invalid time");
-    return res.status(400).json({ errors: error.array() });
-  }
-  if (!AM) {
-    if (timeArray[0] != 12) timeArray[0] += 12;
-  }
-
-  dateObj = new Date(
-    dateArray[2],
-    dateArray[0],
-    dateArray[1],
-    timeArray[0],
-    timeArray[1]
-  );
-  if (isNaN(dateObj)) {
-    const error = new ValidationError("Invalid date");
-    return res.status(400).json({ errors: error.array() });
-  }
+  const dateObj = services.dateTimeValidator(date, time, AM);
 
   fromPlaceInfo = await getPlaceInfo(locationFrom);
   toPlaceInfo = await getPlaceInfo(locationTo);
@@ -368,7 +329,12 @@ app.put(
     body("rideID").isLength({ min: 1 }).withMessage("Please provide a ride ID"),
   ],
   async (req, res) => {
-    const { rideID, time, AM, numRidersAllowed } = req.body;
+    const { username, rideID, time, AM, numRidersAllowed } = req.body;
+    const foundUser = await User.findOne({ username: username });
+    if (!foundUser) {
+      const error = new ValidationError("Invalid username");
+      return res.status(400).json({ errors: error.array() });
+    }
     const foundRide = await Ride.findOne({ _id: rideID });
     if (foundRide) {
       let timeArray = time.split(":").map((x) => parseInt(x));
@@ -400,8 +366,13 @@ app.put(
     }
 
     if (numRidersAllowed) {
+      if (foundRide.usernames.length > numRidersAllowed) {
+        const error = new ValidationError(
+          "There are more riders already in the ride than the new limit"
+        );
+        return res.status(400).json({ errors: error.array() });
+      }
       foundRide.numRidersAllowed = numRidersAllowed;
-
       await foundRide.save();
     } else {
       res.send(null); // couldn't find ride
@@ -430,6 +401,30 @@ app.delete("/leave-ride", async (req, res) => {
   } else {
     res.send(null); // couldn't find ride
   }
+});
+
+app.get("/search-ride", async (req, res) => {
+  const { locationFrom, locationTo, date, time, AM, open } = req.body;
+  const foundRides = await Ride.find({}); // store rides in local variable
+  const dateObj = services.dateTimeValidator(date, time, AM);
+
+  fromPlaceInfo = await getPlaceInfo(locationFrom);
+  toPlaceInfo = await getPlaceInfo(locationTo);
+
+  if (fromPlaceInfo.address == undefined) {
+    const error = new ValidationError("Invalid from location");
+    return res.status(400).json({ errors: error.array() });
+  } else if (toPlaceInfo.address == undefined) {
+    const error = new ValidationError("Invalid destination");
+    return res.status(400).json({ errors: error.array() });
+  }
+
+  let foundRidesFiltered = foundRides.filter((ride) => {
+    cond = true;
+    if (fromPlaceInfo.address != undefined) {
+      cond = cond && ride.locationFrom.address == fromPlaceInfo.address;
+    }
+  });
 });
 
 app.listen(8000, function (req, res) {
