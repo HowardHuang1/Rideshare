@@ -404,6 +404,8 @@ app.delete("/leave-ride", async (req, res) => {
 });
 
 app.get("/search-ride", async (req, res) => {
+  const timeparam = 15;
+  const distparam = 0.5;
   const { locationFrom, locationTo, date, time, AM, open } = req.body;
   const foundRides = await Ride.find({}); // store rides in local variable
   const dateObj = services.dateTimeValidator(date, time, AM);
@@ -421,19 +423,20 @@ app.get("/search-ride", async (req, res) => {
 
   let foundRidesFiltered = foundRides.filter((ride) => {
     cond = true;
-    if (fromPlaceInfo.address != undefined) {
-      cond = cond && ride.locationFrom.address == fromPlaceInfo.address;
+    cond = cond && ride.addressFrom == fromPlaceInfo.address;
+    cond = cond && ride.addressTo == toPlaceInfo.address;
+    // check if ride is already filled, if open is specified
+    if(open){
+      cond = cond && (ride.usernames.length != ride.numRidersAllowed);
     }
-    if (toPlaceInfo.address != undefined) {
-      cond = cond && ride.locationTo.address == toPlaceInfo.address;
-    }
-    // check if ride is already filled
-    cond = cond && (ride.usernames.length != ride.numRidersAllowed);
-    // rides only 15 min apart
+    // rides only timeparam min apart
     if (req.body.date != undefined){
       var diff = (req.body.date.getTime() - ride.date.getTime())/60000;
-      cond = cond && ((diff < 15 && diff > 0) ||(diff > -15 && diff < 0))
+      cond = cond && ((diff < timeparam && diff > 0) ||(diff > -timeparam && diff < 0))
     }
+    // rides only distparam apart
+    const dist = services.getDistance(fromPlaceInfo.address, ride.addressFrom);
+    cond = cond && (dist <= distparam);
   });
 });
 
