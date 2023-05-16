@@ -461,8 +461,7 @@ app.get("/search-ride", async (req, res) => {
 
 app.get("/get-ride-image", async (req, res) => {
   const { rideID } = req.body;
-  console.log(rideID);
-  const foundRide = await Ride.find({ _id: rideID });
+  const foundRide = await Ride.findOne({ _id: rideID });
   if (!foundRide) {
     const error = new ValidationError("Invalid Ride ID");
     return res.status(400).json({ errors: error.array() });
