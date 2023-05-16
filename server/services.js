@@ -63,17 +63,14 @@ const dateTimeValidator = (dateArray, timeArray, AM) => {
   return dateObj;
 };
 
-const getDistance = async (origin, destination, apiKey) => {
-  originInfo = await getPlaceInfo(origin);
-  destinationInfo = await getPlaceInfo(destination);
-
+const getDistance = async (place_1_address, place_2_address, apiKey) => {
   try {
     const response = await axios.get(
       "https://maps.googleapis.com/maps/api/distancematrix/json",
       {
         params: {
-          origins: originInfo.address,
-          destinations: destinationInfo.address,
+          origins: place_1_address,
+          destinations: place_2_address,
           mode: "driving",
           units: "imperial",
           key: apiKey,
@@ -85,7 +82,7 @@ const getDistance = async (origin, destination, apiKey) => {
     console.log(`Distance: ${distance}`);
     console.log(`Duration: ${duration}`);
 
-    return distance;
+    return parseFloat(distance.split(" ")[0]);
   } catch (error) {
     console.error("Error:", error.message);
   }
