@@ -424,6 +424,16 @@ app.get("/search-ride", async (req, res) => {
     if (fromPlaceInfo.address != undefined) {
       cond = cond && ride.locationFrom.address == fromPlaceInfo.address;
     }
+    if (toPlaceInfo.address != undefined) {
+      cond = cond && ride.locationTo.address == toPlaceInfo.address;
+    }
+    // check if ride is already filled
+    cond = cond && (ride.usernames.length != ride.numRidersAllowed);
+    // rides only 15 min apart
+    if (req.body.date != undefined){
+      var diff = (req.body.date.getTime() - ride.date.getTime())/60000;
+      cond = cond && ((diff < 15 && diff > 0) ||(diff > -15 && diff < 0))
+    }
   });
 });
 
