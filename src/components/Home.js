@@ -13,9 +13,6 @@ function Home() {
   
   return( 
     <div className="container" style={backgroundImageStyle}>
-      <div className="bannerImage">
-        {/* <img src={Tesla} alt="tesla" /> */}
-      </div>
       <div className="photo">
         <RedirectingButton destination={"/createRide"} value={"Create a ride"} />
       </div>
