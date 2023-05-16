@@ -5,6 +5,7 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 const axios = require("axios");
+const { body, validationResult } = require("express-validator");
 
 /* other imported files: */
 
@@ -86,52 +87,101 @@ app.get("/", async (req, res) => {
 });
 
 // create user
-app.post("/create-user", async (req, res) => {
-  // get username and password from req.body
-  const { username, password, fullNam, email } = req.body;
+app.post(
+  "/create-user",
+  [
+    body("username")
+      .isLength({ min: 3 })
+      .withMessage("Username must be at least 3 characters"),
+    body("password")
+      .isLength({ min: 3 })
+      .withMessage("Password must be at least 3 characters"),
+    body("fullName")
+      .isLength({ min: 3 })
+      .withMessage("Please enter your full name"),
+    body("email").isEmail().withMessage("Please enter a valid email"),
+  ],
+  async (req, res) => {
+    // send validation errors if any
+    const errors = validationResult(req);
 
-  console.log(username, password, fullName, email);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
-  // hash password
-  const hashedPassword = await bcrypt.hash(password, 10);
+    //extract user info from request body
+    const { username, password, fullName, email } = req.body;
 
-  // create new user
-  const newUser = new User({
-    username,
-    password: hashedPassword,
-    fullName,
-    email,
-  });
+    // log user info
+    console.log(username, password, fullName, email);
 
-  if (username == "" || password == "" || fullName == "" || email == "") {
-    const error = "Please fill out all fields";
-    res.send(error);
-    return;
-  } else if (password.length < 3) {
-    const error = "Password must be at least 3 characters";
-    res.send(error);
-  } else if (!fullName.includes(" ")) {
-    const error = "Please enter your full name";
-    res.send(error);
-  } else if (!validator.isEmail(email)) {
-    const error = "Please enter a valid email";
-    res.send(error);
+    // hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // create new user
+    const newUser = new User({
+      username,
+      password: hashedPassword,
+      fullName,
+      email,
+    });
+
+    // save new user to database
+    try {
+      let foundUser = await User.findOne({ username: username });
+      if (foundUser == null) {
+        try {
+          await newUser.save();
+          res.send(true);
+        } catch (error) {
+          res.send(error);
+        }
+      } else {
+        res.send(false);
+      }
+    } catch (error) {
+      res.send(error);
+    }
   }
+);
 
-  // save new user to database
-  try {
-    let foundUser = await User.findOne({ username: username });
-    if (foundUser == null) {
-      try {
-        await newUser.save();
+app.post(
+  "/login",
+  [
+    body("username")
+      .isLength({ min: 3 })
+      .withMessage("Username must be at least 3 characters"),
+    body("password")
+      .isLength({ min: 3 })
+      .withMessage("Password must be at least 3 characters"),
+  ],
+  async (req, res) => {
+    const { username, password } = req.body;
+
+    const user = await User.findOne({ username: username });
+
+    if (user) {
+      const isMatch = await bcrypt.compare(password, user.password);
+
+      if (isMatch) {
         res.send(true);
-      } catch (error) {
-        res.send(error);
+      } else {
+        res.send(false); // found user but incorrect password
       }
     } else {
-      res.send(false);
+      res.send(null); // couldn't find user
     }
-  } catch (error) {
-    res.send(error);
+  }
+);
+
+app.get("/user-data", async (req, res) => {
+  const { username } = req.body;
+  const user = User.findOne({ username: username });
+  if (user) {
+    console.log("The user is ", user);
+    // res.send(user.fullName, user.email, user.username, moneySaved(user));
+    res.send(user.fullName, user.email, user.username);
+  } else {
+    res.send(null);
   }
 });
