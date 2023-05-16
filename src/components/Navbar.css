@@ -20,11 +20,8 @@
   }
   
   .menuItems a:hover,
-  .menuItems a:active {
+  .menuItems a.active {
     color: #BA0F30;
   }
   
-  a:first-of-type {
-    color: #BA0F30;
-  }
   
