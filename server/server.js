@@ -31,7 +31,7 @@ main().catch((err) => console.log(err));
 
 // connect to mongoDB database
 async function main() {
-  mongoose.connect(
+  await mongoose.connect(
     "mongodb+srv://rohil:pass@cluster0.j9oshqr.mongodb.net/rides_db?retryWrites=true&w=majority"
   );
 }
@@ -461,6 +461,7 @@ app.get("/search-ride", async (req, res) => {
 
 app.get("/get-ride-image", async (req, res) => {
   const { rideID } = req.body;
+  console.log(rideID);
   const foundRide = await Ride.find({ _id: rideID });
   if (!foundRide) {
     const error = new ValidationError("Invalid Ride ID");
