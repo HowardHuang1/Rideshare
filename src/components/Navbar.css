@@ -2,7 +2,7 @@
     background-color: black;
     color: white;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     height: 70px;
   }
@@ -20,4 +20,15 @@
   .menuItems a.active {
     color: #BA0F30;
   }
-  
+
+.menuItems{
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  flex: auto;
+}
+
+nav {
+  display: flex;
+  flex: auto;
+}
