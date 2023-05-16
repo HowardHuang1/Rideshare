@@ -11,6 +11,8 @@ const {
   ValidationError,
 } = require("express-validator");
 
+const google_api_key = "AIzaSyDErGxdZK14gqrGZG0TXDnqooOgOQVGGyY";
+
 /* other imported files: */
 
 const services = require("./services.js");
@@ -266,6 +268,13 @@ app.post("/create-ride", async (req, res) => {
     idTo: toPlaceInfo.id,
     numRidersAllowed: numRidersAllowed,
   });
+
+  try {
+    await newRide.save();
+    res.send(newRide);
+  } catch (error) {
+    res.send(error);
+  }
 });
 
 app.post("/join-ride", async (req, res) => {
@@ -410,8 +419,14 @@ app.get("/search-ride", async (req, res) => {
   const foundRides = await Ride.find({}); // store rides in local variable
   const dateObj = services.dateTimeValidator(date, time, AM);
 
-  fromPlaceInfo = await getPlaceInfo(locationFrom);
-  toPlaceInfo = await getPlaceInfo(locationTo);
+  let fromPlaceInfo;
+  let toPlaceInfo;
+  if (fromPlaceInfo.address == undefined) {
+    fromPlaceInfo = await getPlaceInfo(locationFrom);
+  }
+  if (fromPlaceInfo.address == undefined) {
+    toPlaceInfo = await getPlaceInfo(locationTo);
+  }
 
   if (fromPlaceInfo.address == undefined) {
     const error = new ValidationError("Invalid from location");
@@ -426,18 +441,51 @@ app.get("/search-ride", async (req, res) => {
     cond = cond && ride.addressFrom == fromPlaceInfo.address;
     cond = cond && ride.addressTo == toPlaceInfo.address;
     // check if ride is already filled, if open is specified
-    if(open){
-      cond = cond && (ride.usernames.length != ride.numRidersAllowed);
+    if (open) {
+      cond = cond && ride.usernames.length != ride.numRidersAllowed;
     }
     // rides only timeparam min apart
-    if (req.body.date != undefined){
-      var diff = (req.body.date.getTime() - ride.date.getTime())/60000;
-      cond = cond && ((diff < timeparam && diff > 0) ||(diff > -timeparam && diff < 0))
+    if (req.body.date != undefined) {
+      var diff = (dateObj.getTime() - ride.date.getTime()) / 60000;
+      cond =
+        cond &&
+        ((diff < timeparam && diff > 0) || (diff > -timeparam && diff < 0));
     }
     // rides only distparam apart
     const dist = services.getDistance(fromPlaceInfo.address, ride.addressFrom);
-    cond = cond && (dist <= distparam);
+    cond = cond && dist <= distparam;
+    return cond;
   });
+  return res.send(foundRidesFiltered);
+});
+
+app.get("/get-ride-image", async (req, res) => {
+  const { rideID } = req.body;
+  const foundRide = await Ride.find({ _id: rideID });
+  if (!foundRide) {
+    const error = new ValidationError("Invalid Ride ID");
+    return res.status(400).json({ errors: error.array() });
+  }
+
+  // Make a request to the Directions API
+  const response = await axios.get(
+    "https://maps.googleapis.com/maps/api/directions/json",
+    {
+      params: {
+        origin: foundRide.addressFrom,
+        destination: foundRide.addressTo,
+        key: google_api_key,
+      },
+    }
+  );
+
+  // Extract route coordinates from the response
+  const route = response.data.routes[0];
+  const overviewPolyline = route.overview_polyline.points;
+
+  // Generate the static map image URL with the driving route
+  const mapImageURL = `https://maps.googleapis.com/maps/api/staticmap?size=600x400&path=enc:${overviewPolyline}&key=${google_api_key}`;
+  res.send(mapImageURL);
 });
 
 app.listen(8000, function (req, res) {
