@@ -12,7 +12,7 @@ function Navbar() {
                 <NavLink to="/createRide" activeClassName="active">Create Ride</NavLink>
               </div>
               <div className="right-items">
-                <NavLink to="/dashboard" activeClassName="active">Dashboard</NavLink>
+                <NavLink to="/profile" activeClassName="active">Profile</NavLink>
               </div>
           </div>
       </nav>
