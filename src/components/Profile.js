@@ -16,11 +16,14 @@ const Profile = (props) => {
     );
 }
 
+export default Profile;
+
 // Display previous rides here
 
 const RideHistory = () => {
     const rides = [
         {
+            id: 1,
             start: "starting point",
             end: "ending point",
             payment: "$payment"
@@ -40,3 +43,5 @@ const RideHistory = () => {
         </div>
     )
 }
+
+export { RideHistory };
