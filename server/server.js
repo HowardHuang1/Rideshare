@@ -207,7 +207,7 @@ app.post(
 
 app.get("/user-data", async (req, res) => {
   const { username } = req.body;
-  const user = User.findOne({ username: username });
+  const user = await User.findOne({ username: username });
   if (user) {
     console.log("The user is ", user);
     // res.send({user.fullName, user.email, user.username, moneySaved: moneySaved(user)}, numRides: numRides(user)});
@@ -488,8 +488,6 @@ app.get("/get-ride-image", async (req, res) => {
   res.send(mapImageURL);
 });
 
-//uberfarefinder.com/estimate/San%20Mateo%20High%20School,%20506%20N%20Delaware%20St,%20San%20Mateo,%20California%2094401,%20United%20States/Bowditch%20Middle%20School,%201450%20Tarpon%20St,%20Foster%20City,%20California%2094404,%20United%20States#fare-comparison
-
-https: app.listen(8000, function (req, res) {
+app.listen(8000, function (req, res) {
   console.log("Listening on port 8000");
 });
