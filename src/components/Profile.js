@@ -40,7 +40,7 @@ const RideHistory = () => {
     )
 }
 
-const App = () => {
+const ProfileApp = () => {
     const profileData = {
         name: "Satvik Nair",
         username: "satvikn",
@@ -55,4 +55,4 @@ const App = () => {
     );
 }
 
-export default App;
+export default ProfileApp;
