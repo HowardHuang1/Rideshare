@@ -364,15 +364,6 @@ app.post("/get-rides-for-user", async (req, res) => {
   }
 });
 
-app.post("/get-all-rides", async (req, res) => {
-  const foundRides = await Ride.find({});
-  if (foundRides) {
-    res.send(foundRides); // found rides
-  } else {
-    res.send(null); // no rides in database
-  }
-});
-
 app.put(
   "/update-ride",
   [
@@ -463,6 +454,22 @@ app.get("/search-ride", async (req, res) => {
   const { locationFrom, locationTo, date, time, AM, open } = req.body;
   const foundRides = await Ride.find({}); // store rides in local variable
   const dateObj = services.dateTimeValidator(date, time, AM);
+
+  if (
+    locationFrom == undefined ||
+    locationTo == undefined ||
+    dateObj == undefined ||
+    time == undefined ||
+    AM == undefined ||
+    open == undefined
+  ) {
+    const foundRides = await Ride.find({});
+    if (foundRides) {
+      res.send(foundRides); // found rides
+    } else {
+      res.send(null); // no rides in database
+    }
+  }
 
   let fromPlaceInfo;
   let toPlaceInfo;
