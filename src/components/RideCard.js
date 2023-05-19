@@ -38,6 +38,7 @@ function RideCard() {
                 </Button>
                 </CardFooter>
             </Stack>
+                <Heading fontSize='3xl' marginTop='30px' marginRight='30px'>$54.98</Heading>
             </Card>
         </ChakraProvider>
     );

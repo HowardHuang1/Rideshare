@@ -1,9 +1,12 @@
 import { VStack, StackDivider, Box } from '@chakra-ui/react'
 import RideCard from "./RideCard"
+import "./CardStack.css"
+import Searchbar from "./Searchbar"
 
 function CardStack() {
     return(
-        <div className="container">
+        <div className="container" >
+            <Searchbar />
             <div className="cardStack">
                 <VStack
                     divider={<StackDivider borderColor='gray.200' />}
