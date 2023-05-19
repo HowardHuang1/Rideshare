@@ -7,9 +7,13 @@ function Navbar() {
     <div className="header__wrapper">
       <nav>
           <div className="menuItems">
-              <NavLink exact to="/" activeClassName="active">Home</NavLink>
-              <NavLink to="/createRide" activeClassName="active">Create Ride</NavLink>
-              <NavLink to="/dashboard" activeClassName="active">Dashboard</NavLink>
+              <div className="left-items">
+                <NavLink exact to="/" activeClassName="active">Home</NavLink>
+                <NavLink to="/createRide" activeClassName="active">Create Ride</NavLink>
+              </div>
+              <div className="right-items">
+                <NavLink to="/profile" activeClassName="active">Profile</NavLink>
+              </div>
           </div>
       </nav>
     </div>

@@ -2,14 +2,14 @@
     background-color: black;
     color: white;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     height: 70px;
-  }
-  
-  .menuItems {
+    width: 100vw;
+    position: fixed;
     
   }
+  
   
   .menuItems a {
     background-color: black;
@@ -20,11 +20,18 @@
   }
   
   .menuItems a:hover,
-  .menuItems a:active {
+  .menuItems a.active {
     color: #BA0F30;
   }
-  
-  a:first-of-type {
-    color: #BA0F30;
-  }
-  
+
+.menuItems{
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  flex: auto;
+}
+
+nav {
+  display: flex;
+  flex: auto;
+}
