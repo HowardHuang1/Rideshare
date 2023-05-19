@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "./CreateRide.css"
 import Modal from "./Modal"
+import RideCard from "./RideCard"
 
 function CreateRide() {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,6 +11,7 @@ function CreateRide() {
         Open Modal
       </button>
       {isOpen && <Modal setIsOpen={setIsOpen} />}
+      <RideCard />
     </div>
   )
 };
