@@ -1,3 +1,4 @@
+
 .darkBG {
     background-color: rgba(0, 0, 0, 0.2);
     width: 100vw;
@@ -17,8 +18,8 @@
   }
   
   .modal {
-    width: 800px;
-    height: 500px;
+    width: 600px;
+    height: 350px;
     background: white;
     color: white;
     z-index: 10;
@@ -38,14 +39,14 @@
     margin: 0;
     padding: 10px;
     color: #2c3e50;
-    font-weight: 500;
-    font-size: 18px;
+    font-weight: 1000;
+    font-size: 30px;
     text-align: center;
   }
   
   .modalContent {
     padding: 10px;
-    font-size: 14px;
+    font-size: 16px;
     color: #2c3e50;
     text-align: center;
   }
@@ -123,4 +124,49 @@
     box-shadow: none;
     transform: none;
     background: whitesmoke;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    margin: 8px 0;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+    transition: 0.3s;
+  }
+  
+  input[type="text"]:focus {
+    border-color: #ff3e4e;
+    box-shadow: 0 0 8px 0 #ff3e4e;
+  }
+  
+  .inputWithIcon input[type="text"] {
+    padding-left: 50px;
+  }
+  
+  .inputWithIcon {
+    position: relative;
+  }
+  
+  .inputWithIcon i {
+    position: absolute;
+    left: 0;
+    top: 8px;
+    padding: 9px 8px;
+    color: #aaa;
+    transition: 0.3s;
+  }
+  
+  .inputWithIcon input[type="text"]:focus + i {
+    color: #ff3e4e;
+  }
+
+  .yourClass:not(:placeholder-shown) ~ span {
+    display:none;
+  }
+
+  .title{
+    font-family: Arial, Helvetica, sans-serif;
   }
