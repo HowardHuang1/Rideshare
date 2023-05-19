@@ -20,12 +20,11 @@ const getPlaceInfo = async (location) => {
   }
 };
 
-const dateTimeValidator = (dateArray, timeArray, AM) => {
-  dateArray = date.split("/").map((x) => parseInt(x));
-  timeArray = time.split(":").map((x) => parseInt(x));
-
+const dateTimeValidator = (date, time, AM) => {
+  let dateArray = date.split("/").map((x) => parseInt(x));
+  let timeArray = time.split(":").map((x) => parseInt(x));
   if (
-    dateArray.length != 3 ||
+    dateArray.length !== 3 ||
     dateArray[0] > 12 ||
     dateArray[1] > 31 ||
     dateArray[2] < 2023 ||
@@ -33,23 +32,21 @@ const dateTimeValidator = (dateArray, timeArray, AM) => {
     dateArray[1] < 0 ||
     dateArray[2] < 0
   ) {
-    const error = new ValidationError("Invalid date");
-    return res.status(400).json({ errors: error.array() });
+    return null;
   } else if (
-    timeArray.length != 2 ||
+    timeArray.length !== 2 ||
     timeArray[0] > 12 ||
     timeArray[1] > 59 ||
     timeArray[0] < 0 ||
     timeArray[1] < 0
   ) {
-    const error = new ValidationError("Invalid time");
-    return res.status(400).json({ errors: error.array() });
+    return null;
   }
   if (!AM) {
-    if (timeArray[0] != 12) timeArray[0] += 12;
+    if (timeArray[0] !== 12) timeArray[0] += 12;
   }
 
-  dateObj = new Date(
+  let dateObj = new Date(
     dateArray[2],
     dateArray[0],
     dateArray[1],
@@ -57,8 +54,7 @@ const dateTimeValidator = (dateArray, timeArray, AM) => {
     timeArray[1]
   );
   if (isNaN(dateObj)) {
-    const error = new ValidationError("Invalid date");
-    return res.status(400).json({ errors: error.array() });
+    return null;
   }
   return dateObj;
 };
@@ -78,11 +74,11 @@ const getDistance = async (place_1_address, place_2_address, apiKey) => {
       }
     );
 
-    const distance = response.data.rows[0].elements[0].distance.text;
+    const distance = parseInt(response.data.rows[0].elements[0].distance.text);
+    const duration = parseInt(response.data.rows[0].elements[0].duration.text);
     console.log(`Distance: ${distance}`);
     console.log(`Duration: ${duration}`);
-
-    return parseFloat(distance.split(" ")[0]);
+    return { distance: distance, duration: duration };
   } catch (error) {
     console.error("Error:", error.message);
   }

@@ -71,6 +71,14 @@ const rideSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  distance: {
+    type: Number,
+    required: true,
+  },
+  duration: {
+    type: Number,
+    required: true,
+  },
   numRidersAllowed: {
     type: Number,
     required: true,
@@ -215,22 +223,44 @@ app.get("/user-data", async (req, res) => {
       fullName: user.fullName,
       email: user.email,
       username: user.username,
+      moneySaved: moneySaved(user),
+      carbonSaved: carbonSaved(user),
+      numRides: numRides(user),
     });
   } else {
     res.send(null);
   }
+
+  const moneySaved = async (username) => {
+    const rides = await Ride.find({ usernames: username });
+    return 5;
+  };
+
+  const carbonSaved = async (username) => {
+    //calculate pounds of carbon dioxide
+    let totalCarbon = 0;
+    const rides = await Ride.find({ usernames: username });
+    if (!rides) {
+      return 0;
+    }
+    for (let i = 0; i < rides.length; i++) {
+      totalCarbon += rides[i].distance * 0.75 + rides[i].duration * 0.25;
+    }
+    return totalCarbon;
+  };
+
+  const numRides = async (username) => {
+    const rides = await Ride.find({ usernames: username });
+    const filteredRides = rides.filter((ride) => {
+      return ride.usernames.includes(username);
+    });
+    return filteredRides.length;
+  };
 });
 
 app.post("/create-ride", async (req, res) => {
-  const {
-    username,
-    date,
-    time,
-    AM,
-    locationFrom,
-    locationTo,
-    numRidersAllowed,
-  } = req.body;
+  let { username, date, time, AM, locationFrom, locationTo, numRidersAllowed } =
+    req.body;
   // {"username": "john doe", "date": "09/15/2023", "time": "12:15", "AM": false, "locationFrom": "UCLA", "locationTo": "LAX", "numRidersAllowed": "3"}
   const foundUser = await User.findOne({ username: username });
   if (!foundUser) {
@@ -238,14 +268,26 @@ app.post("/create-ride", async (req, res) => {
   }
   const dateObj = services.dateTimeValidator(date, time, AM);
 
-  fromPlaceInfo = await getPlaceInfo(locationFrom);
-  toPlaceInfo = await getPlaceInfo(locationTo);
+  let fromPlaceInfo = await services.getPlaceInfo(locationFrom);
+  let toPlaceInfo = await services.getPlaceInfo(locationTo);
 
   if (fromPlaceInfo.address == undefined) {
     const error = new ValidationError("Invalid from location");
     return res.status(400).json({ errors: error.array() });
   } else if (toPlaceInfo.address == undefined) {
     const error = new ValidationError("Invalid destination");
+    return res.status(400).json({ errors: error.array() });
+  }
+
+  let { distance, duration } = await services.getDistanceAndDuration(
+    fromPlaceInfo.address,
+    toPlaceInfo.address
+  );
+  if (distance == undefined) {
+    const error = new ValidationError("Trouble fetching distance");
+    return res.status(400).json({ errors: error.array() });
+  } else if (duration == undefined) {
+    const error = new ValidationError("Trouble fetching duration");
     return res.status(400).json({ errors: error.array() });
   }
 
@@ -262,10 +304,12 @@ app.post("/create-ride", async (req, res) => {
     date: dateObj,
     locationFrom: locationFrom,
     locationTo: locationTo,
-    addressFrom: fromPlaceInfo.placeID,
-    addressTo: toPlaceInfo.placeID,
+    addressFrom: fromPlaceInfo.address,
+    addressTo: toPlaceInfo.address,
     idFrom: fromPlaceInfo.id,
     idTo: toPlaceInfo.id,
+    distance: distance,
+    duration: duration,
     numRidersAllowed: numRidersAllowed,
   });
 
@@ -298,7 +342,7 @@ app.post("/leave-ride", async (req, res) => {
   const foundRide = await Ride.findOne({ _id: rideID });
   if (foundRide) {
     const index = foundRide.usernames.indexOf(username);
-    if (index != -1) {
+    if (index !== -1) {
       foundRide.usernames.splice(index, 1);
       await foundRide.save();
       res.send(true); // successfully left ride
@@ -339,6 +383,7 @@ app.put(
   ],
   async (req, res) => {
     const { username, rideID, time, AM, numRidersAllowed } = req.body;
+    // user can be any user in the ride
     const foundUser = await User.findOne({ username: username });
     if (!foundUser) {
       const error = new ValidationError("Invalid username");
@@ -348,7 +393,7 @@ app.put(
     if (foundRide) {
       let timeArray = time.split(":").map((x) => parseInt(x));
       if (
-        timeArray.length != 2 ||
+        timeArray.length !== 2 ||
         timeArray[0] > 12 ||
         timeArray[1] > 59 ||
         timeArray[0] < 0 ||
@@ -357,7 +402,7 @@ app.put(
         const error = new ValidationError("Invalid time");
         return res.status(400).json({ errors: error.array() });
       }
-      if (!AM && timeArray[0] != 12) timeArray[0] += 12;
+      if (!AM && timeArray[0] !== 12) timeArray[0] += 12;
       const foundDate = foundRide.date.getDate();
       const foundMonth = foundRide.date.getMonth();
       const foundYear = foundRide.date.getFullYear();
@@ -395,7 +440,7 @@ app.delete("/leave-ride", async (req, res) => {
   const foundRide = await Ride.findOne({ _id: rideID });
   if (foundRide) {
     const index = foundRide.usernames.indexOf(username);
-    if (index != -1) {
+    if (index !== -1) {
       foundRide.usernames.splice(index, 1);
       if (foundRide.usernames.length === 0) {
         // write code for delete ride if no one is in it
@@ -422,10 +467,10 @@ app.get("/search-ride", async (req, res) => {
   let fromPlaceInfo;
   let toPlaceInfo;
   if (fromPlaceInfo.address == undefined) {
-    fromPlaceInfo = await getPlaceInfo(locationFrom);
+    fromPlaceInfo = await services.getPlaceInfo(locationFrom);
   }
   if (fromPlaceInfo.address == undefined) {
-    toPlaceInfo = await getPlaceInfo(locationTo);
+    toPlaceInfo = await services.getPlaceInfo(locationTo);
   }
 
   if (fromPlaceInfo.address == undefined) {
@@ -437,7 +482,7 @@ app.get("/search-ride", async (req, res) => {
   }
 
   let foundRidesFiltered = foundRides.filter((ride) => {
-    cond = true;
+    let cond = true;
     cond = cond && ride.addressFrom == fromPlaceInfo.address;
     cond = cond && ride.addressTo == toPlaceInfo.address;
     // check if ride is already filled, if open is specified
