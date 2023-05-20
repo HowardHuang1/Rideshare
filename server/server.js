@@ -84,6 +84,10 @@ const rideSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  price: {
+    type: Number,
+    required: true,
+  },
   numRidersAllowed: {
     type: Number,
     required: true,
@@ -340,6 +344,7 @@ app.post("/create-ride", async (req, res) => {
     distance: distance,
     durationInTraffic: durationInTraffic,
     trafficMultiplier: trafficMultiplier,
+    price: price,
     numRidersAllowed: numRidersAllowed,
   });
 
@@ -441,13 +446,29 @@ app.put(
     }
 
     if (numRidersAllowed) {
-      if (foundRide.usernames.length > numRidersAllowed) {
+      if (
+        foundRide.usernames.length > numRidersAllowed ||
+        numRidersAllowed != 4 ||
+        numRidersAllowed != 6
+      ) {
         const error = new ValidationError(
           "There are more riders already in the ride than the new limit"
         );
         return res.status(400).json({ errors: error.array() });
       }
       foundRide.numRidersAllowed = numRidersAllowed;
+
+      const price = await services.scrapeFareValues(
+        foundRide.fromPlaceInfo.address,
+        foundRide.toPlaceInfo.address,
+        foundRide.numRidersAllowed
+      );
+      if (price == -1) {
+        const error = new ValidationError("Trouble fetching price");
+        return res.status(400).json({ errors: error.array() });
+      }
+      foundRide.price = price * foundRide.trafficMultiplier * generalMultiplier;
+
       await foundRide.save();
     } else {
       res.send(null); // couldn't find ride
