@@ -1,50 +1,32 @@
 const puppeteer = require("puppeteer");
 
-async function scrapeUberFare() {
-  // Launch a headless browser
-  const browser = await puppeteer.launch();
-
+async function scrapeFareValues(location1, location2, numRidersAllowed) {
   try {
-    // Create a new page instance
+    const browser = await puppeteer.launch();
     const page = await browser.newPage();
-
-    // Navigate to uberfarefinder.com
-    await page.goto("https://www.uberfarefinder.com/");
-
-    // Enter the start location
-    await page.type(
-      "#enter-location",
-      "1450 Tarpon Street, Foster City, CA 94404"
+    await page.goto(
+      `https://ride.guru/estimate/${location1}/${location2}#fare-comparison`
     );
 
-    // Enter the end location
-    await page.type(
-      "#enter-end-location",
-      "506 N Delaware St, San Mateo, CA 94401"
+    // Wait for the elements to be rendered on the page
+    await page.waitForSelector(".fare.ng-binding");
+
+    // Extract the values of all matching elements
+    const fareValues = await page.$$eval(".fare.ng-binding", (elements) =>
+      elements.map((element) => element.textContent)
     );
 
-    // Submit the form
-    await page.click("#submit");
-
-    // Wait for the fare information to load
-    await page.waitForSelector(".uf-section.estimate");
-
-    // Extract the fare information
-    const fareInfo = await page.evaluate(() => {
-      const fareElement = document.querySelector(".uf-section.estimate .num");
-
-      return fareElement ? fareElement.textContent : null;
+    const filteredList = fareValues.filter((value) => {
+      return !value.includes("\n");
     });
-
-    // Print the fare information
-    console.log("Uber fare:", fareInfo);
+    console.log(filteredList);
+    await browser.close();
+    if (numRidersAllowed == 4) return parseInt(filteredList[1]);
+    else return parseInt(filteredList[3]);
   } catch (error) {
     console.error("Error:", error);
-  } finally {
-    // Close the browser
-    await browser.close();
+    return -1;
   }
 }
 
-// Call the function to initiate the scraping
-scrapeUberFare();
+module.exports = { scrapeFareValues };

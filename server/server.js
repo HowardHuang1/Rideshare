@@ -12,6 +12,7 @@ const {
 } = require("express-validator");
 
 const google_api_key = "AIzaSyDErGxdZK14gqrGZG0TXDnqooOgOQVGGyY";
+const generalMultiplier = 1.1;
 
 /* other imported files: */
 
@@ -294,6 +295,11 @@ app.post("/create-ride", async (req, res) => {
       dateObj
     );
 
+  if (distance > 200) {
+    const error = new ValidationError("Distance is too long");
+    return res.status(400).json({ errors: error.array() });
+  }
+
   if (distance == undefined) {
     const error = new ValidationError("Trouble fetching distance");
     return res.status(400).json({ errors: error.array() });
@@ -306,12 +312,21 @@ app.post("/create-ride", async (req, res) => {
   }
 
   numRidersAllowed = parseInt(numRidersAllowed);
-  if (numRidersAllowed < 2 || numRidersAllowed > 6) {
-    const error = new ValidationError(
-      "There must be between 2 and 6 riders allowed"
-    );
+  if (numRidersAllowed != 4 || numRidersAllowed != 6) {
+    const error = new ValidationError("There must either 4 or 6 riders");
     return res.status(400).json({ errors: error.array() });
   }
+
+  const price = await services.scrapeFareValues(
+    fromPlaceInfo.address,
+    toPlaceInfo.address,
+    numRidersAllowed
+  );
+  if (price == -1) {
+    const error = new ValidationError("Trouble fetching price");
+    return res.status(400).json({ errors: error.array() });
+  }
+  price = price * trafficMultiplier * generalMultiplier;
 
   const newRide = new Ride({
     usernames: [username],
