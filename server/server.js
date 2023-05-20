@@ -75,7 +75,11 @@ const rideSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  duration: {
+  durationInTraffic: {
+    type: Number,
+    required: true,
+  },
+  trafficMultiplier: {
     type: Number,
     required: true,
   },
@@ -267,6 +271,10 @@ app.post("/create-ride", async (req, res) => {
     res.send(null); // user not found
   }
   const dateObj = services.dateTimeValidator(date, time, AM);
+  if (dateObj == null) {
+    const error = new ValidationError("Invalid date or time");
+    return res.status(400).json({ errors: error.array() });
+  }
 
   let fromPlaceInfo = await services.getPlaceInfo(locationFrom);
   let toPlaceInfo = await services.getPlaceInfo(locationTo);
@@ -279,15 +287,21 @@ app.post("/create-ride", async (req, res) => {
     return res.status(400).json({ errors: error.array() });
   }
 
-  let { distance, duration } = await services.getDistanceAndDuration(
-    fromPlaceInfo.address,
-    toPlaceInfo.address
-  );
+  let { distance, durationInTraffic, trafficMultiplier } =
+    await services.getDistanceAndDuration(
+      fromPlaceInfo.address,
+      toPlaceInfo.address,
+      dateObj
+    );
+
   if (distance == undefined) {
     const error = new ValidationError("Trouble fetching distance");
     return res.status(400).json({ errors: error.array() });
-  } else if (duration == undefined) {
+  } else if (durationInTraffic == undefined) {
     const error = new ValidationError("Trouble fetching duration");
+    return res.status(400).json({ errors: error.array() });
+  } else if (trafficMultiplier == NaN) {
+    const error = new ValidationError("Trouble fetching traffic");
     return res.status(400).json({ errors: error.array() });
   }
 
@@ -309,7 +323,8 @@ app.post("/create-ride", async (req, res) => {
     idFrom: fromPlaceInfo.id,
     idTo: toPlaceInfo.id,
     distance: distance,
-    duration: duration,
+    durationInTraffic: durationInTraffic,
+    trafficMultiplier: trafficMultiplier,
     numRidersAllowed: numRidersAllowed,
   });
 

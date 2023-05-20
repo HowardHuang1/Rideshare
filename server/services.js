@@ -59,7 +59,11 @@ const dateTimeValidator = (date, time, AM) => {
   return dateObj;
 };
 
-const getDistance = async (place_1_address, place_2_address, apiKey) => {
+const getDistanceAndDuration = async (
+  place_1_address,
+  place_2_address,
+  dateObj
+) => {
   try {
     const response = await axios.get(
       "https://maps.googleapis.com/maps/api/distancematrix/json",
@@ -69,19 +73,46 @@ const getDistance = async (place_1_address, place_2_address, apiKey) => {
           destinations: place_2_address,
           mode: "driving",
           units: "imperial",
+          departure_time: dateObj.getTime() / 1000,
           key: google_api_key,
         },
       }
     );
 
     const distance = parseInt(response.data.rows[0].elements[0].distance.text);
-    const duration = parseInt(response.data.rows[0].elements[0].duration.text);
+    const durationInTraffic = parseInt(
+      response.data.rows[0].elements[0].duration_in_traffic.text
+    );
     console.log(`Distance: ${distance}`);
-    console.log(`Duration: ${duration}`);
-    return { distance: distance, duration: duration };
+    console.log(`Duration: ${durationInTraffic}`);
+    //default time code
+    const dateObj1PM = new Date("May 17, 2023 13:00:00");
+    const response1PM = await axios.get(
+      "https://maps.googleapis.com/maps/api/distancematrix/json",
+      {
+        params: {
+          origins: place_1_address,
+          destinations: place_2_address,
+          mode: "driving",
+          units: "imperial",
+          departure_time: dateObj1PM / 1000,
+          key: google_api_key,
+        },
+      }
+    );
+    const durationInTraffic1PM = parseInt(
+      response1PM.data.rows[0].elements[0].duration_in_traffic.text
+    );
+
+    const trafficMultiplier = durationInTraffic / durationInTraffic1PM;
+    return {
+      distance: distance,
+      durationInTraffic: durationInTraffic,
+      trafficMultiplier: trafficMultiplier,
+    };
   } catch (error) {
     console.error("Error:", error.message);
   }
 };
 
-module.exports = { getPlaceInfo, dateTimeValidator, getDistance };
+module.exports = { getPlaceInfo, dateTimeValidator, getDistanceAndDuration };
