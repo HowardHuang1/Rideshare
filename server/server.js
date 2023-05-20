@@ -17,6 +17,8 @@ const generalMultiplier = 1.1;
 /* other imported files: */
 
 const services = require("./services.js");
+const scraper = require("./scraper.js");
+const email = require("./email.js");
 
 // algorithm.tripListMaker(hotels,restaurants,attractions,budget,num_days)
 
@@ -112,7 +114,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  email: {
+  emailAddress: {
     // handle email validation in API endpoint
     type: String,
     required: true,
@@ -165,7 +167,7 @@ app.post(
       username,
       password: hashedPassword,
       fullName,
-      email,
+      emailAddress: email,
     });
 
     // save new user to database
@@ -230,7 +232,7 @@ app.get("/user-data", async (req, res) => {
     // res.send({user.fullName, user.email, user.username, moneySaved: moneySaved(user)}, numRides: numRides(user)});
     res.send({
       fullName: user.fullName,
-      email: user.email,
+      emailAddress: user.emailAddress,
       username: user.username,
       moneySaved: moneySaved(user),
       carbonSaved: carbonSaved(user),
@@ -321,7 +323,7 @@ app.post("/create-ride", async (req, res) => {
     return res.status(400).json({ errors: error.array() });
   }
 
-  const price = await services.scrapeFareValues(
+  const price = await scraper.scrapeFareValues(
     fromPlaceInfo.address,
     toPlaceInfo.address,
     numRidersAllowed
@@ -354,6 +356,17 @@ app.post("/create-ride", async (req, res) => {
   } catch (error) {
     res.send(error);
   }
+
+  // send email to user
+  await email.createEmailSender(
+    foundUser.emailAddress,
+    foundUser.fullName,
+    locationFrom,
+    locationTo,
+    date,
+    time,
+    AM
+  );
 });
 
 app.post("/join-ride", async (req, res) => {
@@ -415,6 +428,7 @@ app.put(
       const error = new ValidationError("Invalid username");
       return res.status(400).json({ errors: error.array() });
     }
+
     const foundRide = await Ride.findOne({ _id: rideID });
     if (foundRide) {
       let timeArray = time.split(":").map((x) => parseInt(x));
@@ -458,7 +472,7 @@ app.put(
       }
       foundRide.numRidersAllowed = numRidersAllowed;
 
-      const price = await services.scrapeFareValues(
+      const price = await scraper.scrapeFareValues(
         foundRide.fromPlaceInfo.address,
         foundRide.toPlaceInfo.address,
         foundRide.numRidersAllowed
@@ -473,6 +487,27 @@ app.put(
     } else {
       res.send(null); // couldn't find ride
     }
+
+    let emailsFromUsernames = [];
+    for (let i = 0; i < foundRide.usernames.length; i++) {
+      emailsFromUsernames.push(
+        await User.findOne({ username: foundRide.usernames[i] }).emailAddress
+      );
+    }
+    await email.updateEmailSender(
+      emailsFromUsernames,
+      foundRide.usernames,
+      foundRide.locationFrom,
+      foundRide.locationTo,
+      foundRide.date.getMonth() +
+        "/" +
+        foundRide.date.getDate() +
+        "/" +
+        foundRide.date.getFullYear(),
+      foundRide.time,
+      foundRide.AM
+    );
+
     res.send(true); // successfully updated ride
   }
 );
@@ -555,8 +590,12 @@ app.get("/search-ride", async (req, res) => {
         ((diff < timeparam && diff > 0) || (diff > -timeparam && diff < 0));
     }
     // rides only distparam apart
-    const dist = services.getDistance(fromPlaceInfo.address, ride.addressFrom);
-    cond = cond && dist <= distparam;
+    const response = services.getDistanceAndDuration(
+      fromPlaceInfo.address,
+      ride.addressFrom,
+      dateObj
+    );
+    cond = cond && response.distance <= distparam;
     return cond;
   });
   return res.send(foundRidesFiltered);
