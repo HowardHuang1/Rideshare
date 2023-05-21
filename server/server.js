@@ -343,10 +343,9 @@ app.post("/create-ride", async (req, res) => {
     // return res.status(400).json({ errors: error.array() });
   }
   price = price * trafficMultiplier * generalMultiplier;
-
   price = 10;
 
-  console.log(fromPlaceInfo.id);
+  console.log(fromPlaceInfo);
   const newRide = new Ride({
     usernames: [username],
     date: dateObj,
@@ -354,8 +353,8 @@ app.post("/create-ride", async (req, res) => {
     locationTo: locationTo,
     addressFrom: fromPlaceInfo.address,
     addressTo: toPlaceInfo.address,
-    idFrom: "holder1",
-    idTo: "holder2",
+    idFrom: fromPlaceInfo.place_id,
+    idTo: toPlaceInfo.place_id,
     distance: distance,
     durationInTraffic: durationInTraffic,
     trafficMultiplier: trafficMultiplier,
@@ -371,15 +370,15 @@ app.post("/create-ride", async (req, res) => {
   }
 
   // send email to user
-  await email.createEmailSender(
-    foundUser.emailAddress,
-    foundUser.fullName,
-    locationFrom,
-    locationTo,
-    date,
-    time,
-    AM
-  );
+  // await email.createEmailSender(
+  //   foundUser.emailAddress,
+  //   foundUser.fullName,
+  //   locationFrom,
+  //   locationTo,
+  //   date,
+  //   time,
+  //   AM
+  // );
 });
 
 app.post("/join-ride", async (req, res) => {
