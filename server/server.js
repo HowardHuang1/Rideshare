@@ -325,7 +325,7 @@ app.post("/create-ride", async (req, res) => {
     // return res.status(400).json({ errors: error.array() });
   }
 
-  numRidersAllowedint = parseInt(numRidersAllowed);
+  const numRidersAllowedint = parseInt(numRidersAllowed);
   if (numRidersAllowedint != 4 && numRidersAllowedint != 6) {
     return res.json({ error: "There must be either 4 or 6 riders" });
     // const error = new ValidationError("There must either 4 or 6 riders");
@@ -625,6 +625,12 @@ app.get("/get-ride-image", async (req, res) => {
   // Generate the static map image URL with the driving route
   const mapImageURL = `https://maps.googleapis.com/maps/api/staticmap?size=600x400&path=enc:${overviewPolyline}&key=${google_api_key}`;
   res.send(mapImageURL);
+});
+
+app.delete("/delete-database", async (req, res) => {
+  await Ride.deleteMany({});
+  await User.deleteMany({});
+  res.send(true);
 });
 
 app.listen(8000, function (req, res) {
