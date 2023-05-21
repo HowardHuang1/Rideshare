@@ -325,8 +325,8 @@ app.post("/create-ride", async (req, res) => {
     // return res.status(400).json({ errors: error.array() });
   }
 
-  numRidersAllowed = parseInt(numRidersAllowed);
-  if (numRidersAllowed != 4 || numRidersAllowed != 6) {
+  numRidersAllowedint = parseInt(numRidersAllowed);
+  if (numRidersAllowedint != 4 && numRidersAllowedint != 6) {
     return res.json({ error: "There must be either 4 or 6 riders" });
     // const error = new ValidationError("There must either 4 or 6 riders");
     // return res.status(400).json({ errors: error.array() });
