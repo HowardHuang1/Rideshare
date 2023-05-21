@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import RedirectingButton from './RedirectingButton';
 import "./Profile.css";
 
 // Display personal information here
@@ -51,6 +52,7 @@ const ProfileApp = () => {
         <div className="container">
             <Profile {...profileData} />
             <RideHistory />
+            <RedirectingButton destination={"/login"} value={"Go to Login Page"} />
         </div>
     );
 }
