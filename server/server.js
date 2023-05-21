@@ -415,7 +415,7 @@ app.post("/leave-ride", async (req, res) => {
   }
 });
 
-app.post("/get-rides-for-user", async (req, res) => {
+app.get("/get-rides-for-user", async (req, res) => {
   const { username } = req.body;
   const foundRides = await Ride.find({ usernames: username });
   if (foundRides) {
