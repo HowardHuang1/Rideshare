@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Text, Image, Stack, Heading, Button, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
 import { ChakraProvider } from '@chakra-ui/react'
 
-function RideCard() {
+function RideCard( { date, locationFrom, locationTo, durationInTraffic, price, numRidersAllowed } ) {
     return(
         <ChakraProvider>
             <Card
@@ -23,7 +23,14 @@ function RideCard() {
             <Stack>
                 <CardBody>
                 <Heading size='md'>UberX</Heading>
-        
+                <Text py='2'>
+                    Date: { date }
+                    Location From: { locationFrom }
+                    Location From: { locationTo }
+                    ETA: { durationInTraffic }
+                    Number of Riders: { numRidersAllowed }
+                    Price: { price }
+                </Text>
                 <Text py='2'>
                     7:09 | 7 min away
                 </Text>
