@@ -86,7 +86,7 @@ const getDistanceAndDuration = async (
     console.log(`Distance: ${distance}`);
     console.log(`Duration: ${durationInTraffic}`);
     //default time code
-    const dateObj1PM = new Date("May 17, 2023 13:00:00");
+    const dateObj1PM = new Date("November 17, 2028 13:00:00");
     const response1PM = await axios.get(
       "https://maps.googleapis.com/maps/api/distancematrix/json",
       {
@@ -95,7 +95,7 @@ const getDistanceAndDuration = async (
           destinations: place_2_address,
           mode: "driving",
           units: "imperial",
-          departure_time: dateObj1PM / 1000,
+          departure_time: dateObj1PM.getTime() / 1000,
           key: google_api_key,
         },
       }
@@ -104,12 +104,9 @@ const getDistanceAndDuration = async (
       response1PM.data.rows[0].elements[0].duration_in_traffic.text
     );
 
+    console.log(`Duration2: ${durationInTraffic1PM}`);
     const trafficMultiplier = durationInTraffic / durationInTraffic1PM;
-    return {
-      distance: distance,
-      durationInTraffic: durationInTraffic,
-      trafficMultiplier: trafficMultiplier,
-    };
+    return { distance, durationInTraffic, trafficMultiplier };
   } catch (error) {
     console.error("Error:", error.message);
   }

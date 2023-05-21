@@ -275,62 +275,72 @@ app.post("/create-ride", async (req, res) => {
   // {"username": "john doe", "date": "09/15/2023", "time": "12:15", "AM": false, "locationFrom": "UCLA", "locationTo": "LAX", "numRidersAllowed": "3"}
   const foundUser = await User.findOne({ username: username });
   if (!foundUser) {
-    res.send(null); // user not found
+    return res.send(null); // user not found
   }
   const dateObj = services.dateTimeValidator(date, time, AM);
   if (dateObj == null) {
-    const error = new ValidationError("Invalid date or time");
-    return res.status(400).json({ errors: error.array() });
+    return res.json({ error: "invalid date or date" });
+    // const error = new ValidationError("Invalid date or time");
+    // return res.status(400).json({ errors: error.array() });
   }
 
   let fromPlaceInfo = await services.getPlaceInfo(locationFrom);
   let toPlaceInfo = await services.getPlaceInfo(locationTo);
 
   if (fromPlaceInfo.address == undefined) {
-    const error = new ValidationError("Invalid from location");
-    return res.status(400).json({ errors: error.array() });
+    return res.json({ error: "invalid from location" });
+    // const error = new ValidationError("Invalid from location");
+    // return res.status(400).json({ errors: error.array() });
   } else if (toPlaceInfo.address == undefined) {
-    const error = new ValidationError("Invalid destination");
-    return res.status(400).json({ errors: error.array() });
+    return res.json({ error: "invalid to location" });
+    // const error = new ValidationError("Invalid destination");
+    // return res.status(400).json({ errors: error.array() });
   }
 
-  let { distance, durationInTraffic, trafficMultiplier } =
+  const { distance, durationInTraffic, trafficMultiplier } =
     await services.getDistanceAndDuration(
       fromPlaceInfo.address,
       toPlaceInfo.address,
       dateObj
     );
+  console.log(distance, durationInTraffic, trafficMultiplier);
 
   if (distance > 200) {
-    const error = new ValidationError("Distance is too long");
-    return res.status(400).json({ errors: error.array() });
+    return res.json({ error: "Trouble fetching distance" });
+    // const error = new ValidationError("Distance is too long");
+    // return res.status(400).json({ errors: error.array() });
   }
 
   if (distance == undefined) {
-    const error = new ValidationError("Trouble fetching distance");
-    return res.status(400).json({ errors: error.array() });
+    return res.json({ error: "Trouble fetching distance" });
+    // const error = new ValidationError("Trouble fetching distance");
+    // return res.status(400).json({ errors: error.array() });
   } else if (durationInTraffic == undefined) {
-    const error = new ValidationError("Trouble fetching duration");
-    return res.status(400).json({ errors: error.array() });
+    return res.json({ error: "Trouble fetching duration" });
+    // const error = new ValidationError("Trouble fetching duration");
+    // return res.status(400).json({ errors: error.array() });
   } else if (trafficMultiplier == NaN) {
-    const error = new ValidationError("Trouble fetching traffic");
-    return res.status(400).json({ errors: error.array() });
+    return res.json({ error: "Trouble fetching traffic" });
+    // const error = new ValidationError("Trouble fetching traffic");
+    // return res.status(400).json({ errors: error.array() });
   }
 
   numRidersAllowed = parseInt(numRidersAllowed);
   if (numRidersAllowed != 4 || numRidersAllowed != 6) {
-    const error = new ValidationError("There must either 4 or 6 riders");
-    return res.status(400).json({ errors: error.array() });
+    return res.json({ error: "There must be either 4 or 6 riders" });
+    // const error = new ValidationError("There must either 4 or 6 riders");
+    // return res.status(400).json({ errors: error.array() });
   }
 
-  const price = await scraper.scrapeFareValues(
+  let price = await scraper.scrapeFareValues(
     fromPlaceInfo.address,
     toPlaceInfo.address,
     numRidersAllowed
   );
   if (price == -1) {
-    const error = new ValidationError("Trouble fetching price");
-    return res.status(400).json({ errors: error.array() });
+    return res.json({ error: "Trouble fetching price" });
+    // const error = new ValidationError("Trouble fetching price");
+    // return res.status(400).json({ errors: error.array() });
   }
   price = price * trafficMultiplier * generalMultiplier;
 
@@ -425,8 +435,9 @@ app.put(
     // user can be any user in the ride
     const foundUser = await User.findOne({ username: username });
     if (!foundUser) {
-      const error = new ValidationError("Invalid username");
-      return res.status(400).json({ errors: error.array() });
+      return res.json({ error: "Invalid username" });
+      // const error = new ValidationError("Invalid username");
+      // return res.status(400).json({ errors: error.array() });
     }
 
     const foundRide = await Ride.findOne({ _id: rideID });
@@ -439,8 +450,9 @@ app.put(
         timeArray[0] < 0 ||
         timeArray[1] < 0
       ) {
-        const error = new ValidationError("Invalid time");
-        return res.status(400).json({ errors: error.array() });
+        return res.json({ error: "Invalid Time" });
+        // const error = new ValidationError("Invalid time");
+        // return res.status(400).json({ errors: error.array() });
       }
       if (!AM && timeArray[0] !== 12) timeArray[0] += 12;
       const foundDate = foundRide.date.getDate();
@@ -465,10 +477,11 @@ app.put(
         numRidersAllowed != 4 ||
         numRidersAllowed != 6
       ) {
-        const error = new ValidationError(
-          "There are more riders already in the ride than the new limit"
-        );
-        return res.status(400).json({ errors: error.array() });
+        return res.json({ error: "Invalid number of riders" });
+        // const error = new ValidationError(
+        //   "There are more riders already in the ride than the new limit"
+        // );
+        // return res.status(400).json({ errors: error.array() });
       }
       foundRide.numRidersAllowed = numRidersAllowed;
 
@@ -478,8 +491,9 @@ app.put(
         foundRide.numRidersAllowed
       );
       if (price == -1) {
-        const error = new ValidationError("Trouble fetching price");
-        return res.status(400).json({ errors: error.array() });
+        return res.json({ error: "Trouble fetching price" });
+        // const error = new ValidationError("Trouble fetching price");
+        // return res.status(400).json({ errors: error.array() });
       }
       foundRide.price = price * foundRide.trafficMultiplier * generalMultiplier;
 
@@ -561,11 +575,13 @@ app.get("/search-ride", async (req, res) => {
   }
 
   if (fromPlaceInfo.address == undefined) {
-    const error = new ValidationError("Invalid from location");
-    return res.status(400).json({ errors: error.array() });
+    res.json({ error: "Invalid from location" });
+    // const error = new ValidationError("Invalid from location");
+    // return res.status(400).json({ errors: error.array() });
   } else if (toPlaceInfo.address == undefined) {
-    const error = new ValidationError("Invalid destination");
-    return res.status(400).json({ errors: error.array() });
+    res.json({ error: "Invalid to location" });
+    // const error = new ValidationError("Invalid destination");
+    // return res.status(400).json({ errors: error.array() });
   }
 
   let foundRidesFiltered = foundRides.filter((ride) => {
@@ -599,8 +615,9 @@ app.get("/get-ride-image", async (req, res) => {
   const { rideID } = req.body;
   const foundRide = await Ride.findOne({ _id: rideID });
   if (!foundRide) {
-    const error = new ValidationError("Invalid Ride ID");
-    return res.status(400).json({ errors: error.array() });
+    return res.json({ error: "Invalid Ride ID" });
+    // const error = new ValidationError("Invalid Ride ID");
+    // return res.status(400).json({ errors: error.array() });
   }
 
   // Make a request to the Directions API
