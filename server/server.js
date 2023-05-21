@@ -499,13 +499,7 @@ app.put(
       foundRide.usernames,
       foundRide.locationFrom,
       foundRide.locationTo,
-      foundRide.date.getMonth() +
-        "/" +
-        foundRide.date.getDate() +
-        "/" +
-        foundRide.date.getFullYear(),
-      foundRide.time,
-      foundRide.AM
+      foundRide.date
     );
 
     res.send(true); // successfully updated ride
