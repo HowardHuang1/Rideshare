@@ -58,7 +58,7 @@ const Login = () => (
             </Heading>
             <HStack spacing="1" justify="center">
               <Text color="muted">Don't have an account?</Text>
-              <Button variant="link" colorScheme="blue">
+              <Button variant="link" colorScheme="red">
                 Sign up
               </Button>
             </HStack>
@@ -98,7 +98,7 @@ const Login = () => (
               </FormControl>
             </Stack>
             <HStack justify="space-between">
-              <Button variant="link" colorScheme="blue" size="sm">
+              <Button variant="link" colorScheme="red" size="sm">
                 Forgot password?
               </Button>
             </HStack>
