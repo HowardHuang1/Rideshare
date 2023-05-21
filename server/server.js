@@ -481,8 +481,7 @@ app.put(
     if (numRidersAllowed) {
       if (
         foundRide.usernames.length > numRidersAllowed ||
-        numRidersAllowed != 4 ||
-        numRidersAllowed != 6
+        (numRidersAllowed != 4 && numRidersAllowed != 6)
       ) {
         return res.json({ error: "Invalid number of riders" });
         // const error = new ValidationError(
@@ -493,8 +492,8 @@ app.put(
       foundRide.numRidersAllowed = numRidersAllowed;
 
       const price = await scraper.scrapeFareValues(
-        foundRide.fromPlaceInfo.address,
-        foundRide.toPlaceInfo.address,
+        foundRide.addressFrom,
+        foundRide.addressTo,
         foundRide.numRidersAllowed
       );
       if (price == -1) {
