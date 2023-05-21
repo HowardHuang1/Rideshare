@@ -405,7 +405,11 @@ app.post("/leave-ride", async (req, res) => {
     const index = foundRide.usernames.indexOf(username);
     if (index !== -1) {
       foundRide.usernames.splice(index, 1);
-      await foundRide.save();
+      if (foundRide.usernames.length === 0) {
+        await foundRide.deleteOne();
+      } else {
+        await foundRide.save();
+      }
       res.send(true); // successfully left ride
     } else {
       res.send(false); // user not in ride
@@ -523,27 +527,7 @@ app.put(
   }
 );
 
-app.delete("/leave-ride", async (req, res) => {
-  const { username, rideID } = req.body;
-  const foundRide = await Ride.findOne({ _id: rideID });
-  if (foundRide) {
-    const index = foundRide.usernames.indexOf(username);
-    if (index !== -1) {
-      foundRide.usernames.splice(index, 1);
-      if (foundRide.usernames.length === 0) {
-        // write code for delete ride if no one is in it
-        await foundRide.deleteOne();
-      } else {
-        await foundRide.save();
-      }
-      res.send(true); // successfully left ride or deleted ride
-    } else {
-      res.send(false); // user not in ride
-    }
-  } else {
-    res.send(null); // couldn't find ride
-  }
-});
+
 
 app.get("/search-ride", async (req, res) => {
   const timeparam = 15;
