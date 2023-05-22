@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Text, Image, Stack, Heading, Button, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
+import { Card, Text, Image, Stack, Heading, Button, CardBody, CardFooter } from '@chakra-ui/react'
 import { ChakraProvider } from '@chakra-ui/react'
 
 function RideCard( { date, locationFrom, locationTo, durationInTraffic, price, numRidersAllowed } ) {
@@ -25,11 +25,14 @@ function RideCard( { date, locationFrom, locationTo, durationInTraffic, price, n
                 <Heading size='md'>UberX</Heading>
                 <Text py='2'>
                     Date: { date }
+                    <br />
                     Location From: { locationFrom }
-                    Location From: { locationTo }
+                    <br />
+                    Location To: { locationTo }
+                    <br />
                     ETA: { durationInTraffic }
+                    <br />
                     Number of Riders: { numRidersAllowed }
-                    Price: { price }
                 </Text>
                 <Text py='2'>
                     7:09 | 7 min away
@@ -45,7 +48,7 @@ function RideCard( { date, locationFrom, locationTo, durationInTraffic, price, n
                 </Button>
                 </CardFooter>
             </Stack>
-                <Heading fontSize='3xl' marginTop='30px' marginRight='30px'>$54.98</Heading>
+                <Heading fontSize='3xl' marginTop='30px' marginRight='30px'>${ price }</Heading>
             </Card>
         </ChakraProvider>
     );
