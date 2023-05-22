@@ -332,11 +332,13 @@ app.post("/create-ride", async (req, res) => {
     // return res.status(400).json({ errors: error.array() });
   }
 
-  let price = await scraper.scrapeFareValues(
-    fromPlaceInfo.address,
-    toPlaceInfo.address,
-    numRidersAllowed
-  );
+  // let price = await scraper.scrapeFareValues(
+  //   fromPlaceInfo.address,
+  //   toPlaceInfo.address,
+  //   numRidersAllowed
+  // );
+
+  let price = 25; // for testing purposes
   if (price == -1) {
     return res.json({ error: "Trouble fetching price" });
     // const error = new ValidationError("Trouble fetching price");
