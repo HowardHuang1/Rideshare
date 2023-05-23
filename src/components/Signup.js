@@ -25,7 +25,7 @@ import {
     },
 
   )
-const Login = () => (
+const SignUp = () => (
     <ChakraProvider theme={theme}>
     <Container
       maxW="lg"
@@ -54,12 +54,12 @@ const Login = () => (
                 md: 'sm',
               }}
             >
-              Log in to your account
+              Sign up for an account
             </Heading>
             <HStack spacing="1" justify="center">
-              <Text color="muted">Don't have an account?</Text>
+              <Text color="muted">Have an Account?</Text>
               <Button variant="link" colorScheme="red">
-                Sign up
+                Log in
               </Button>
             </HStack>
           </Stack>
@@ -89,6 +89,14 @@ const Login = () => (
           <Stack spacing="6">
             <Stack spacing="5">
               <FormControl>
+                <FormLabel htmlFor="firstname">First Name</FormLabel>
+                <Input id="firstname" type="firstname" />
+              </FormControl>
+              <FormControl>
+                <FormLabel htmlFor="lastname">Last Name</FormLabel>
+                <Input id="lastname" type="lastname" />
+              </FormControl>
+              <FormControl>
                 <FormLabel htmlFor="email">Email</FormLabel>
                 <Input id="email" type="email" />
               </FormControl>
@@ -96,14 +104,13 @@ const Login = () => (
                 <FormLabel htmlFor="password">Password</FormLabel>
                 <Input id="password" type="password" />
               </FormControl>
+              <FormControl>
+                <FormLabel htmlFor="confirmPassword">Confirm Password</FormLabel>
+                <Input id="confirmPassword" type="confirmPassword" />
+              </FormControl>
             </Stack>
-            <HStack justify="space-between">
-              <Button variant="link" colorScheme="red" size="sm">
-                Forgot password?
-              </Button>
-            </HStack>
             <Stack spacing="6">
-              <Button variant="primary">Sign in</Button>
+              <Button variant="primary">Sign up</Button>
 
             </Stack>
           </Stack>
@@ -112,4 +119,4 @@ const Login = () => (
     </Container>
     </ChakraProvider>
   )
-  export default Login;
+  export default SignUp;
