@@ -338,7 +338,13 @@ app.post("/create-ride", async (req, res) => {
   //   numRidersAllowed
   // );
 
-  let price = 25; // for testing purposes
+  let price; // for testing purposes
+  if(durationInTraffic < 12) {
+    price = 12;
+  } else {
+    price = durationInTraffic;
+  }
+
   if (price == -1) {
     return res.json({ error: "Trouble fetching price" });
     // const error = new ValidationError("Trouble fetching price");
