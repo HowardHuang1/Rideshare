@@ -97,14 +97,13 @@
     font-size: 0.8rem;
     border: none;
     color: #fff;
-    background: #ff3e4e;
+    background: #E53e3e;
     transition: all 0.25s ease;
   }
   
   .deleteButton:hover {
-    box-shadow: 0 10px 20px -10px rgba(255, 62, 78, 0.6);
+    box-shadow: 0 10px 20px -10px rgba(255, 62, 78, 0.7);
     transform: translateY(-5px);
-    background: #ff3e4e;
   }
   
   .cancelButton {

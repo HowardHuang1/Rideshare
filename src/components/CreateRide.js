@@ -19,7 +19,7 @@ function CreateRide() {
       </div>
       <div className="ModalButton" style={{
         position: 'absolute',
-        top: '50px',
+        top: '55px',
         left: '50px'
       }}>
         <button className="openModalButton" onClick={() => setIsOpen(true)}>
