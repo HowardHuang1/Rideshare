@@ -1,6 +1,7 @@
 import React from 'react';
 import Tesla from '../Tesla.jpeg'
 import RedirectingButton from './RedirectingButton';
+import "./Home.css";
 
 function Home() {
   const backgroundImageStyle = {
@@ -14,7 +15,7 @@ function Home() {
   return( 
     <div className="container" style={backgroundImageStyle}>
       <div className="photo">
-        <RedirectingButton destination={"/createRide"} value={"Create a ride"} />
+        <RedirectingButton id="hi" destination={"/createRide"} value={"Create a ride"} />
       </div>
     </div>
   );

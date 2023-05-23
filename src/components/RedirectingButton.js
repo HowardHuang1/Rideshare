@@ -1,5 +1,6 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
+import "./RedirectingButton.css";
 
 export default function RedirectingButton({destination, value}){
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ export default function RedirectingButton({destination, value}){
 
     return (
         <div className = "redirectingButton">
-            <button onClick={() => {scrollToTop(); navigate(destination);}}>{value}</button>
+            <button className="btn" onClick={() => {scrollToTop(); navigate(destination);}}>{value}</button>
         </div>
     );
 }
