@@ -332,6 +332,8 @@ app.post("/create-ride", async (req, res) => {
     // return res.status(400).json({ errors: error.array() });
   }
 
+  // console.log(fromPlaceInfo.address);
+  // console.log(toPlaceInfo.address);
   // let price = await scraper.scrapeFareValues(
   //   fromPlaceInfo.address,
   //   toPlaceInfo.address,
@@ -339,7 +341,7 @@ app.post("/create-ride", async (req, res) => {
   // );
 
   let price; // for testing purposes
-  if(durationInTraffic < 12) {
+  if (durationInTraffic < 12) {
     price = 12;
   } else {
     price = durationInTraffic;
@@ -532,8 +534,6 @@ app.put(
     res.send(true); // successfully updated ride
   }
 );
-
-
 
 app.get("/search-ride", async (req, res) => {
   const timeparam = 15;

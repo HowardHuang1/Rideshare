@@ -5,24 +5,33 @@ async function scrapeFareValues(location1, location2, numRidersAllowed) {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto(
-      `https://ride.guru/estimate/${location1}/${location2}#fare-comparison`
+      `https://ride.guru/estimate/${location1}/${location2}#fare-comparison`,
+      { waitUntil: "networkidle2" }
     );
 
-    // Wait for the elements to be rendered on the page
-    await page.waitForSelector(".fare.ng-binding");
+    const delay = 2000;
+    await new Promise((resolve) => setTimeout(resolve, delay));
 
-    // Extract the values of all matching elements
-    const fareValues = await page.$$eval(".fare.ng-binding", (elements) =>
-      elements.map((element) => element.textContent)
-    );
+    await page.click("li.ng-scope.is-active a"); // click the "sedan button"
 
-    const filteredList = fareValues.filter((value) => {
-      return !value.includes("\n");
-    });
-    console.log(filteredList);
-    await browser.close();
-    if (numRidersAllowed == 4) return parseInt(filteredList[1]);
-    else return parseInt(filteredList[3]);
+    const delay2 = 1000;
+    await new Promise((resolve) => setTimeout(resolve, delay2));
+
+    // Get the rendered HTML content of the page
+    const htmlContent = await page.content();
+    //console.log(htmlContent);
+    const lines = htmlContent.split("\n");
+    const ilines = lines.filter((line) => line.includes("fare ng-binding"));
+    console.log(ilines);
+    const fare = parseInt(ilines[0].split(">")[1].split("<")[0].substring(1));
+    console.log("fare: ", fare);
+    if (numRidersAllowed == 6) {
+      return Math.floor(fare * 1.4);
+    }
+    return fare;
+
+    // fs.writeFileSync("rg.html", htmlContent);
+    // console.log(`Webpage downloaded and saved as rg.html`);
   } catch (error) {
     console.error("Error:", error);
     return -1;
