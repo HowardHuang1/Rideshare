@@ -12,7 +12,8 @@ function CreateRide() {
         flexDirection: 'column',
         alignItems: 'flex-end',
         height: '100vh', // Adjust this value based on your requirements
-        paddingRight: '20px' // Optional: add some right padding for spacing
+        paddingRight: '20px', // Optional: add some right padding for spacing
+        paddingTop: "100px",
       }}>
         <CardStack />
       </div>
