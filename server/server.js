@@ -582,10 +582,8 @@ app.get("/search-ride", async (req, res) => {
     // return res.status(400).json({ errors: error.array() });
   }
 
-  let foundRidesFiltered = foundRides.filter((ride) => {
-    console.log(dateObj);
-    console.log(ride.date);
-  
+  let foundRidesFiltered = []
+  for (const ride of foundRides){
     
     let cond = true;
     cond = cond && ride.addressFrom == fromPlaceInfo.address;
@@ -602,15 +600,18 @@ app.get("/search-ride", async (req, res) => {
         ((diff < timeparam && diff >= 0) || (diff > -timeparam && diff <= 0));
     }
     // rides only distparam apart
-    const response = services.getDistanceAndDuration(
+    const response = await services.getDistanceAndDuration(
       fromPlaceInfo.address,
       ride.addressFrom,
       dateObj
     );
     console.log(response.distance);
     cond = cond && response.distance <= distparam;
-    return cond;
-  });
+
+    if (cond){
+      foundRidesFiltered.push(ride);
+    }
+  }  
   return res.send(foundRidesFiltered);
 });
 
