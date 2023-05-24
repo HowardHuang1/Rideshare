@@ -1,60 +1,140 @@
-import React, { useState } from 'react';
-import RedirectingButton from './RedirectingButton';
-import "./Profile.css";
+import React from 'react';
+import './Profile.css';
 
-// Display personal information here
 const Profile = (props) => {
-    const { name, username, balance } = props;
+  const { name, username, num_rides, money_saved, carbon_saved } = props;
 
-    return (
-        <div className="container">
-            <h2>Profile Information</h2>
-            <p>Name: {name}</p>
-            <p>Username: {username}</p>
-            <p>Balance: {balance}</p>
-        </div>
-    );
-}
+  return (
+    <div className="profile-container">
+      <h2>Profile Information</h2>
+      <table className="profile-table">
+        <tbody>
+          <tr>
+            <td><strong>Name:</strong></td>
+            <td>{name}</td>
+          </tr>
+          <tr>
+            <td><strong>Username:</strong></td>
+            <td>{username}</td>
+          </tr>
+          <tr>
+            <td><strong>Number of Rides:</strong></td>
+            <td>{num_rides}</td>
+          </tr>
+          <tr>
+            <td><strong>Money Saved:</strong></td>
+            <td>{money_saved}</td>
+          </tr>
+          <tr>
+            <td><strong>Carbon Saved:</strong></td>
+            <td>{carbon_saved}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
-// Display previous rides here
 const RideHistory = () => {
-    const rides = [
-        {
-            id: 1,
-            start: "starting point",
-            end: "ending point",
-            payment: "$payment"
-        }
+    const existingRides = [
+      {
+        id: 1,
+        start: 'starting point',
+        end: 'ending point',
+        payment: '$payment'
+      }
     ];
-
+  
+    const pastRides = [
+      {
+        id: 2,
+        start: 'past starting point',
+        end: 'past ending point',
+        payment: '$past payment'
+      }
+    ];
+  
     return (
-        <div className="container">
-            <h2>Ride History</h2>
-            {rides.map(ride => (
-                <div key={ride.id}>
-                    <p>Start: {ride.start}</p>
-                    <p>End: {ride.end}</p>
-                    <p>Payment: {ride.payment}</p>
-                </div>
-            ))}
+      <div className="ride-history-container">
+        <h2>Ride History</h2>
+        <div className="tables-container">
+          <div className="ride-history-table">
+            <h3>Existing Rides</h3>
+            <table>
+              <tbody>
+                {existingRides.map((ride) => (
+                  <React.Fragment key={ride.id}>
+                    <tr>
+                      <td><strong>Start:</strong></td>
+                      <td>{ride.start}</td>
+                    </tr>
+                    <tr>
+                      <td><strong>End:</strong></td>
+                      <td>{ride.end}</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Payment:</strong></td>
+                      <td>{ride.payment}</td>
+                    </tr>
+                    <tr>
+                      <td colSpan="2">
+                        <button style={{ marginRight: '10px' }}>Update Ride</button>
+                        <button>Leave Ride</button>
+                      </td>
+                    </tr>
+                  </React.Fragment>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="ride-history-table">
+            <h3>Past Rides</h3>
+            <table>
+              <tbody>
+                {pastRides.map((ride) => (
+                  <React.Fragment key={ride.id}>
+                    <tr>
+                      <td><strong>Start:</strong></td>
+                      <td>{ride.start}</td>
+                    </tr>
+                    <tr>
+                      <td><strong>End:</strong></td>
+                      <td>{ride.end}</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Payment:</strong></td>
+                      <td>{ride.payment}</td>
+                    </tr>
+                  </React.Fragment>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-    )
-}
-
-const ProfileApp = () => {
-    const profileData = {
-        name: "Satvik Nair",
-        username: "satvikn",
-        balance: "$100"
-    };
-
-    return (
-        <div className="container">
-            <Profile {...profileData} />
-            <RideHistory />
-            <RedirectingButton destination={"/login"} value={"Go to Login Page"} />
-        </div>
+      </div>
     );
-}
+  };
 
-export default ProfileApp;
+const App = () => {
+  const profileData = {
+    name: 'Satvik Nair',
+    username: 'satvikn',
+    num_rides: 100,
+    money_saved: '$100',
+    carbon_saved: '2 diamonds worth'
+  };
+
+  return (
+    <div className="container">
+      <div className="flex-container">
+        <Profile {...profileData} />
+        <RideHistory />
+      </div>
+      <div>
+        <button>Logout</button>
+      </div>
+    </div>
+  );
+};
+
+export default App;
