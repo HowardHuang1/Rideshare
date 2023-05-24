@@ -510,17 +510,17 @@ app.put(
       }
       foundRide.numRidersAllowed = numRidersAllowed;
 
-      const price = await scraper.scrapeFareValues(
-        foundRide.addressFrom,
-        foundRide.addressTo,
-        foundRide.numRidersAllowed
-      );
-      if (price == -1) {
-        return res.json({ error: "Trouble fetching price" });
-        // const error = new ValidationError("Trouble fetching price");
-        // return res.status(400).json({ errors: error.array() });
-      }
-      foundRide.price = price * foundRide.trafficMultiplier * generalMultiplier;
+      // const price = await scraper.scrapeFareValues(
+      //   foundRide.addressFrom,
+      //   foundRide.addressTo,
+      //   foundRide.numRidersAllowed
+      // );
+      // if (price == -1) {
+      //   return res.json({ error: "Trouble fetching price" });
+      //   // const error = new ValidationError("Trouble fetching price");
+      //   // return res.status(400).json({ errors: error.array() });
+      // }
+      // foundRide.price = price * foundRide.trafficMultiplier * generalMultiplier;
 
       await foundRide.save();
     } else {
@@ -568,14 +568,9 @@ app.get("/search-ride", async (req, res) => {
     }
   }
 
-  let fromPlaceInfo;
-  let toPlaceInfo;
-  if (fromPlaceInfo.address == undefined) {
-    fromPlaceInfo = await services.getPlaceInfo(locationFrom);
-  }
-  if (fromPlaceInfo.address == undefined) {
-    toPlaceInfo = await services.getPlaceInfo(locationTo);
-  }
+  let fromPlaceInfo = await services.getPlaceInfo(locationFrom);
+  let toPlaceInfo = await services.getPlaceInfo(locationTo);
+
 
   if (fromPlaceInfo.address == undefined) {
     res.json({ error: "Invalid from location" });
@@ -588,6 +583,10 @@ app.get("/search-ride", async (req, res) => {
   }
 
   let foundRidesFiltered = foundRides.filter((ride) => {
+    console.log(dateObj);
+    console.log(ride.date);
+  
+    
     let cond = true;
     cond = cond && ride.addressFrom == fromPlaceInfo.address;
     cond = cond && ride.addressTo == toPlaceInfo.address;
@@ -600,7 +599,7 @@ app.get("/search-ride", async (req, res) => {
       var diff = (dateObj.getTime() - ride.date.getTime()) / 60000;
       cond =
         cond &&
-        ((diff < timeparam && diff > 0) || (diff > -timeparam && diff < 0));
+        ((diff < timeparam && diff >= 0) || (diff > -timeparam && diff <= 0));
     }
     // rides only distparam apart
     const response = services.getDistanceAndDuration(
@@ -608,6 +607,7 @@ app.get("/search-ride", async (req, res) => {
       ride.addressFrom,
       dateObj
     );
+    console.log(response.distance);
     cond = cond && response.distance <= distparam;
     return cond;
   });
