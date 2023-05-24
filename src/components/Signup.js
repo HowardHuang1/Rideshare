@@ -1,5 +1,6 @@
 import React from 'react';
-import { extendTheme, theme as baseTheme } from '@chakra-ui/react'
+import { extendTheme, theme as baseTheme } from '@chakra-ui/react';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
 
 
@@ -58,9 +59,11 @@ const SignUp = () => (
             </Heading>
             <HStack spacing="1" justify="center">
               <Text color="muted">Have an Account?</Text>
-              <Button variant="link" colorScheme="red">
-                Log in
-              </Button>
+              <Link to="/login">
+                <Button variant="link" colorScheme="red">
+                  Log in
+                </Button>
+              </Link>
             </HStack>
           </Stack>
         </Stack>
