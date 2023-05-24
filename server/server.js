@@ -228,10 +228,9 @@ app.get("/user-data", async (req, res) => {
   const { username } = req.body;
   const user = await User.findOne({ username: username });
   if (user) {
-    //console.log("The user is ", user);
+    console.log("The user is ", user);
     // res.send({user.fullName, user.email, user.username, moneySaved: moneySaved(user)}, numRides: numRides(user)});
     const moneySavedfunc = async (username) => {
-      console.log("here");
       const rides = await Ride.find({ usernames: username });
       if (!rides){
         return 0;
@@ -465,6 +464,9 @@ app.put(
     }
 
     const foundRide = await Ride.findOne({ _id: rideID });
+    if (foundRide.usernames[0] != username){
+      return res.json({error: "Only ride creator can update the ride"})
+    }
     if (foundRide) {
       let timeArray = time.split(":").map((x) => parseInt(x));
       if (
