@@ -228,45 +228,53 @@ app.get("/user-data", async (req, res) => {
   const { username } = req.body;
   const user = await User.findOne({ username: username });
   if (user) {
-    console.log("The user is ", user);
+    //console.log("The user is ", user);
     // res.send({user.fullName, user.email, user.username, moneySaved: moneySaved(user)}, numRides: numRides(user)});
+    const moneySavedfunc = async (username) => {
+      console.log("here");
+      const rides = await Ride.find({ usernames: username });
+      if (!rides){
+        return 0;
+      }
+      return 5;
+    };
+  
+    const carbonSavedfunc = async (username) => {
+      //calculate pounds of carbon dioxide
+      let totalCarbon = 0;
+      const rides = await Ride.find({ usernames: username });
+      if (!rides) {
+        return 0;
+      }
+      for (let i = 0; i < rides.length; i++) {
+        totalCarbon += rides[i].distance * 0.75 + rides[i].duration * 0.25;
+      }
+      return totalCarbon;
+    };
+  
+    const numRidesfunc = async (username) => {
+      const rides = await Ride.find({ usernames: username });
+      const filteredRides = rides.filter((ride) => {
+        return ride.usernames.includes(username);
+      });
+      return filteredRides.length;
+    };
+
+    const moneySaved = await moneySavedfunc(username);
+    const carbonSaved = await carbonSavedfunc(username);
+    const numRides = await numRidesfunc(username);
+
     res.send({
       fullName: user.fullName,
       emailAddress: user.emailAddress,
       username: user.username,
-      moneySaved: moneySaved(user),
-      carbonSaved: carbonSaved(user),
-      numRides: numRides(user),
+      moneySaved: moneySaved,
+      carbonSaved: carbonSaved,
+      numRides: numRides,
     });
   } else {
     res.send(null);
   }
-
-  const moneySaved = async (username) => {
-    const rides = await Ride.find({ usernames: username });
-    return 5;
-  };
-
-  const carbonSaved = async (username) => {
-    //calculate pounds of carbon dioxide
-    let totalCarbon = 0;
-    const rides = await Ride.find({ usernames: username });
-    if (!rides) {
-      return 0;
-    }
-    for (let i = 0; i < rides.length; i++) {
-      totalCarbon += rides[i].distance * 0.75 + rides[i].duration * 0.25;
-    }
-    return totalCarbon;
-  };
-
-  const numRides = async (username) => {
-    const rides = await Ride.find({ usernames: username });
-    const filteredRides = rides.filter((ride) => {
-      return ride.usernames.includes(username);
-    });
-    return filteredRides.length;
-  };
 });
 
 app.post("/create-ride", async (req, res) => {
