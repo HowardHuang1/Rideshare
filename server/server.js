@@ -230,43 +230,50 @@ app.get("/user-data", async (req, res) => {
   if (user) {
     console.log("The user is ", user);
     // res.send({user.fullName, user.email, user.username, moneySaved: moneySaved(user)}, numRides: numRides(user)});
+    const moneySavedfunc = async (username) => {
+      const rides = await Ride.find({ usernames: username });
+      if (!rides){
+        return 0;
+      }
+      return 5;
+    };
+  
+    const carbonSavedfunc = async (username) => {
+      //calculate pounds of carbon dioxide
+      let totalCarbon = 0;
+      const rides = await Ride.find({ usernames: username });
+      if (!rides) {
+        return 0;
+      }
+      for (let i = 0; i < rides.length; i++) {
+        totalCarbon += rides[i].distance * 0.75 + rides[i].duration * 0.25;
+      }
+      return totalCarbon;
+    };
+  
+    const numRidesfunc = async (username) => {
+      const rides = await Ride.find({ usernames: username });
+      const filteredRides = rides.filter((ride) => {
+        return ride.usernames.includes(username);
+      });
+      return filteredRides.length;
+    };
+
+    const moneySaved = await moneySavedfunc(username);
+    const carbonSaved = await carbonSavedfunc(username);
+    const numRides = await numRidesfunc(username);
+
     res.send({
       fullName: user.fullName,
       emailAddress: user.emailAddress,
       username: user.username,
-      moneySaved: moneySaved(user),
-      carbonSaved: carbonSaved(user),
-      numRides: numRides(user),
+      moneySaved: moneySaved,
+      carbonSaved: carbonSaved,
+      numRides: numRides,
     });
   } else {
     res.send(null);
   }
-
-  const moneySaved = async (username) => {
-    const rides = await Ride.find({ usernames: username });
-    return 5;
-  };
-
-  const carbonSaved = async (username) => {
-    //calculate pounds of carbon dioxide
-    let totalCarbon = 0;
-    const rides = await Ride.find({ usernames: username });
-    if (!rides) {
-      return 0;
-    }
-    for (let i = 0; i < rides.length; i++) {
-      totalCarbon += rides[i].distance * 0.75 + rides[i].duration * 0.25;
-    }
-    return totalCarbon;
-  };
-
-  const numRides = async (username) => {
-    const rides = await Ride.find({ usernames: username });
-    const filteredRides = rides.filter((ride) => {
-      return ride.usernames.includes(username);
-    });
-    return filteredRides.length;
-  };
 });
 
 app.post("/create-ride", async (req, res) => {
@@ -457,6 +464,9 @@ app.put(
     }
 
     const foundRide = await Ride.findOne({ _id: rideID });
+    if (foundRide.usernames[0] != username){
+      return res.json({error: "Only ride creator can update the ride"})
+    }
     if (foundRide) {
       let timeArray = time.split(":").map((x) => parseInt(x));
       if (
@@ -500,17 +510,17 @@ app.put(
       }
       foundRide.numRidersAllowed = numRidersAllowed;
 
-      const price = await scraper.scrapeFareValues(
-        foundRide.addressFrom,
-        foundRide.addressTo,
-        foundRide.numRidersAllowed
-      );
-      if (price == -1) {
-        return res.json({ error: "Trouble fetching price" });
-        // const error = new ValidationError("Trouble fetching price");
-        // return res.status(400).json({ errors: error.array() });
-      }
-      foundRide.price = price * foundRide.trafficMultiplier * generalMultiplier;
+      // const price = await scraper.scrapeFareValues(
+      //   foundRide.addressFrom,
+      //   foundRide.addressTo,
+      //   foundRide.numRidersAllowed
+      // );
+      // if (price == -1) {
+      //   return res.json({ error: "Trouble fetching price" });
+      //   // const error = new ValidationError("Trouble fetching price");
+      //   // return res.status(400).json({ errors: error.array() });
+      // }
+      // foundRide.price = price * foundRide.trafficMultiplier * generalMultiplier;
 
       await foundRide.save();
     } else {
@@ -558,14 +568,9 @@ app.get("/search-ride", async (req, res) => {
     }
   }
 
-  let fromPlaceInfo;
-  let toPlaceInfo;
-  if (fromPlaceInfo.address == undefined) {
-    fromPlaceInfo = await services.getPlaceInfo(locationFrom);
-  }
-  if (fromPlaceInfo.address == undefined) {
-    toPlaceInfo = await services.getPlaceInfo(locationTo);
-  }
+  let fromPlaceInfo = await services.getPlaceInfo(locationFrom);
+  let toPlaceInfo = await services.getPlaceInfo(locationTo);
+
 
   if (fromPlaceInfo.address == undefined) {
     res.json({ error: "Invalid from location" });
@@ -577,7 +582,9 @@ app.get("/search-ride", async (req, res) => {
     // return res.status(400).json({ errors: error.array() });
   }
 
-  let foundRidesFiltered = foundRides.filter((ride) => {
+  let foundRidesFiltered = []
+  for (const ride of foundRides){
+    
     let cond = true;
     cond = cond && ride.addressFrom == fromPlaceInfo.address;
     cond = cond && ride.addressTo == toPlaceInfo.address;
@@ -590,17 +597,21 @@ app.get("/search-ride", async (req, res) => {
       var diff = (dateObj.getTime() - ride.date.getTime()) / 60000;
       cond =
         cond &&
-        ((diff < timeparam && diff > 0) || (diff > -timeparam && diff < 0));
+        ((diff < timeparam && diff >= 0) || (diff > -timeparam && diff <= 0));
     }
     // rides only distparam apart
-    const response = services.getDistanceAndDuration(
+    const response = await services.getDistanceAndDuration(
       fromPlaceInfo.address,
       ride.addressFrom,
       dateObj
     );
+    console.log(response.distance);
     cond = cond && response.distance <= distparam;
-    return cond;
-  });
+
+    if (cond){
+      foundRidesFiltered.push(ride);
+    }
+  }  
   return res.send(foundRidesFiltered);
 });
 

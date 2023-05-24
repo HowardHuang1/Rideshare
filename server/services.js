@@ -79,6 +79,10 @@ const getDistanceAndDuration = async (
       }
     );
 
+    if(place_1_address === place_2_address){
+      return { distance: 0, durationInTraffic: 0, trafficMultiplier: 0 };
+    }
+
     const distance = parseInt(response.data.rows[0].elements[0].distance.text);
     const durationInTraffic = parseInt(
       response.data.rows[0].elements[0].duration_in_traffic.text
