@@ -8,8 +8,6 @@ function Modal({ setIsOpen }) {
     return(
         <div>
             <div className="darkBG centered" onClick={() => setIsOpen(false)}>
-
-            
             <div className="centered">
                 <div className="modal">
                     <div className="modalHeader">
