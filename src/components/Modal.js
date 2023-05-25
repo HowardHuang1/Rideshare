@@ -7,7 +7,9 @@ import 'font-awesome/css/font-awesome.min.css';
 function Modal({ setIsOpen }) {
     return(
         <div>
-            <div className="darkBG" onClick={() => setIsOpen(false)} />
+            <div className="darkBG centered" onClick={() => setIsOpen(false)}>
+
+            
             <div className="centered">
                 <div className="modal">
                     <div className="modalHeader">
@@ -42,6 +44,7 @@ function Modal({ setIsOpen }) {
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     );

@@ -3,6 +3,9 @@ import "./CreateRide.css"
 import Modal from "./Modal"
 import CardStack from "./CardStack"
 
+
+//TODO: Need to make am PM button
+//TODO: Need to add dropdown menu for number of riders (2 options: 4 or 6)
 function CreateRide() {
   const [isOpen, setIsOpen] = useState(false);
   return(
