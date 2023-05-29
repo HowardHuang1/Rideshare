@@ -2,6 +2,9 @@ import React from 'react';
 import { extendTheme, theme as baseTheme } from '@chakra-ui/react';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
+//Note: do not send a request if confirm password doesn't match password
+//200 is the good status
+
 
 
 import {
@@ -108,7 +111,7 @@ const SignUp = () => (
                 <Input id="password" type="password" />
               </FormControl>
               <FormControl>
-                <FormLabel htmlFor="confirmPassword">Confirm Password</FormLabel>
+                <FormLabel htmlFor="confirmPassword">Confirm Password</FormLabel> 
                 <Input id="confirmPassword" type="confirmPassword" />
               </FormControl>
             </Stack>
