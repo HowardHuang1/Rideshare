@@ -9,7 +9,6 @@ function Navbar() {
           <div className="menuItems">
               <div className="left-items">
                 <NavLink exact to="/" activeClassName="active">Home</NavLink>
-                <NavLink exact to="/home" activeClassName="active">Tesla</NavLink>
                 <NavLink to="/createRide" activeClassName="active">Create Ride</NavLink>
               </div>
               <div className="right-items">
