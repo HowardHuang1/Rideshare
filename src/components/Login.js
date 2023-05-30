@@ -1,6 +1,9 @@
 import React from 'react';
 import { extendTheme, theme as baseTheme } from '@chakra-ui/react'
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import axios from 'axios';
+
+import { useForm } from "react-hook-form";
 
 //TODO: Implement user APi into here.
 
@@ -17,6 +20,7 @@ import {
     Text,
   } from '@chakra-ui/react'
   import { ChakraProvider } from '@chakra-ui/react'
+import { toHaveFormValues } from '@testing-library/jest-dom/dist/matchers';
   
   export const theme = extendTheme(
     {
@@ -24,7 +28,36 @@ import {
     },
 
   )
-const Login = () => (
+function Login (){
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isSubmitting }
+  } = useForm();
+
+  // async function onSubmit(values) {
+  //   const response = await axios.get('http://localhost:8000/login', values.username, values.password  );
+  //   console.log("response: ", response);
+  // }
+  async function loginUser(values) {
+    try {
+      const response = await axios.post('http://localhost:8000/login', {
+        username: values.username,
+        password: values.password,
+      });
+  
+      // Handle the response data
+      console.log(response.data); // true, false, or null
+  
+      // You can perform additional actions based on the response here
+  
+    } catch (error) {
+      // Handle any errors that occurred during the request
+      console.error(error);
+    }
+  }
+  return (
     <ChakraProvider theme={theme}>
     <Container
       maxW="lg"
@@ -87,15 +120,24 @@ const Login = () => (
             sm: 'xl',
           }}
         >
+          <form onSubmit={handleSubmit(loginUser)}>
           <Stack spacing="6">
             <Stack spacing="5">
               <FormControl>
-                <FormLabel htmlFor="email">Email</FormLabel>
-                <Input id="email" type="email" />
+                <FormLabel htmlFor="username">Username</FormLabel>
+                <Input id="username" type="username" 
+                {...register("username", {
+                required: "This is required",
+                minLength: { value: 4, message: "Minimum length should be 4" }
+          })}/>
               </FormControl>
               <FormControl>
                 <FormLabel htmlFor="password">Password</FormLabel>
-                <Input id="password" type="password" />
+                <Input id="password" type="password" 
+                {...register("password", {
+                  required: "This is required",
+                  minLength: { value: 4, message: "Minimum length should be 4" }
+            })}/>
               </FormControl>
             </Stack>
             <HStack justify="space-between">
@@ -104,13 +146,16 @@ const Login = () => (
               </Button>
             </HStack>
             <Stack spacing="6">
-              <Button variant="primary">Sign in</Button>
+              <Button variant="primary" type='submit'>Sign in</Button>
 
             </Stack>
           </Stack>
+          </form>
         </Box>
       </Stack>
     </Container>
     </ChakraProvider>
   )
+}
   export default Login;
+
