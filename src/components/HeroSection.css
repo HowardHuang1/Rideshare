@@ -1,0 +1,21 @@
+.hero {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100vh;
+    padding: 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero-title {
+    font-size: 4.5em;
+    margin-bottom: 0px;
+}
+
+.hero-subtext {
+    font-size: 2em;
+}
