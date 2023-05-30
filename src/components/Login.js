@@ -4,8 +4,6 @@ import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
 //TODO: Implement user APi into here.
 
-
-
 import {
     Box,
     Button,
