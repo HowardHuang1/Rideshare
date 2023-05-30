@@ -54,7 +54,7 @@ const Profile = () => {
               <td>
                 <strong>Carbon Saved:</strong>
               </td>
-              <td>{userData.carbonSaved}</td>
+              <td>{userData.carbonSaved + " kg CO2"}</td>
             </tr>
             <tr>
               <td>
@@ -84,66 +84,86 @@ const RideHistory = () => {
         console.error('Error fetching user data:', error);
       }
     };
-    console.log(rideData);
+
     fetchRideData();
   }, []);
+
+  const existingRides = [];
+  const pastRides = [];
+  const current = new Date();
+
+  if (rideData) {
+    rideData.forEach((ride) => {
+      if (current < new Date(ride.date)) {
+        existingRides.push(ride);
+      } else {
+        pastRides.push(ride);
+      }
+    });
+  }
+  console.log(pastRides);
 
   return (
     <div className="ride-history-container">
       <h2>Ride History</h2>
       <div className="tables-container">
-        <div className="ride-history-table">
-          <h3>Existing Rides</h3>
-          <table>
-            <tbody>
-              {rideData && rideData.map((ride) => (
-                <React.Fragment key={ride._id}>
-                  <tr>
-                    <td><strong>Start:</strong></td>
-                    <td>{ride.locationFrom}</td>
-                  </tr>
-                  <tr>
-                    <td><strong>End:</strong></td>
-                    <td>{ride.locationTo}</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Distance:</strong></td>
-                    <td>{ride.distance}</td>
-                  </tr>
-                  <tr>
-                    <td colSpan="2">
-                      <button style={{ marginRight: '10px' }}>Update Ride</button>
-                      <button>Leave Ride</button>
-                    </td>
-                  </tr>
-                </React.Fragment>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div className="ride-history-table">
-          <h3>Past Rides</h3>
-          <table>
-            <tbody>
-              {rideData && rideData.map((ride) => (
-                <React.Fragment key={ride._id}>
-                  <tr>
-                    <td><strong>Start:</strong></td>
-                    <td>{ride.start}</td>
-                  </tr>
-                  <tr>
-                    <td><strong>End:</strong></td>
-                    <td>{ride.end}</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Payment:</strong></td>
-                    <td>{ride.payment}</td>
-                  </tr>
-                </React.Fragment>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        {rideData && (
+          <div className="ride-history-table">
+            <h3>Existing Rides</h3>
+            <table>
+              <tbody>
+                {existingRides.map((ride) => (
+                  <React.Fragment key={ride._id}>
+                    <tr>
+                      <td><strong>Start:</strong></td>
+                      <td>{ride.locationFrom}</td>
+                    </tr>
+                    <tr>
+                      <td><strong>End:</strong></td>
+                      <td>{ride.locationTo}</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Date:</strong></td>
+                      <td>{ride.date}</td>
+                    </tr>
+                    <tr>
+                      <td colSpan="2">
+                        <button style={{ marginRight: '10px' }}>Update Ride</button>
+                        <button>Leave Ride</button>
+                      </td>
+                    </tr>
+                  </React.Fragment>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {rideData && (
+          <div className="ride-history-table">
+            <h3>Past Rides</h3>
+            <table>
+              <tbody>
+                {pastRides.map((ride) => (
+                  <React.Fragment key={ride._id}>
+                    <tr>
+                      <td><strong>Start:</strong></td>
+                      <td>{ride.locationFrom}</td>
+                    </tr>
+                    <tr>
+                      <td><strong>End:</strong></td>
+                      <td>{ride.locationTo}</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Date:</strong></td>
+                      <td>{ride.date}</td>
+                    </tr>
+                  </React.Fragment>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );
