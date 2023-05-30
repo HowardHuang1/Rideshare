@@ -244,7 +244,7 @@ app.get("/user-data", async (req, res) => {
         return 0;
       }
       for (let i = 0; i < rides.length; i++) {
-        totalCarbon += rides[i].distance * 0.75 + rides[i].duration * 0.25;
+        totalCarbon += rides[i].distance * 0.3548;
       }
       return totalCarbon;
     };
