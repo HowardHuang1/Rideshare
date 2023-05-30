@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import { VStack, StackDivider, Box } from '@chakra-ui/react'
 import RideCard from "./RideCard"
 import "./CardStack.css"
-import Searchbar from "./Searchbar"
+import Searchbar from "./Ride Filters/Searchbar"
 import axios from "axios";
 import RideSelector from "./RideSelector";
+import Locationbar from "./Ride Filters/Locationbar";
+import Destinationbar from "./Ride Filters/Destinationbar";
+import RideDateTimeBar from "./Ride Filters/RideDateTimebar";
 
 function CardStack() {
     const [data, setData] = useState(null);
@@ -45,6 +48,9 @@ function CardStack() {
     return(
         <div className="container" >
             <Searchbar />
+            <Locationbar />
+            <Destinationbar />
+            <RideDateTimeBar />
             <RideSelector />
             <div className="cardStack">
                 <VStack
