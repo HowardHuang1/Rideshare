@@ -9,10 +9,14 @@ function CardStack() {
     const [data, setData] = useState(null);
 
     useEffect(() => {
-        async function fetchData() {
-            const response = await axios.post('/localhost:8000/create-ride');
-            const json = await response.json();
-            setData(json);
+        const fetchData = async () =>{
+            try {
+                const response = await axios.get('/localhost:8000/get-rides-for-user');
+                const json = await response.json();
+                setData(json);
+            } catch (error) {
+                console.error('Error fetching ride data: ', error)
+            }
         }
         fetchData();
     }, []);
@@ -48,6 +52,7 @@ function CardStack() {
                 >
                 {/* <RideCard date={response.date} locationFrom={response.locationFrom} locationTo={response.locationTo} durationInTraffic={response.durationInTraffic} price={response.price} numRidersAllowed={response.numRidersAllowed} /> */}
                 <RideCard date={5/21/2023} locationFrom={"SF"} locationTo={"LAX"} duration={7} price={500} numRiders={4} />
+                {/* <RideCard date={data.date} locationFrom={data.locationFrom} locationTo={data.locationTo} duration={data.durationInTraffic} price={data.price} numRiders={data.numRidersAllowed}/> */}
                 <RideCard />
                 </VStack>
             </div>

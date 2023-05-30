@@ -225,11 +225,9 @@ app.post(
 );
 
 app.get("/user-data", async (req, res) => {
-  const { username } = req.body;
+  const { username } = req.query;
   const user = await User.findOne({ username: username });
   if (user) {
-    console.log("The user is ", user);
-    // res.send({user.fullName, user.email, user.username, moneySaved: moneySaved(user)}, numRides: numRides(user)});
     const moneySavedfunc = async (username) => {
       const rides = await Ride.find({ usernames: username });
       if (!rides){
