@@ -4,6 +4,7 @@ import RideCard from "./RideCard"
 import "./CardStack.css"
 import Searchbar from "./Searchbar"
 import axios from "axios";
+import RideSelector from "./RideSelector";
 
 function CardStack() {
     const [data, setData] = useState(null);
@@ -44,6 +45,7 @@ function CardStack() {
     return(
         <div className="container" >
             <Searchbar />
+            <RideSelector />
             <div className="cardStack">
                 <VStack
                     divider={<StackDivider borderColor='gray.200' />}
