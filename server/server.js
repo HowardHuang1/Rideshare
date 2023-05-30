@@ -229,11 +229,17 @@ app.get("/user-data", async (req, res) => {
   const user = await User.findOne({ username: username });
   if (user) {
     const moneySavedfunc = async (username) => {
+      let totalMoney = 0;
       const rides = await Ride.find({ usernames: username });
       if (!rides){
         return 0;
       }
-      return 5;
+      for (let i = 0; i < rides.length; i++) {
+        totalMoney += rides[i].price;
+        // formula asssumes 25 mpg and 8.887 kg/gallon consumption
+        // output in kg CO2
+      }
+      return totalMoney;
     };
   
     const carbonSavedfunc = async (username) => {
@@ -245,6 +251,8 @@ app.get("/user-data", async (req, res) => {
       }
       for (let i = 0; i < rides.length; i++) {
         totalCarbon += rides[i].distance * 0.3548;
+        // formula asssumes 25 mpg and 8.887 kg/gallon consumption
+        // output in kg CO2
       }
       return totalCarbon;
     };
