@@ -434,14 +434,24 @@ app.post("/leave-ride", async (req, res) => {
 });
 
 app.get("/get-rides-for-user", async (req, res) => {
-  const { username } = req.body;
+  const { username } = req.query;
   const foundRides = await Ride.find({ usernames: username });
-  if (foundRides) {
+  if (foundRides.length > 0) {
     res.send(foundRides); // found rides for that user
   } else {
     res.send(null); // couldn't find rides for that user
   }
 });
+
+// app.get("/get-rides-for-user", async (req, res) => {
+//   const { username } = req.body;
+//   const foundRides = await Ride.find({ usernames: username });
+//   if (foundRides) {
+//     res.send(foundRides); // found rides for that user
+//   } else {
+//     res.send(null); // couldn't find rides for that user
+//   }
+// });
 
 app.put(
   "/update-ride",
