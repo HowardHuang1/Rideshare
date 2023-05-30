@@ -22,17 +22,18 @@ function Modal({ setIsOpen }) {
 
     const handleSubmit = (e) => {
         console.log('Click registered');
-        setIsOpen(false);
         setPickupLocation(pickupLocation);
         setDestination(destination);
         setRideDate(rideDate);
         setRideTime(rideTime);
         postData();
+        setIsOpen(false);
     }
 
     return(
         <div>
-            <div className="darkBG centered" onClick={() => setIsOpen(false)}>
+            {/* <div className="darkBG centered" onClick={() => setIsOpen(false)}> */}
+            <div className="darkBG centered">
             <div className="centered">
                 <div className="modal">
                     <div className="modalHeader">
