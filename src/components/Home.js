@@ -17,7 +17,6 @@ function Home() {
     <div className="home" >
       <HeroSection />
       <div className="photo">
-        <RedirectingButton id="hi" destination={"/createRide"} value={"Create a ride"} />
       </div>
     </div>
   );
