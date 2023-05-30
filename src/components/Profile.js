@@ -8,12 +8,40 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get('localhost:8000/user-data');
+        const username = "parthivn"; // Replace with your current username
+        const response = await axios.get('http://localhost:8000/user-data', { params: { username } });
+        // Rest of your code...
         setUserData(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
     };
+    //   try {
+    //     const response = await axios.get('http://localhost:8000/user-data', {
+    //     params: {
+    //       username: 'parthivn'
+    //     }});
+
+    //     setUserData(response.data);
+    //   } catch (error) {
+    //     console.error('Error fetching user data:', error);
+    //   }
+    // axios.get('http://localhost:8000/user-data', {
+    //   data: {
+    //     username: 'parthivn'
+    //   }
+    // })
+    //   .then(response => {
+    //     console.log(response.data);
+    //     setUserData(response.data);
+    //     // Handle the response data
+    //   })
+    //   .catch(error => {
+    //     console.error('Error fetching user data:', error);
+    //     // Handle the error
+    //   });
+    // };
 
     fetchUserData();
   }, []);
@@ -34,7 +62,7 @@ const Profile = () => {
               <td>
                 <strong>Email:</strong>
               </td>
-              <td>{userData.email}</td>
+              <td>{userData.emailAddress}</td>
             </tr>
             <tr>
               <td>
