@@ -231,7 +231,7 @@ app.get("/user-data", async (req, res) => {
     const moneySavedfunc = async (username) => {
       let totalMoney = 0;
       const rides = await Ride.find({ usernames: username });
-      if (!rides){
+      if (!rides) {
         return 0;
       }
       for (let i = 0; i < rides.length; i++) {
@@ -241,7 +241,7 @@ app.get("/user-data", async (req, res) => {
       }
       return totalMoney;
     };
-  
+
     const carbonSavedfunc = async (username) => {
       //calculate pounds of carbon dioxide
       let totalCarbon = 0;
@@ -256,7 +256,7 @@ app.get("/user-data", async (req, res) => {
       }
       return totalCarbon;
     };
-  
+
     const numRidesfunc = async (username) => {
       const rides = await Ride.find({ usernames: username });
       const filteredRides = rides.filter((ride) => {
@@ -345,14 +345,6 @@ app.post("/create-ride", async (req, res) => {
     // return res.status(400).json({ errors: error.array() });
   }
 
-  // console.log(fromPlaceInfo.address);
-  // console.log(toPlaceInfo.address);
-  // let price = await scraper.scrapeFareValues(
-  //   fromPlaceInfo.address,
-  //   toPlaceInfo.address,
-  //   numRidersAllowed
-  // );
-
   let price; // for testing purposes
   if (durationInTraffic < 12) {
     price = 12;
@@ -392,16 +384,39 @@ app.post("/create-ride", async (req, res) => {
     res.send(error);
   }
 
+  let bestAvailablePrice;
+  try {
+    bestAvailablePrice = await scraper.scrapeFareValues(
+      fromPlaceInfo.address,
+      toPlaceInfo.address,
+      numRidersAllowed
+    );
+  } catch (error) {
+    console.log("Error: ", error.message);
+  }
+
+  if (bestAvailablePrice) {
+    bestAvailablePrice =
+      bestAvailablePrice * trafficMultiplier * generalMultiplier;
+    newRide.price = bestAvailablePrice;
+    try {
+      await newRide.save();
+    } catch (error) {
+      console.log("Error: ", error.message);
+    }
+  } else {
+    bestAvailablePrice = price;
+  }
+
   // send email to user
-  // await email.createEmailSender(
-  //   foundUser.emailAddress,
-  //   foundUser.fullName,
-  //   locationFrom,
-  //   locationTo,
-  //   date,
-  //   time,
-  //   AM
-  // );
+  await email.createEmailSender(
+    foundUser.emailAddress,
+    foundUser.fullName,
+    locationFrom,
+    locationTo,
+    dateObj,
+    bestAvailablePrice
+  );
 });
 
 app.post("/join-ride", async (req, res) => {
@@ -480,8 +495,8 @@ app.put(
     }
 
     const foundRide = await Ride.findOne({ _id: rideID });
-    if (foundRide.usernames[0] != username){
-      return res.json({error: "Only ride creator can update the ride"})
+    if (foundRide.usernames[0] != username) {
+      return res.json({ error: "Only ride creator can update the ride" });
     }
     if (foundRide) {
       let timeArray = time.split(":").map((x) => parseInt(x));
@@ -543,6 +558,32 @@ app.put(
       res.send(null); // couldn't find ride
     }
 
+    res.send(true); // successfully updated ride
+
+    let bestAvailablePrice;
+    try {
+      bestAvailablePrice = await scraper.scrapeFareValues(
+        foundRide.addressFrom,
+        foundRide.addressTo,
+        foundRide.numRidersAllowed
+      );
+    } catch (error) {
+      console.log("Error: ", error.message);
+    }
+
+    if (bestAvailablePrice) {
+      bestAvailablePrice =
+        bestAvailablePrice * foundRide.trafficMultiplier * generalMultiplier;
+      foundRide.price = bestAvailablePrice;
+      try {
+        await foundRide.save();
+      } catch (error) {
+        console.log("Error: ", error.message);
+      }
+    } else {
+      bestAvailablePrice = foundRide.price;
+    }
+
     let emailsFromUsernames = [];
     for (let i = 0; i < foundRide.usernames.length; i++) {
       emailsFromUsernames.push(
@@ -556,8 +597,6 @@ app.put(
       foundRide.locationTo,
       foundRide.date
     );
-
-    res.send(true); // successfully updated ride
   }
 );
 
@@ -587,7 +626,6 @@ app.get("/search-ride", async (req, res) => {
   let fromPlaceInfo = await services.getPlaceInfo(locationFrom);
   let toPlaceInfo = await services.getPlaceInfo(locationTo);
 
-
   if (fromPlaceInfo.address == undefined) {
     res.json({ error: "Invalid from location" });
     // const error = new ValidationError("Invalid from location");
@@ -598,9 +636,8 @@ app.get("/search-ride", async (req, res) => {
     // return res.status(400).json({ errors: error.array() });
   }
 
-  let foundRidesFiltered = []
-  for (const ride of foundRides){
-    
+  let foundRidesFiltered = [];
+  for (const ride of foundRides) {
     let cond = true;
     cond = cond && ride.addressFrom == fromPlaceInfo.address;
     cond = cond && ride.addressTo == toPlaceInfo.address;
@@ -624,10 +661,10 @@ app.get("/search-ride", async (req, res) => {
     console.log(response.distance);
     cond = cond && response.distance <= distparam;
 
-    if (cond){
+    if (cond) {
       foundRidesFiltered.push(ride);
     }
-  }  
+  }
   return res.send(foundRidesFiltered);
 });
 

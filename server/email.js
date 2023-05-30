@@ -49,14 +49,9 @@ const createEmailSender = async (
   fullName,
   locationFrom,
   locationTo,
-  date,
-  time,
-  AM
+  dateObject,
+  ba_price
 ) => {
-  let AMstring = "AM";
-  if (!AM) {
-    AMstring = "PM";
-  }
   const body =
     "Dear " +
     fullName +
@@ -66,11 +61,10 @@ const createEmailSender = async (
     "\nTo: " +
     locationTo +
     "\ndate: " +
-    date +
-    "\ntime: " +
-    time +
-    " " +
-    AMstring +
+    dateObject +
+    ". Based on newly received data, your estimated ride price is " +
+    ba_price +
+    "." +
     "\nThank you for using BruinCruisin!" +
     "\nSincerely,\nBruinCruisin Team";
 
@@ -88,7 +82,8 @@ const updateEmailSender = async (
   fullNames,
   locationFrom,
   locationTo,
-  dateObject
+  dateObject,
+  ba_price
 ) => {
   for (let i = 0; i < recipientEmails.length; i++) {
     const body =
@@ -101,6 +96,9 @@ const updateEmailSender = async (
       locationTo +
       "\ndate: " +
       dateObject +
+      ". Based on newly received data, your estimated ride price is " +
+      ba_price +
+      "." +
       "\nThank you for using BruinCruisin!" +
       "\nSincerely,\nBruinCruisin Team";
 
