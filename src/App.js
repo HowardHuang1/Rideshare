@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -9,15 +10,17 @@ import Login from './components/Login';
 import SignUp from './components/Signup';
 
 function App() {
+  const {user, updateUser} = useState(null);
+
   return (
     <div className="app">
       <Router>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home/>} />
-          <Route path="/createRide" element={<CreateRide/>} />
-          <Route path="/profile" element={<ProfileApp/>} />
-          <Route path="/login"   element={<Login/>} />
+          <Route path="/createRide" element={<CreateRide username={user}/>} />
+          <Route path="/profile" element={<ProfileApp username={user} logout={updateUser}/>} />
+          <Route path="/login"   element={<Login updateUsername={updateUser}/>} />
           <Route path="/signup" element={<SignUp/>} />
         </Routes>
       </Router>

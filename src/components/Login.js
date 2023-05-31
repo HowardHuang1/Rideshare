@@ -28,7 +28,7 @@ import { toHaveFormValues } from '@testing-library/jest-dom/dist/matchers';
     },
 
   )
-function Login (){
+function Login ({updateUsername}){
 
   const {
     handleSubmit,
@@ -46,10 +46,12 @@ function Login (){
         username: values.username,
         password: values.password,
       });
-  
+      
       // Handle the response data
       console.log(response.data); // true, false, or null
-  
+      if (response.data){
+        updateUsername(response.data);
+      }
       // You can perform additional actions based on the response here
   
     } catch (error) {

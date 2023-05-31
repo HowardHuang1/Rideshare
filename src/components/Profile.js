@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Profile.css';
 
-const Profile = () => {
+const Profile = ({username}) => {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const username = "parthivn"; // Replace with your current username
         const response = await axios.get('http://localhost:8000/user-data', { params: { username } });
         // Rest of your code...
         setUserData(response.data);
@@ -71,13 +70,13 @@ const Profile = () => {
   );
 };
 
-const RideHistory = () => {
+const RideHistory = ({username}) => {
   const [rideData, setRideData] = useState(null);
 
   useEffect(() => {
     const fetchRideData = async () => {
       try {
-        const username = "parthivn"; // Replace with your current username
+        // const username = "parthivn"; // Replace with your current username
         const response = await axios.get('http://localhost:8000/get-rides-for-user', { params: { username } });
         setRideData(response.data);
       } catch (error) {
@@ -169,15 +168,15 @@ const RideHistory = () => {
   );
 };
 
-const App = () => {
+const App = ({username, logout}) => {
   return (
     <div className="container">
       <div className="flex-container">
-        <Profile /*{...profileData}*/ />
-        <RideHistory />
+        <Profile username={username} />
+        <RideHistory username={username}/>
       </div>
       <div>
-        <button>Logout</button>
+        <button onClick={() => logout(null)}>Logout</button>
       </div>
     </div>
   );
