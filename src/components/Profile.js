@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Profile.css';
 
-const Profile = ({username}) => {
+const Profile = ({}) => {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
+        const username = "parthivn";
         const response = await axios.get('http://localhost:8000/user-data', { params: { username } });
         // Rest of your code...
         setUserData(response.data);
@@ -70,13 +71,13 @@ const Profile = ({username}) => {
   );
 };
 
-const RideHistory = ({username}) => {
+const RideHistory = ({}) => {
   const [rideData, setRideData] = useState(null);
 
   useEffect(() => {
     const fetchRideData = async () => {
       try {
-        // const username = "parthivn"; // Replace with your current username
+        const username = "parthivn"; // Replace with your current username
         const response = await axios.get('http://localhost:8000/get-rides-for-user', { params: { username } });
         setRideData(response.data);
       } catch (error) {
