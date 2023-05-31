@@ -101,10 +101,14 @@ const RideHistory = () => {
   const leaveRide = async (username, rideID) => {
     try {
       const response = await axios.post('http://localhost:8000/leave-ride', { params: { username, rideID } });
+      if (response.status === 200) {
+        setRideData(prevRideData => prevRideData.filter(ride => ride._id !== rideID));
+      }
     } catch (error) {
       console.error('Error leaving ride:', error);
     }
   };
+  
 
   const existingRides = [];
   const pastRides = [];
