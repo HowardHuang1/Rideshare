@@ -235,7 +235,7 @@ app.get("/user-data", async (req, res) => {
         return 0;
       }
       for (let i = 0; i < rides.length; i++) {
-        totalMoney += rides[i].price;
+        totalMoney += (rides[i].price)/(rides[i].usernames.length);
         // formula asssumes 25 mpg and 8.887 kg/gallon consumption
         // output in kg CO2
       }
@@ -250,7 +250,7 @@ app.get("/user-data", async (req, res) => {
         return 0;
       }
       for (let i = 0; i < rides.length; i++) {
-        totalCarbon += rides[i].distance * 0.3548;
+        totalCarbon += (rides[i].distance * 0.3548)*(rides[i].usernames.length-1);
         // formula asssumes 25 mpg and 8.887 kg/gallon consumption
         // output in kg CO2
       }
