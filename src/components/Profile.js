@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 import './Profile.css';
 
-const Profile = ({}) => {
+const username = "parthivn";
+
+const Profile = () => {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const username = "parthivn";
         const response = await axios.get('http://localhost:8000/user-data', { params: { username } });
-        // Rest of your code...
         setUserData(response.data);
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -27,39 +28,27 @@ const Profile = ({}) => {
         <table className="profile-table">
           <tbody>
             <tr>
-              <td>
-                <strong>Full Name:</strong>
-              </td>
+              <td><strong>Full Name:</strong></td>
               <td>{userData.fullName}</td>
             </tr>
             <tr>
-              <td>
-                <strong>Email:</strong>
-              </td>
+              <td><strong>Email:</strong></td>
               <td>{userData.emailAddress}</td>
             </tr>
             <tr>
-              <td>
-                <strong>Username:</strong>
-              </td>
+              <td><strong>Username:</strong></td>
               <td>{userData.username}</td>
             </tr>
             <tr>
-              <td>
-                <strong>Money Saved:</strong>
-              </td>
+              <td><strong>Money Saved:</strong></td>
               <td>{userData.moneySaved}</td>
             </tr>
             <tr>
-              <td>
-                <strong>Carbon Saved:</strong>
-              </td>
-              <td>{userData.carbonSaved + " kg CO2"}</td>
+              <td><strong>Carbon Saved:</strong></td>
+              <td>{userData.carbonSaved} kg CO2</td>
             </tr>
             <tr>
-              <td>
-                <strong>Number of Rides:</strong>
-              </td>
+              <td><strong>Number of Rides:</strong></td>
               <td>{userData.numRides}</td>
             </tr>
           </tbody>
@@ -71,13 +60,24 @@ const Profile = ({}) => {
   );
 };
 
-const RideHistory = ({}) => {
+const RideHistory = () => {
   const [rideData, setRideData] = useState(null);
+  const [time, setTime] = useState('');
+  const [numRiders, setNumRiders] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
 
   useEffect(() => {
     const fetchRideData = async () => {
       try {
-        const username = "parthivn"; // Replace with your current username
+        const username = "parthivn";
         const response = await axios.get('http://localhost:8000/get-rides-for-user', { params: { username } });
         setRideData(response.data);
       } catch (error) {
@@ -87,6 +87,24 @@ const RideHistory = ({}) => {
 
     fetchRideData();
   }, []);
+
+  const handleUpdateRide = async (rideID, time, numRiders) => {
+    try {
+      const response = await axios.post('http://localhost:8000/update-ride', { params: { rideID, time, numRiders } });
+    } catch (error) {
+      console.error('Error updating ride:', error);
+    }
+
+    handleCloseModal();
+  };
+
+  const leaveRide = async (username, rideID) => {
+    try {
+      const response = await axios.post('http://localhost:8000/leave-ride', { params: { username, rideID } });
+    } catch (error) {
+      console.error('Error leaving ride:', error);
+    }
+  };
 
   const existingRides = [];
   const pastRides = [];
@@ -101,7 +119,6 @@ const RideHistory = ({}) => {
       }
     });
   }
-  console.log(pastRides);
 
   return (
     <div className="ride-history-container">
@@ -128,10 +145,28 @@ const RideHistory = ({}) => {
                     </tr>
                     <tr>
                       <td colSpan="2">
-                        <button style={{ marginRight: '10px' }}>Update Ride</button>
-                        <button>Leave Ride</button>
+                        <div className="button-group">
+                          <button className="action-button" onClick={handleShowModal}>Update Ride</button>
+                          <button className="action-button" onClick={() => leaveRide(username, ride._id)}>Leave Ride</button>
+                        </div>
                       </td>
                     </tr>
+                    <Modal show={showModal} onHide={handleCloseModal}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Update Ride</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <label>Time:</label>
+                        <input type="text" value={time} onChange={(e) => setTime(e.target.value)} />
+                        <br />
+                        <label>Number of Riders:</label>
+                        <input type="number" value={numRiders} onChange={(e) => setNumRiders(parseInt(e.target.value))} />
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleCloseModal}>Close</Button>
+                        <Button variant="primary" onClick={() => handleUpdateRide(ride._id, time, numRiders)}>Save Changes</Button>
+                      </Modal.Footer>
+                    </Modal>
                   </React.Fragment>
                 ))}
               </tbody>
@@ -169,15 +204,15 @@ const RideHistory = ({}) => {
   );
 };
 
-const App = ({username, logout}) => {
+const App = ({ username, logout }) => {
   return (
     <div className="container">
       <div className="flex-container">
-        <Profile username={username} />
-        <RideHistory username={username}/>
+        <Profile />
+        <RideHistory />
       </div>
       <div>
-        <button onClick={() => logout(null)}>Logout</button>
+        <button className="logout-button" onClick={() => logout(null)}>Logout</button>
       </div>
     </div>
   );
