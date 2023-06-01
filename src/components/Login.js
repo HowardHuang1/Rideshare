@@ -1,6 +1,6 @@
 import React from 'react';
 import { extendTheme, theme as baseTheme } from '@chakra-ui/react'
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Switch, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import { useForm } from "react-hook-form";
@@ -18,9 +18,9 @@ import {
     Input,
     Stack,
     Text,
+    FormErrorMessage,
   } from '@chakra-ui/react'
   import { ChakraProvider } from '@chakra-ui/react'
-import { toHaveFormValues } from '@testing-library/jest-dom/dist/matchers';
   
   export const theme = extendTheme(
     {
@@ -30,17 +30,16 @@ import { toHaveFormValues } from '@testing-library/jest-dom/dist/matchers';
   )
 function Login ({updateUsername}){
 
+  const history = useNavigate();
   const {
     handleSubmit,
     register,
-    formState: { errors, isSubmitting }
+    formState: { errors, isSubmitting },
+    setError
   } = useForm();
 
-  // async function onSubmit(values) {
-  //   const response = await axios.get('http://localhost:8000/login', values.username, values.password  );
-  //   console.log("response: ", response);
-  // }
   async function loginUser(values) {
+    if (!!errors){
     try {
       const response = await axios.post('http://localhost:8000/login', {
         username: values.username,
@@ -49,14 +48,26 @@ function Login ({updateUsername}){
       
       // Handle the response data
       console.log(response.data); // true, false, or null
-      if (response.data){
+      // if (response.data){
+      //   updateUsername(response.data);
+      // }
+      if (response.data === true) {
         updateUsername(response.data);
-      }
+        history('/profile');
+      } else 
+
+      {
+        setError('password', { type: 'custom', message: 'Incorrect Password or username' });
+      } 
+      // else if (response.data === null) {
+      //   setError('username', { type: 'custom', message: 'Username not found' });
+      // }
       // You can perform additional actions based on the response here
   
     } catch (error) {
       // Handle any errors that occurred during the request
       console.error(error);
+    }
     }
   }
   return (
@@ -125,31 +136,36 @@ function Login ({updateUsername}){
           <form onSubmit={handleSubmit(loginUser)}>
           <Stack spacing="6">
             <Stack spacing="5">
-              <FormControl>
+              <FormControl isInvalid={errors.username}>
                 <FormLabel htmlFor="username">Username</FormLabel>
                 <Input id="username" type="username" 
                 {...register("username", {
                 required: "This is required",
                 minLength: { value: 4, message: "Minimum length should be 4" }
           })}/>
+              <FormErrorMessage>
+              {errors.username && errors.username.message}
+            </FormErrorMessage>
               </FormControl>
-              <FormControl>
+              <FormControl isInvalid={errors.password}>
                 <FormLabel htmlFor="password">Password</FormLabel>
                 <Input id="password" type="password" 
                 {...register("password", {
                   required: "This is required",
                   minLength: { value: 4, message: "Minimum length should be 4" }
             })}/>
+            <FormErrorMessage>
+              {errors.password && errors.password.message}
+            </FormErrorMessage>
               </FormControl>
             </Stack>
-            <HStack justify="space-between">
+            {/* <HStack justify="space-between">
               <Button variant="link" colorScheme="red" size="sm">
                 Forgot password?
               </Button>
-            </HStack>
+            </HStack> */}
             <Stack spacing="6">
               <Button variant="primary" type='submit'>Sign in</Button>
-
             </Stack>
           </Stack>
           </form>
