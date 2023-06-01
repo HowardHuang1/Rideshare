@@ -6,11 +6,13 @@ const HeroSection = () => {
   return (
     <div>
       <div className="hero-container">
-        <h1>Welcome to BruinCruisin</h1>
+        <h1 class="red-text">Welcome to BruinCruisin</h1>
         <p>Create or find carpools with fellow Bruins in an instant!</p>
       </div>
       <div className="left-half">
-        <h2>Steps for searching/creating a ride</h2>
+        <h2 class="light-red-text"id="underlineText">
+          Steps for searching/creating a ride
+        </h2>
         <div className="steps">
           <ol>
             <li>
@@ -40,7 +42,9 @@ const HeroSection = () => {
         />
       </div>
       <div className="right-half">
-        <h2>Accessing Profile Page</h2>
+        <h2 class="light-red-text" id="underlineText">
+          Accessing Profile Page
+        </h2>
         <div className="profile">
           <ol>
             <li>
@@ -66,6 +70,7 @@ const HeroSection = () => {
           alt="Left Image"
         />
       </div>
+
     </div>
   );
 };

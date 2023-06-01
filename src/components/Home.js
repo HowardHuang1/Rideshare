@@ -1,6 +1,4 @@
-import React from 'react';
-import Tesla from '../Tesla.jpeg'
-import RedirectingButton from './RedirectingButton';
+import React, {useState} from 'react';
 import "./Home.css";
 import HeroSection from './HeroSection';
 
@@ -13,13 +11,24 @@ function Home() {
     height: '100vh',
   };
   
+  const [isOpen, setIsOpen] = useState(false);
+
   return( 
-    <div className="home" >
+    <div className="home">
       <HeroSection />
       <div className="photo">
       </div>
+      <div>
+        <a href="/createRide">
+          <button id="ButtonToCreate" onClick={() => setIsOpen(true)}>
+           Click here to Get Started!
+          </button>
+        </a>
+      </div>
     </div>
   );
+
+
 };
 
 
