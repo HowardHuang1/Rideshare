@@ -235,7 +235,7 @@ app.get("/user-data", async (req, res) => {
         return 0;
       }
       for (let i = 0; i < rides.length; i++) {
-        totalMoney += (rides[i].price)/(rides[i].usernames.length);
+        totalMoney += rides[i].price / rides[i].usernames.length;
         // formula asssumes 25 mpg and 8.887 kg/gallon consumption
         // output in kg CO2
       }
@@ -250,7 +250,8 @@ app.get("/user-data", async (req, res) => {
         return 0;
       }
       for (let i = 0; i < rides.length; i++) {
-        totalCarbon += (rides[i].distance * 0.3548)*(rides[i].usernames.length-1);
+        totalCarbon +=
+          rides[i].distance * 0.3548 * (rides[i].usernames.length - 1);
         // formula asssumes 25 mpg and 8.887 kg/gallon consumption
         // output in kg CO2
       }
@@ -352,13 +353,7 @@ app.post("/create-ride", async (req, res) => {
     price = durationInTraffic;
   }
 
-  if (price == -1) {
-    return res.json({ error: "Trouble fetching price" });
-    // const error = new ValidationError("Trouble fetching price");
-    // return res.status(400).json({ errors: error.array() });
-  }
   price = price * trafficMultiplier * generalMultiplier;
-  price = 10;
 
   console.log(fromPlaceInfo);
   const newRide = new Ride({
