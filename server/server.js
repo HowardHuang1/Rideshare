@@ -94,6 +94,14 @@ const rideSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  optimizedAddressFrom: {
+    type: String,
+    required: false,
+  },
+  optimizedAddressTo: {
+    type: String,
+    required: false,
+  },
 });
 
 const Ride = mongoose.model("Ride", rideSchema);
@@ -284,18 +292,19 @@ app.get("/user-data", async (req, res) => {
 });
 
 app.post("/create-ride", async (req, res) => {
-  let { username, date, time, AM, locationFrom, locationTo, numRidersAllowed, search } =
+  let { username, date, time, AM, locationFrom, locationTo, numRidersAllowed } =
     req.body;
   // {"username": "john doe", "date": "09/15/2023", "time": "12:15", "AM": false, "locationFrom": "UCLA", "locationTo": "LAX", "numRidersAllowed": "3"}
-  
-  if (search){
+
+  const search = req.body.search;
+  if (search) {
     const timeparam = 15;
     const distparam = 0.5;
     const { locationFrom, locationTo, date, time, AM } = req.body;
     const open = true;
     const foundRides = await Ride.find({}); // store rides in local variable
     const dateObj = services.dateTimeValidator(date, time, AM);
-  
+
     if (
       locationFrom == undefined ||
       locationTo == undefined ||
@@ -311,10 +320,10 @@ app.post("/create-ride", async (req, res) => {
         res.send(null); // no rides in database
       }
     }
-  
+
     let fromPlaceInfo = await services.getPlaceInfo(locationFrom);
     let toPlaceInfo = await services.getPlaceInfo(locationTo);
-  
+
     if (fromPlaceInfo.address == undefined) {
       res.json({ error: "Invalid from location" });
       // const error = new ValidationError("Invalid from location");
@@ -324,7 +333,7 @@ app.post("/create-ride", async (req, res) => {
       // const error = new ValidationError("Invalid destination");
       // return res.status(400).json({ errors: error.array() });
     }
-  
+
     let foundRidesFiltered = [];
     for (const ride of foundRides) {
       let cond = true;
@@ -349,17 +358,18 @@ app.post("/create-ride", async (req, res) => {
       );
       console.log(response.distance);
       cond = cond && response.distance <= distparam;
-  
+
       if (cond) {
         foundRidesFiltered.push(ride);
       }
     }
-    if(foundRidesFiltered.length > 0){
-      return res.send("There are similar rides existing, would you like to continue creating?")
+    if (foundRidesFiltered.length > 0) {
+      return res.send(
+        "There are similar rides existing, would you like to continue creating?"
+      );
     }
   }
-  
-  
+
   const foundUser = await User.findOne({ username: username });
   if (!foundUser) {
     return res.send(null); // user not found
@@ -443,6 +453,8 @@ app.post("/create-ride", async (req, res) => {
     trafficMultiplier: trafficMultiplier,
     price: price,
     numRidersAllowed: numRidersAllowed,
+    optimizedAddressFrom: fromPlaceInfo.address,
+    optimizedAddressTo: toPlaceInfo.address,
   });
 
   try {
@@ -461,6 +473,15 @@ app.post("/create-ride", async (req, res) => {
     );
   } catch (error) {
     console.log("Error: ", error.message);
+    try {
+      bestAvailablePrice = await scraper.scrapeFareValues(
+        fromPlaceInfo.address,
+        toPlaceInfo.address,
+        numRidersAllowed
+      );
+    } catch (error) {
+      console.log("Error: ", error.message);
+    }
   }
 
   if (bestAvailablePrice) {
