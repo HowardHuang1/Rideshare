@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 
-function RideDateTimeBar() {
+function RideTimebar() {
     const [q, setQ] = useState("");
 
     return(
         <div className="search">
             <input
                 type="text"
-                placeholder="Date and Time of Ride"
+                placeholder="Time of Ride"
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 style={{
@@ -22,4 +22,4 @@ function RideDateTimeBar() {
 
 
 
-export default RideDateTimeBar;
+export default RideTimebar;

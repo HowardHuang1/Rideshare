@@ -59,6 +59,10 @@ function Modal({ setIsOpen }) {
                             <input type="text" value={rideTime} placeholder="Time of Ride" />
                             <i class="fa fa-spinner fa-lg fa-fw" aria-hidden="true"></i>
                         </div>
+                        <div class="inputWithIcon">
+                            <input type="text" value={rideTime} placeholder="Number of Riders" />
+                            <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+                        </div>
                     </div>
                     <div className="modalActions">
                         <div className="actionsContainer">

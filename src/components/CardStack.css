@@ -1,3 +1,16 @@
 .cardStack {
     background-color: white;
 }
+
+.searchButton {
+    margin-top: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 11px 28px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    border: none;
+    color: #fff;
+    background: #E53e3e;
+    transition: all 0.25s ease;
+  }

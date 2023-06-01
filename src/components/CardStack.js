@@ -7,7 +7,8 @@ import axios from "axios";
 import RideSelector from "./RideSelector";
 import Locationbar from "./Ride Filters/Locationbar";
 import Destinationbar from "./Ride Filters/Destinationbar";
-import RideDateTimeBar from "./Ride Filters/RideDateTimebar";
+import RideDatebar from "./Ride Filters/RideDatebar";
+import RideTimebar from "./Ride Filters/RideTimebar";
 
 function CardStack() {
     const [data, setData] = useState(null);
@@ -50,8 +51,14 @@ function CardStack() {
             <Searchbar />
             <Locationbar />
             <Destinationbar />
-            <RideDateTimeBar />
+            <RideDatebar />
+            <RideTimebar />
             <RideSelector />
+            <div className="cardstacksearch">
+                    <button className="searchButton" >
+                        Search
+                    </button>
+            </div>
             <div className="cardStack">
                 <VStack
                     divider={<StackDivider borderColor='gray.200' />}

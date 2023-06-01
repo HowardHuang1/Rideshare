@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 
-function Locationbar() {
+function RideDatebar() {
     const [q, setQ] = useState("");
 
     return(
         <div className="search">
             <input
                 type="text"
-                placeholder="Pickup Location, ex: De Neve Plaza"
+                placeholder="Date of Ride"
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 style={{
@@ -22,4 +22,4 @@ function Locationbar() {
 
 
 
-export default Locationbar;
+export default RideDatebar;

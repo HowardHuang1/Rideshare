@@ -7,7 +7,7 @@ function Destinationbar() {
         <div className="search">
             <input
                 type="text"
-                placeholder="Destination"
+                placeholder="Destination, ex: LAX International Airport"
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 style={{
