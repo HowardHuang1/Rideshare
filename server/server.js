@@ -292,11 +292,18 @@ app.get("/user-data", async (req, res) => {
 });
 
 app.post("/create-ride", async (req, res) => {
-  let { username, date, time, AM, locationFrom, locationTo, numRidersAllowed } =
-    req.body;
+  let {
+    username,
+    date,
+    time,
+    AM,
+    locationFrom,
+    locationTo,
+    numRidersAllowed,
+    search,
+  } = req.body;
   // {"username": "john doe", "date": "09/15/2023", "time": "12:15", "AM": false, "locationFrom": "UCLA", "locationTo": "LAX", "numRidersAllowed": "3"}
 
-  const search = req.body.search;
   if (search) {
     const timeparam = 15;
     const distparam = 0.5;
