@@ -292,6 +292,7 @@ app.get("/user-data", async (req, res) => {
 });
 
 app.post("/create-ride", async (req, res) => {
+  console.log("create-ride working")
   let {
     username,
     date,
@@ -303,7 +304,7 @@ app.post("/create-ride", async (req, res) => {
     search,
   } = req.body;
   // {"username": "john doe", "date": "09/15/2023", "time": "12:15", "AM": false, "locationFrom": "UCLA", "locationTo": "LAX", "numRidersAllowed": "3"}
-
+  search = false
   if (search) {
     const timeparam = 15;
     const distparam = 0.5;
@@ -377,6 +378,12 @@ app.post("/create-ride", async (req, res) => {
     }
   }
 
+  console.log("pickupLocation: " + locationFrom)
+  console.log("destination: " + locationTo)
+  console.log("date: " + date)
+  console.log("time: " + time)
+  console.log("AM: " + AM)
+  console.log("numRiders: " + numRidersAllowed)
   const foundUser = await User.findOne({ username: username });
   if (!foundUser) {
     return res.send(null); // user not found
@@ -444,6 +451,10 @@ app.post("/create-ride", async (req, res) => {
   }
 
   price = price * trafficMultiplier * generalMultiplier;
+
+  if (price < 0){
+    price = durationInTraffic
+  }
 
   console.log(fromPlaceInfo);
   const newRide = new Ride({
