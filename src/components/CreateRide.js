@@ -26,9 +26,9 @@ function CreateRide() {
         left: '50px'
       }}>
         <button className="openModalButton" onClick={() => setIsOpen(true)}>
-            Create New Ride
-          </button>
-          {isOpen && <Modal setIsOpen={setIsOpen} />}
+          Create New Ride
+        </button>
+        {isOpen && <Modal setIsOpen={setIsOpen} />}
       </div>
     </div>
   )
