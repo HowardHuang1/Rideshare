@@ -19,6 +19,7 @@ import {
     Stack,
     Text,
     FormErrorMessage,
+    Divider
   } from '@chakra-ui/react'
   import { ChakraProvider } from '@chakra-ui/react'
   
@@ -88,19 +89,21 @@ function Login ({updateUsername}){
             <Heading
               size={{
                 base: 'xs',
-                md: 'sm',
+                md: 'lg',
+              }}
+              style={{
+                textAlign: 'center',
+                padding: "0px" ,
               }}
             >
               Log in to your account
             </Heading>
-            <HStack spacing="1" justify="center">
               <Text color="muted">Don't have an account?</Text>
               <Link to="/signup">
               <Button variant="link" colorScheme="red">
                 Sign up
               </Button>
               </Link>
-            </HStack>
           </Stack>
         </Stack>
         <Box
@@ -151,13 +154,14 @@ function Login ({updateUsername}){
             </FormErrorMessage>
               </FormControl>
             </Stack>
-            {/* <HStack justify="space-between">
-              <Button variant="link" colorScheme="red" size="sm">
-                Forgot password?
-              </Button>
-            </HStack> */}
+            <Divider/>
             <Stack spacing="6">
-              <Button variant="primary" type='submit'>Sign in</Button>
+              <Button variant="primary" type='submit' className="myButton"
+              style={{
+                background: "#E53e3e",
+                margin: "10px"
+              }}
+              >Sign in</Button>
             </Stack>
           </Stack>
           </form>

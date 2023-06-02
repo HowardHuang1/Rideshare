@@ -200,8 +200,12 @@ const SignUp = ({updateUsername}) => {
             </FormErrorMessage>
               </FormControl>
             </Stack>
+            <Divider/>
             <Stack spacing="6">
-              <Button variant="primary" type="submit">Sign up</Button>
+              <Button variant="primary" type="submit" style={{
+                background: "#E53e3e",
+                margin: "10px",
+              }}>Sign up</Button>
             </Stack>
           </Stack>
         </form>
