@@ -61,7 +61,7 @@ const SignUp = ({updateUsername}) => {
           console.log(response.data); // true, false, or null
 
           if (response.data === true) {
-            updateUsername(response.data);
+            updateUsername(values.username);
             history('/profile');
           } else 
           {

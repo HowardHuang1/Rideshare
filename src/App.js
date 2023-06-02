@@ -10,9 +10,10 @@ import Login from './components/Login';
 import SignUp from './components/Signup';
 
 function App() {
-  const {user, updateUser} = useState(null);
+  const [user, updateUser] = useState(null);
 
   return (
+    user ?
     <div className="app">
       <Router>
         <Navbar />
@@ -21,10 +22,24 @@ function App() {
           <Route path="/createRide" element={<CreateRide username={user}/>} />
           <Route path="/profile" element={<ProfileApp username={user} logout={updateUser}/>} />
           <Route path="/login"   element={<Login updateUsername={updateUser}/>} />
-          <Route path="/signup" element={<SignUp/>} />
+          <Route path="/signup" element={<SignUp updateUsername={updateUser}/>} />
         </Routes>
       </Router>
     </div>
+    :
+    <div className="app">
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/createRide" element={<Login updateUsername={updateUser}/>} />
+        <Route path="/profile" element={<Login updateUsername={updateUser}/>} />
+        <Route path="/login"   element={<Login updateUsername={updateUser}/>} />
+        <Route path="/signup" element={<SignUp updateUsername={updateUser}/>} />
+      </Routes>
+    </Router>
+  </div>
+    
   );
 }
 
