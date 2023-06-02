@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 import './Profile.css';
-import './Modal'
+import Modal from './Modal'
 
 const username = "parthivn";
 
@@ -152,10 +151,10 @@ const RideHistory = () => {
                     <tr>
                       <td colSpan="2">
                         <div className="button-group">
-                        <button className="openModalButton" onClick={() => setIsOpen(true)}>
-                          Create New Ride
-                        </button>
-                        {isOpen && <Modal setIsOpen={setIsOpen} />}
+                          <button onClick={() => setIsOpen(true)}>
+                            Update Ride
+                          </button>
+                          {isOpen && <Modal setIsOpen={setIsOpen} />}
                           {/* <button className="action-button" onClick={handleShowModal}>Update Ride</button> */}
                           <button className="action-button" onClick={() => leaveRide(username, ride._id)}>Leave Ride</button>
                         </div>
