@@ -10,13 +10,18 @@ function Modal({ setIsOpen }) {
     const [destination, setDestination] = useState();
     const [rideDate, setRideDate] = useState();
     const [rideTime, setRideTime] = useState();
+    const [numRiders, setNumRiders] = useState();
 
-    const postData = (e) => {
-        axios.post('/localhost:8000/create-ride', {
+    const postData = async (e) => {
+        await axios.post('http://localhost:8000/create-ride', {
+            // default username
+            username: "parthivn",
+            date: rideDate,
+            time: rideTime, // time is missing
+            AM: "false", // default am pm
             locationFrom: pickupLocation,
             locationTo: destination,
-            date: rideDate,
-            // time is missing
+            numRidersAllowed: numRiders, // default numRiders
         }).then(res => console.log('Posting data', res)).catch(err => console.log(err))
     }
 
@@ -26,6 +31,7 @@ function Modal({ setIsOpen }) {
         setDestination(destination);
         setRideDate(rideDate);
         setRideTime(rideTime);
+        setNumRiders(numRiders);
         postData();
         setIsOpen(false);
     }
@@ -60,7 +66,7 @@ function Modal({ setIsOpen }) {
                             <i class="fa fa-spinner fa-lg fa-fw" aria-hidden="true"></i>
                         </div>
                         <div class="inputWithIcon">
-                            <input type="text" value={rideTime} placeholder="Number of Riders" />
+                            <input type="text" value={numRiders} placeholder="Number of Riders" />
                             <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
                         </div>
                     </div>
