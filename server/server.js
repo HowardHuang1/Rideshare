@@ -452,6 +452,10 @@ app.post("/create-ride", async (req, res) => {
 
   price = price * trafficMultiplier * generalMultiplier;
 
+  if (price < 0){
+    price = durationInTraffic
+  }
+
   console.log(fromPlaceInfo);
   const newRide = new Ride({
     usernames: [username],

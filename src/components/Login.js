@@ -48,21 +48,13 @@ function Login ({updateUsername}){
       
       // Handle the response data
       console.log(response.data); // true, false, or null
-      // if (response.data){
-      //   updateUsername(response.data);
-      // }
       if (response.data === true) {
         updateUsername(response.data);
         history('/profile');
       } else 
-
       {
         setError('password', { type: 'custom', message: 'Incorrect Password or username' });
       } 
-      // else if (response.data === null) {
-      //   setError('username', { type: 'custom', message: 'Username not found' });
-      // }
-      // You can perform additional actions based on the response here
   
     } catch (error) {
       // Handle any errors that occurred during the request
