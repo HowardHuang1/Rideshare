@@ -15,6 +15,7 @@
     transition: all 0.25s ease;
     font-size: 16px;
     font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    position: fixed;
   }
   
   .openModalButton:hover {
