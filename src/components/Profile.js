@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 import './Profile.css';
+import Modal from './Modal'
 
 const username = "parthivn";
 
@@ -65,6 +65,7 @@ const RideHistory = () => {
   const [time, setTime] = useState('');
   const [numRiders, setNumRiders] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -90,7 +91,7 @@ const RideHistory = () => {
 
   const handleUpdateRide = async (rideID, time, numRiders) => {
     try {
-      const response = await axios.post('http://localhost:8000/update-ride', { params: { rideID, time, numRiders } });
+      const response = await axios.post('http://localhost:8000/update-ride', {rideID: rideID, time: time, numRidersAllowed: numRiders });
     } catch (error) {
       console.error('Error updating ride:', error);
     }
@@ -100,7 +101,7 @@ const RideHistory = () => {
 
   const leaveRide = async (username, rideID) => {
     try {
-      const response = await axios.post('http://localhost:8000/leave-ride', { params: { username, rideID } });
+      const response = await axios.post('http://localhost:8000/leave-ride', {username: username, rideID: rideID});
       if (response.status === 200) {
         setRideData(prevRideData => prevRideData.filter(ride => ride._id !== rideID));
       }
@@ -150,27 +151,15 @@ const RideHistory = () => {
                     <tr>
                       <td colSpan="2">
                         <div className="button-group">
-                          <button className="action-button" onClick={handleShowModal}>Update Ride</button>
+                          <button onClick={() => setIsOpen(true)}>
+                            Update Ride
+                          </button>
+                          {isOpen && <Modal setIsOpen={setIsOpen} />}
+                          {/* <button className="action-button" onClick={handleShowModal}>Update Ride</button> */}
                           <button className="action-button" onClick={() => leaveRide(username, ride._id)}>Leave Ride</button>
                         </div>
                       </td>
                     </tr>
-                    <Modal show={showModal} onHide={handleCloseModal}>
-                      <Modal.Header closeButton>
-                        <Modal.Title>Update Ride</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                        <label>Time:</label>
-                        <input type="text" value={time} onChange={(e) => setTime(e.target.value)} />
-                        <br />
-                        <label>Number of Riders:</label>
-                        <input type="number" value={numRiders} onChange={(e) => setNumRiders(parseInt(e.target.value))} />
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button variant="secondary" onClick={handleCloseModal}>Close</Button>
-                        <Button variant="primary" onClick={() => handleUpdateRide(ride._id, time, numRiders)}>Save Changes</Button>
-                      </Modal.Footer>
-                    </Modal>
                   </React.Fragment>
                 ))}
               </tbody>

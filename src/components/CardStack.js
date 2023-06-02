@@ -16,7 +16,7 @@ function CardStack() {
     useEffect(() => {
         const fetchData = async () =>{
             try {
-                const response = await axios.get('/localhost:8000/get-rides-for-user');
+                const response = await axios.get('https://localhost:8000/get-rides-for-user');
                 const json = await response.json();
                 setData(json);
             } catch (error) {
