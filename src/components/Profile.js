@@ -169,28 +169,26 @@ const RideHistory = () => {
 
         {rideData && (
           <div className="ride-history-table">
-            <h3>Past Rides</h3>
-            <table>
+          <h3>Past Rides</h3>
+          {pastRides.map((ride) => (
+            <table key={ride._id}>
               <tbody>
-                {pastRides.map((ride) => (
-                  <React.Fragment key={ride._id}>
-                    <tr>
-                      <td><strong>Start:</strong></td>
-                      <td>{ride.locationFrom}</td>
-                    </tr>
-                    <tr>
-                      <td><strong>End:</strong></td>
-                      <td>{ride.locationTo}</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Date:</strong></td>
-                      <td>{ride.date}</td>
-                    </tr>
-                  </React.Fragment>
-                ))}
+                <tr>
+                  <td><strong>Start:</strong></td>
+                  <td>{ride.locationFrom}</td>
+                </tr>
+                <tr>
+                  <td><strong>End:</strong></td>
+                  <td>{ride.locationTo}</td>
+                </tr>
+                <tr>
+                  <td><strong>Date:</strong></td>
+                  <td>{ride.date}</td>
+                </tr>
               </tbody>
             </table>
-          </div>
+          ))}
+        </div>
         )}
       </div>
     </div>
