@@ -4,9 +4,10 @@ import './Profile.css';
 import Modal from './Modal'
 import { processDate } from './PrettyDate';
 
-const username = window.USERNAME;
+const username = localStorage.getItem('username'); 
 
 const Profile = () => {
+  console.log(username);
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {

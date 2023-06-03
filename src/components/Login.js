@@ -50,8 +50,8 @@ function Login ({updateUsername}){
       // Handle the response data
       console.log(response.data); // true, false, or null
       if (response.data === true) {
+        localStorage.setItem('username', values.username);
         updateUsername(values.username);
-        window.USERNAME = values.username;
         history('/profile');
       } else 
       {
