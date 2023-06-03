@@ -51,6 +51,7 @@ function Login ({updateUsername}){
       console.log(response.data); // true, false, or null
       if (response.data === true) {
         updateUsername(values.username);
+        window.USERNAME = values.username;
         history('/profile');
       } else 
       {
