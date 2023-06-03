@@ -64,10 +64,6 @@ const getDistanceAndDuration = async (
   place_2_address,
   dateObj
 ) => {
-  if (dateObj === null) {
-    let now = new Date();
-    dateObj = new Date(now.getTime() + 60 * 60 * 1000); // set dateObj to 1 hour from now
-  }
   try {
     const response = await axios.get(
       "https://maps.googleapis.com/maps/api/distancematrix/json",

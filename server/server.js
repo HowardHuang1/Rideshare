@@ -860,10 +860,12 @@ app.get("/get-optimized-ride", async (req, res) => {
         //   toPlaceInfo.address,
         //   dateObj
         // );
+        let now = new Date()
+        const dateObj1PM = new Date("November 17, 2028 13:00:00");
         const distance1Result = await services.getDistanceAndDuration(
           allRides[i].alternateFrom,
           ride.addressFrom,
-          null
+          dateObj1PM
         );
         if (distance1Result.distance > 0.5) {
           continue;
@@ -871,7 +873,7 @@ app.get("/get-optimized-ride", async (req, res) => {
         const distance2Result = await services.getDistanceAndDuration(
           allRides[i].alternateTo,
           ride.addressTo,
-          null
+          dateObj1PM
         );
         if (distance2Result.distance > 0.5) {
           continue;
