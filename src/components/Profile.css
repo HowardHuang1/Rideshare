@@ -16,7 +16,10 @@
   
   table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 3px solid #ccc;
+    border-radius: 10px;
   }
   
   td {
