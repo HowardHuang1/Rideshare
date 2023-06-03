@@ -41,6 +41,35 @@ async function main() {
 
 /* ***************** SCHEMAS AND MODELS ***************** */
 
+const optimizedRideSchema = new mongoose.Schema({
+  addressFrom: {
+    type: String,
+    required: true,
+  },
+  addressTo: {
+    type: String,
+    required: true,
+  },
+  alternateTo: {
+    type: String,
+    required: true,
+  },
+  alternateFrom: {
+    type: String,
+    required: true,
+  },
+  price4: {
+    type: Number,
+    required: true,
+  },
+  price6: {
+    type: Number,
+    required: true,
+  },
+});
+
+const OptimizedRide = mongoose.model("OptimizedRide", optimizedRideSchema);
+
 const rideSchema = new mongoose.Schema({
   usernames: {
     type: [String],
@@ -292,7 +321,7 @@ app.get("/user-data", async (req, res) => {
 });
 
 app.post("/create-ride", async (req, res) => {
-  console.log("create-ride working")
+  console.log("create-ride working");
   let {
     username,
     date,
@@ -304,7 +333,7 @@ app.post("/create-ride", async (req, res) => {
     search,
   } = req.body;
   // {"username": "john doe", "date": "09/15/2023", "time": "12:15", "AM": false, "locationFrom": "UCLA", "locationTo": "LAX", "numRidersAllowed": "3"}
-  search = false
+  search = false;
   if (search) {
     const timeparam = 15;
     const distparam = 0.5;
@@ -378,12 +407,12 @@ app.post("/create-ride", async (req, res) => {
     }
   }
 
-  console.log("pickupLocation: " + locationFrom)
-  console.log("destination: " + locationTo)
-  console.log("date: " + date)
-  console.log("time: " + time)
-  console.log("AM: " + AM)
-  console.log("numRiders: " + numRidersAllowed)
+  console.log("pickupLocation: " + locationFrom);
+  console.log("destination: " + locationTo);
+  console.log("date: " + date);
+  console.log("time: " + time);
+  console.log("AM: " + AM);
+  console.log("numRiders: " + numRidersAllowed);
   const foundUser = await User.findOne({ username: username });
   if (!foundUser) {
     return res.send(null); // user not found
@@ -452,8 +481,8 @@ app.post("/create-ride", async (req, res) => {
 
   price = price * trafficMultiplier * generalMultiplier;
 
-  if (price < 0){
-    price = durationInTraffic
+  if (price < 0) {
+    price = durationInTraffic;
   }
 
   console.log(fromPlaceInfo);
@@ -809,6 +838,59 @@ app.delete("/delete-database", async (req, res) => {
   await Ride.deleteMany({});
   await User.deleteMany({});
   res.send(true);
+});
+
+app.get("/get-optimized-ride", async (req, res) => {
+  const { rideID } = req.body;
+  let ride = await Ride.findOne({ _id: rideID });
+  console.log(ride);
+  if (!ride) {
+    return res.json({ error: "Invalid Ride ID" });
+  }
+  try {
+    // get me all rides in OptimizedRide
+    const allRides = await OptimizedRide.find({});
+    console.log(allRides);
+    let potentialOptimizedRide;
+    for (let i = 0; i < allRides.length; i++) {
+      try {
+        // const { distance, durationInTraffic, trafficMultiplier } =
+        // await services.getDistanceAndDuration(
+        //   fromPlaceInfo.address,
+        //   toPlaceInfo.address,
+        //   dateObj
+        // );
+        let now = new Date()
+        const dateObj1PM = new Date("November 17, 2028 13:00:00");
+        const distance1Result = await services.getDistanceAndDuration(
+          allRides[i].alternateFrom,
+          ride.addressFrom,
+          dateObj1PM
+        );
+        if (distance1Result.distance > 0.5) {
+          continue;
+        }
+        const distance2Result = await services.getDistanceAndDuration(
+          allRides[i].alternateTo,
+          ride.addressTo,
+          dateObj1PM
+        );
+        if (distance2Result.distance > 0.5) {
+          continue;
+        }
+        potentialOptimizedRide = allRides[i];
+      } catch (error) {
+        console.log("Error: ", error.message);
+      }
+    }
+    if (potentialOptimizedRide) {
+      res.send(potentialOptimizedRide);
+    } else {
+      res.send(false);
+    }
+  } catch (error) {
+    console.log("Error: ", error.message);
+  }
 });
 
 app.listen(8000, function (req, res) {
