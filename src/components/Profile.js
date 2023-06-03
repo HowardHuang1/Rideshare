@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Profile.css';
 import Modal from './Modal'
+import { processDate } from './PrettyDate';
 
 const username = window.USERNAME;
 
@@ -145,7 +146,7 @@ const RideHistory = () => {
                     </tr>
                     <tr>
                       <td><strong>Date:</strong></td>
-                      <td>{ride.date}</td>
+                      <td>{processDate(ride.date)}</td>
                     </tr>
                     <tr>
                       <td colSpan="2">
@@ -182,7 +183,7 @@ const RideHistory = () => {
                 </tr>
                 <tr>
                   <td><strong>Date:</strong></td>
-                  <td>{ride.date}</td>
+                  <td>{processDate(ride.date)}</td>
                 </tr>
               </tbody>
             </table>
