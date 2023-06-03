@@ -14,7 +14,7 @@ function RideTimebar() {
         style={{ display: 'flex', justifyContent: 'start', width: '820px', borderRadius: '20px', padding: '10px' }}>
             <input
                 type="text"
-                placeholder="Time of Ride"
+                placeholder="Time of Ride, ex: 8:30"
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 style={{

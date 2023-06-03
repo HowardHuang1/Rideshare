@@ -44,23 +44,23 @@ function Modal({ setIsOpen }) {
                     </button>
                     <div className="modalContent">
                         <div class="inputWithIcon">
-                            <input type="text" value={pickupLocation} placeholder="Pickup Location" />
+                            <input type="text" value={pickupLocation} placeholder="Pickup Location, ex: De Neve Plaza" />
                             <i class="fa fa-search fa-lg fa-fw" aria-hidden="true"></i>
                         </div>
                         <div class="inputWithIcon">
-                            <input type="text" value={destination} placeholder="Destination" />
+                            <input type="text" value={destination} placeholder="Destination, ex: LAX International Airport" />
                             <i class="fa fa-map fa-lg fa-fw" aria-hidden="true"></i>
                         </div>
                         <div class="inputWithIcon">
-                            <input type="text" value={rideDate} placeholder="Date of Ride" />
+                            <input type="text" value={rideDate} placeholder="Date of Ride, ex: 06/05/23" />
                             <i class="fa fa-calendar fa-lg fa-fw" aria-hidden="true"></i>
                         </div>
                         <div class="inputWithIcon">
-                            <input type="text" value={rideTime} placeholder="Time of Ride" />
+                            <input type="text" value={rideTime} placeholder="Time of Ride, ex: 8:30" />
                             <i class="fa fa-spinner fa-lg fa-fw" aria-hidden="true"></i>
                         </div>
                         <div class="inputWithIcon">
-                            <input type="text" value={rideTime} placeholder="Number of Riders" />
+                            <input type="text" value={rideTime} placeholder="Number of Riders, ex: 5" />
                             <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
                         </div>
                     </div>

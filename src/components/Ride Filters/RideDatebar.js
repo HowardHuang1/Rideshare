@@ -7,7 +7,7 @@ function RideDatebar() {
         <div className="search">
             <input
                 type="text"
-                placeholder="Date of Ride"
+                placeholder="Date of Ride, ex: 06/05/23"
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 style={{
