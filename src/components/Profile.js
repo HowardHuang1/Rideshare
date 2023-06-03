@@ -3,7 +3,7 @@ import axios from 'axios';
 import './Profile.css';
 import Modal from './Modal'
 
-const username = "parthivn";
+const username = window.USERNAME;
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
@@ -78,7 +78,6 @@ const RideHistory = () => {
   useEffect(() => {
     const fetchRideData = async () => {
       try {
-        const username = "parthivn";
         const response = await axios.get('http://localhost:8000/get-rides-for-user', { params: { username } });
         setRideData(response.data);
       } catch (error) {
