@@ -3,6 +3,10 @@ import { Card, Text, Image, Stack, Heading, Button, CardBody, CardFooter } from 
 import { ChakraProvider } from '@chakra-ui/react'
 
 function RideCard( { date, locationFrom, locationTo, durationInTraffic, price, numRidersAllowed } ) {
+    const handleClick = () => {
+        
+    }
+    
     return(
         <ChakraProvider>
             <Card
@@ -45,6 +49,9 @@ function RideCard( { date, locationFrom, locationTo, durationInTraffic, price, n
                 <CardFooter>
                 <Button variant='solid' colorScheme='red'>
                     Book Ride
+                </Button>
+                <Button variant='solid' colorScheme='red' onClick={handleClick}>
+                    Display Map
                 </Button>
                 </CardFooter>
             </Stack>

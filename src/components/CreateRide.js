@@ -40,6 +40,7 @@ function CreateRide() {
       <div className="ModalButton"
       style={{
         flex: '1 1 50%',
+        backgroundImage: `url(${imageURL})`
       }}> 
         <button className="openModalButton" onClick={() => setIsOpen(true)}>
           Create New Ride
