@@ -155,7 +155,7 @@ const RideHistory = ({username}) => {
                           <button onClick={() => setIsOpen(true)}>
                             Update Ride
                           </button>
-                          {isOpen && <Modal setIsOpen={setIsOpen} rideId={ride._id} />}
+                          {isOpen && <Modal setIsOpen={setIsOpen} rideID={ride._id} />}
                           {/* <button className="action-button" onClick={handleShowModal}>Update Ride</button> */}
                           <button className="action-button" onClick={() => leaveRide(username, ride._id)}>Leave Ride</button>
                         </div>
