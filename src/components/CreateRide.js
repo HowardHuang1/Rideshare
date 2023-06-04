@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import "./CreateRide.css"
 import Modal from "./Modal"
+import CreateRideModal from './CreateRideModal';
 import CardStack from "./CardStack"
 import axios from "axios"
 
 //TODO: Need to make am PM button
 //TODO: Need to add dropdown menu for number of riders (2 options: 4 or 6)
-function CreateRide() {
+function CreateRide({username}) {
   const [isOpen, setIsOpen] = useState(false);
   const [map, setMap] = useState();
   const [mapRideID, setMapRideID] = useState();
@@ -49,7 +50,7 @@ function CreateRide() {
         <button className="openModalButton" onClick={() => setIsOpen(true)}>
           Create New Ride
         </button>
-        {isOpen && <Modal setIsOpen={setIsOpen} />}
+        {isOpen && <CreateRideModal setIsOpen={setIsOpen} username={username}/>}
       </div>
       
       <div className="rides" style={{
