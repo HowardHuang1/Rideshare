@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "./CreateRide.css"
 import Modal from "./Modal"
+import CreateRideModal from './CreateRideModal';
 import CardStack from "./CardStack"
 import axios from "axios"
 
@@ -44,7 +45,7 @@ function CreateRide() {
         <button className="openModalButton" onClick={() => setIsOpen(true)}>
           Create New Ride
         </button>
-        {isOpen && <Modal setIsOpen={setIsOpen} />}
+        {isOpen && <CreateRideModal setIsOpen={setIsOpen} />}
       </div>
       
       <div className="stylish" style={{

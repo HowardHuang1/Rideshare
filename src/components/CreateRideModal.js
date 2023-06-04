@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Modal.css";
+import "./CreateRideModal.css";
 import { RiCloseLine } from "react-icons/ri";
 import "font-awesome/css/font-awesome.min.css";
 import axios from "axios";
@@ -7,13 +7,15 @@ import { set } from "mongoose";
 
 const username = localStorage.getItem("username");
 
-function CreateRideModal({ setIsOpen, rideid, onSubmit, setRideData }) {
+function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData }) {
   console.log("rideid: " + setRideData);
   const [pickupLocation, setPickupLocation] = useState();
   const [destination, setDestination] = useState();
   const [rideTime, setRideTime] = useState();
   const [numRiders, setNumRiders] = useState();
+  const [dateOfRide, setDateOfRide] = useState();
   const [AM, setAmPm] = useState("AM");
+  const [search, setSearch] = useState(false);
   const rideId = rideid;
 
   const putData = async (e) => {
@@ -40,6 +42,12 @@ function CreateRideModal({ setIsOpen, rideid, onSubmit, setRideData }) {
     } else if (name === "numRiders") {
       setNumRiders(value);
       console.log("numRiders: " + value);
+    } else if (name === "pickupLocation"){
+      setPickupLocation(value);
+    } else if (name === "destination"){
+      setDestination(value);
+    } else if (name === "dateOfRide"){
+      setDateOfRide(value);
     }
   };
 
@@ -79,6 +87,36 @@ function CreateRideModal({ setIsOpen, rideid, onSubmit, setRideData }) {
             </button>
             <div className="modalContent">
               <form onSubmit={handleSubmit}>
+                <div class="inputWithIcon">
+                  <input
+                    type="text"
+                    name="pickupLocation"
+                    value={pickupLocation}
+                    placeholder="Pickup Location, ex: De Neve Plaza"
+                    onChange={handleInputChange}
+                  />
+                  <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+                </div>
+                <div class="inputWithIcon">
+                  <input
+                    type="text"
+                    name="destination"
+                    value={destination}
+                    placeholder="Destination, Ex: LAX International Airport"
+                    onChange={handleInputChange}
+                  />
+                  <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+                </div>
+                <div class="inputWithIcon">
+                  <input
+                    type="text"
+                    name="dateOfRide"
+                    value={dateOfRide}
+                    placeholder="Date of Ride: Ex 06/05/23"
+                    onChange={handleInputChange}
+                  />
+                  <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+                </div>
                 <div class="inputWithIcon2">
                   <input
                     type="text"
@@ -113,10 +151,10 @@ function CreateRideModal({ setIsOpen, rideid, onSubmit, setRideData }) {
                 </div>
                 <div className="modalActions">
                   <div className="actionsContainer">
-                    <button className="CreateButton" type="submit">
+                    <button className="deleteButton" type="submit">
                       Create Ride
                     </button>
-                    <button className="SearchButton" type="submit">
+                    <button className="deleteButton" type="submit">
                       Search
                     </button>
                   </div>
