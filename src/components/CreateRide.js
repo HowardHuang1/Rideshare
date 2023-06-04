@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./CreateRide.css"
 import Modal from "./Modal"
 import CardStack from "./CardStack"
@@ -8,14 +8,29 @@ import axios from "axios"
 //TODO: Need to add dropdown menu for number of riders (2 options: 4 or 6)
 function CreateRide() {
   const [isOpen, setIsOpen] = useState(false);
+  const [map, setMap] = useState();
 
-  const fetchMap = async(e) => {
-    await axios.get("http://localhost:8000/get-ride-image", {
-      rideID: "647652eb719dc5143d88c399"
-    }).then(res => console.log(res.data)).catch(err => console.log(err))
-  }
+  useEffect(() => {
+    const fetchMap = async () => {
+        try {
+            const response = await axios.get('http://localhost:8000/get-ride-image',{
+              rideID: "647652eb719dc5143d88c399"
+            });
+            setMap(response.data);
+        } catch (error) {
+            console.error('Error fetching map: ', error)
+        }
+    }
+    fetchMap();
+  }, []);
 
-  fetchMap();
+  // const fetchMap = async(e) => {
+  //   await axios.get("http://localhost:8000/get-ride-image", {
+  //     rideID: "647652eb719dc5143d88c399"
+  //   }).then(res => console.log(res.data)).catch(err => console.log(err))
+  // }
+
+  // fetchMap();
 
   return(
     <div>
