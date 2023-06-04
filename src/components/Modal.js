@@ -84,7 +84,7 @@ function Modal({ setIsOpen }) {
                                 <input type="text" value={rideDate} placeholder="Date of Ride, ex: 06/05/23" onChange={handleInputChange}/>
                                 <i class="fa fa-calendar fa-lg fa-fw" aria-hidden="true"></i>
                             </div>
-                            <div class="inputWithIcon">
+                            <div class="inputWithIcon2">
                                 <input type="text" value={rideTime} placeholder="Time of Ride, ex: 8:30" onChange={handleInputChange}/>
                                 <select onChange={e => handleInputChange(e, 'amPm')}>
                                     <option value="AM">AM</option>
