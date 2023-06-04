@@ -8,12 +8,13 @@ export function processDate(inputDate){
     const day = date.toLocaleDateString('en-US', { day: 'numeric' });
     const year = date.getFullYear();
     let hours = date.getHours();
-    const minutes = date.getMinutes();
+    let minutes = date.getMinutes();
+    if (minutes == "0") minutes = "00"
     const ampm = hours >= 12 ? 'PM' : 'AM';
     hours = hours %12 || 12
-    const time = `${hours}:${minutes} ${ampm}`
+    let time = `${hours}:${minutes} ${ampm}`
 
-    const formattedDate = `${weekday}, ${month} ${day}, ${year}, ${time}`;
+    const formattedDate = `${month} ${day}, ${year}, ${time}`;
 
     return(formattedDate);
 }
