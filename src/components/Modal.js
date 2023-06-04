@@ -13,20 +13,15 @@ function Modal({ setIsOpen, rideID }) {
     const [numRiders, setNumRiders] = useState();
     const [AM, setAmPm] = useState("AM");
 
-    const postData = async (e) => {
-        console.log("postData is hit")
-        console.log(rideTime)
-        console.log(numRiders)
-        console.log(username)
-        console.log(rideID)
-        // await axios.put('http://localhost:8000/update-ride', {
-        //     // default username
-        //     username: username,
-        //     rideID: "ds",
-        //     time: rideTime, // time is missing
-        //     AM: "false", // default am pm
-        //     numRidersAllowed: numRiders, // default numRiders
-        // }).then(res => console.log('Posting data', res)).catch(err => console.log(err))
+    const putData = async (e) => {
+        await axios.put('http://localhost:8000/update-ride', {
+            // default username
+            username: username,
+            rideID: rideID,
+            time: rideTime, // time is missing
+            AM: "false", // default am pm
+            numRidersAllowed: numRiders, // default numRiders
+        }).then(res => console.log('Posting data', res)).catch(err => console.log(err))
     }
 
     const handleInputChange = (e) => {
@@ -45,7 +40,7 @@ function Modal({ setIsOpen, rideID }) {
     const handleSubmit = (e) => {
         e.preventDefault(); // To prevent page reload on form submission
         console.log('Click registered');
-        postData();
+        putData();
         setIsOpen(false);
     }
 
@@ -56,7 +51,7 @@ function Modal({ setIsOpen, rideID }) {
             <div className="centered">
                 <div className="modal">
                     <div className="modalHeader">
-                        <h5 className="title">Create Your Ride</h5>
+                        <h5 className="title">Update Your Ride</h5>
                     </div>
                     <button className="closeButton" onClick={() => setIsOpen(false)}>
                         <RiCloseLine style={{ marginBottom: "-3px" }} />
@@ -78,7 +73,7 @@ function Modal({ setIsOpen, rideID }) {
                             <div className="modalActions">
                                 <div className="actionsContainer">
                                     <button className="deleteButton" type="submit">
-                                        Create Ride
+                                        Update Ride
                                     </button>
                                 </div>
                             </div>
