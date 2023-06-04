@@ -21,7 +21,7 @@ function App() {
           <Route path="/" element={<Home/>} />
           <Route path="/createRide" element={<CreateRide username={user}/>} />
           <Route path="/profile" element={<ProfileApp username={user} logout={updateUser}/>} />
-          <Route path="/login"   element={<Login updateUsername={updateUser}/>} />
+          <Route path="/login"   element={<Login updateUsername={updateUser} wheretoRoute={"/profile"}/>} />
           <Route path="/signup" element={<SignUp updateUsername={updateUser}/>} />
         </Routes>
       </Router>
@@ -32,9 +32,9 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home/>} />
-        <Route path="/createRide" element={<Login updateUsername={updateUser}/>} />
-        <Route path="/profile" element={<Login updateUsername={updateUser}/>} />
-        <Route path="/login"   element={<Login updateUsername={updateUser}/>} />
+        <Route path="/createRide" element={<Login updateUsername={updateUser} wheretoRoute={"/createRide"}/>} />
+        <Route path="/profile" element={<Login updateUsername={updateUser} wheretoRoute={"/profile"}/>} />
+        <Route path="/login"   element={<Login updateUsername={updateUser} wheretoRoute={"/profile"}/>} />
         <Route path="/signup" element={<SignUp updateUsername={updateUser}/>} />
       </Routes>
     </Router>

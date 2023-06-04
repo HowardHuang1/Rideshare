@@ -116,4 +116,28 @@ const getDistanceAndDuration = async (
   }
 };
 
-module.exports = { getPlaceInfo, dateTimeValidator, getDistanceAndDuration };
+const getLatLong = async (address) => {
+  try {
+    const response = await axios.get(
+      "https://maps.googleapis.com/maps/api/geocode/json",
+      {
+        params: {
+          address: address,
+          key: google_api_key,
+        },
+      }
+    );
+    const lat = response.data.results[0].geometry.location.lat;
+    const lng = response.data.results[0].geometry.location.lng;
+    return { lat: lat, lng: lng };
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
+};
+
+module.exports = {
+  getPlaceInfo,
+  dateTimeValidator,
+  getDistanceAndDuration,
+  getLatLong,
+};

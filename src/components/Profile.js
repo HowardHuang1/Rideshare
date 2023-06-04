@@ -43,15 +43,15 @@ const Profile = () => {
             </tr>
             <tr>
               <td><strong>Money Saved:</strong></td>
-              <td>{userData.moneySaved}</td>
+              <td>{"$"+parseInt(userData.moneySaved)}</td>
             </tr>
             <tr>
               <td><strong>Carbon Saved:</strong></td>
-              <td>{userData.carbonSaved} kg CO2</td>
+              <td>{parseInt(userData.carbonSaved)} kg CO2</td>
             </tr>
             <tr>
               <td><strong>Number of Rides:</strong></td>
-              <td>{userData.numRides}</td>
+              <td>{parseInt(userData.numRides)}</td>
             </tr>
           </tbody>
         </table>
