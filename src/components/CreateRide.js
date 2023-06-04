@@ -18,27 +18,29 @@ function CreateRide() {
   fetchMap();
 
   return(
-    <div>
-      <div className="container" style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-end',
-        height: '100vh', // Adjust this value based on your requirements
-        paddingRight: '20px', // Optional: add some right padding for spacing
-        paddingTop: "100px",
-      }}>
-        <CardStack />
-      </div>
-      <div className="ModalButton" style={{
-        position: 'absolute',
-        top: '55px',
-        left: '50px'
-      }}>
+    <div className="jesus">
+      <div className="ModalButton"
+      style={{
+        flex: '1 1 50%',
+      }}> 
         <button className="openModalButton" onClick={() => setIsOpen(true)}>
           Create New Ride
         </button>
         {isOpen && <Modal setIsOpen={setIsOpen} />}
       </div>
+      
+      <div className="stylish" style={{
+        flexDirection: 'column',
+        alignItems: 'center',
+        height: '100vh', // Adjust this value based on your requirements
+        padding: "20px",
+        paddingTop: "20px",
+        paddingBottom: "20px",
+        flex: "1 1 50%",
+      }}>
+        <CardStack />
+      </div>
+
     </div>
   )
 };
