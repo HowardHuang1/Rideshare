@@ -20,13 +20,19 @@ function RideTimebar() {
                 style={{
                     borderRadius: '20px',
                     padding: '10px',
-                    width: '800px'
+                    width: '100%', // reduced width to make space for the dropdown
+                    marginRight: '10px' // add some space between input and dropdown
                   }}
             />
             <select 
                 value={meridiem} 
                 onChange={handleMeridiemChange}
-                style={{ borderRadius: '20px', width: '20%', border: '2px'}}>
+                style={{ 
+                    borderRadius: '20px', 
+                    width: '15%', 
+                    border: '2px solid #aaa', // add a border
+                    height: '80%' // make the height equal to the input field
+                 }}>
                 <option value="AM">AM</option>
                 <option value="PM">PM</option>
             </select>
