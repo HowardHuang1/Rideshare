@@ -4,9 +4,9 @@ import './Profile.css';
 import Modal from './Modal'
 import { processDate } from './PrettyDate';
 
-const username = localStorage.getItem('username'); 
+// const username = localStorage.getItem('username'); 
 
-const Profile = () => {
+const Profile = ({username}) => {
   console.log(username);
   const [userData, setUserData] = useState(null);
 
@@ -62,7 +62,7 @@ const Profile = () => {
   );
 };
 
-const RideHistory = () => {
+const RideHistory = ({username}) => {
   const [rideData, setRideData] = useState(null);
   const [time, setTime] = useState('');
   const [numRiders, setNumRiders] = useState(0);
@@ -200,8 +200,8 @@ const App = ({ username, logout }) => {
   return (
     <div className="container">
       <div className="flex-container">
-        <Profile />
-        <RideHistory />
+        <Profile username={username}/>
+        <RideHistory username={username}/>
       </div>
       <div>
         <button className="logout-button" onClick={() => logout(null)}>Logout</button>

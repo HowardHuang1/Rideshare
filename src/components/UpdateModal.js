@@ -37,7 +37,7 @@ function Modal({ setIsOpen }) {
             <div className="centered">
                 <div className="modal">
                     <div className="modalHeader">
-                        <h5 className="title">Create Your Ride</h5>
+                        <h5 className="title">Update Your Ride</h5>
                     </div>
                     <button className="closeButton" onClick={() => setIsOpen(false)}>
                         <RiCloseLine style={{ marginBottom: "-3px" }} />
