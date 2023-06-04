@@ -63,7 +63,7 @@ const createEmailSender = async (
     "\nDate: " +
     dateObject +
     ". Based on newly received data, your estimated ride price is " +
-    ba_price +
+    parseInt(ba_price) +
     "." +
     "\nThank you for using BruinCruisin!" +
     "\nSincerely,\nBruinCruisin Team";
@@ -99,15 +99,15 @@ const createEmailSenderWithPOR = async (
     "\nDate: " +
     dateObject +
     ". Based on newly received data, your estimated ride price is " +
-    ba_price +
+    parseInt(ba_price) +
     "." +
-    "\n However, we found a cheaper ride for you with a similar pickup location and destination (less than half a mile away)!" +
+    "\nHowever, we found a cheaper ride for you with a similar pickup location and destination (less than half a mile away)!" +
     "\nAlternate Pickup Location: " +
     por_from +
     "\nAlternate Destination: " +
     por_to +
     "\nAlternate Ride Price: " +
-    por_price +
+    parseInt(por_price) +
     "\nThank you for using BruinCruisin!" +
     "\nSincerely,\nBruinCruisin Team";
 
@@ -140,7 +140,7 @@ const updateEmailSender = async (
       "\nDate: " +
       dateObject +
       ". Based on newly received data, your estimated ride price is " +
-      ba_price +
+      parseInt(ba_price) +
       "." +
       "\nThank you for using BruinCruisin!" +
       "\nSincerely,\nBruinCruisin Team";
