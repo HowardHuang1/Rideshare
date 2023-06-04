@@ -4,7 +4,9 @@ import { RiCloseLine } from "react-icons/ri";
 import 'font-awesome/css/font-awesome.min.css';
 import axios from "axios"
 
-function Modal({ setIsOpen }) {
+const username = localStorage.getItem('username'); 
+
+function Modal({ setIsOpen, rideID }) {
     const [pickupLocation, setPickupLocation] = useState();
     const [destination, setDestination] = useState();
     const [rideTime, setRideTime] = useState();
