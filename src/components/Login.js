@@ -29,7 +29,7 @@ import {
     },
 
   )
-function Login ({updateUsername}){
+function Login ({updateUsername, wheretoRoute}){
 
   const history = useNavigate();
   const {
@@ -52,7 +52,7 @@ function Login ({updateUsername}){
       if (response.data === true) {
         localStorage.setItem('username', values.username);
         updateUsername(values.username);
-        history('/profile');
+        history(wheretoRoute);
       } else 
       {
         setError('password', { type: 'custom', message: 'Incorrect Password or username' });
