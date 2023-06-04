@@ -9,6 +9,7 @@ import axios from "axios"
 function CreateRide() {
   const [isOpen, setIsOpen] = useState(false);
   const [map, setMap] = useState();
+  const [mapRideID, setMapRideID] = useState();
 
   useEffect(() => {
     const fetchMap = async () => {
@@ -16,6 +17,9 @@ function CreateRide() {
             const response = await axios.get('http://localhost:8000/get-ride-image',{
               params:{
                 rideID: "647652eb719dc5143d88c399"
+                // replace this parameter later with rideID: mapRideID
+                // which changes based on which ride card was selected 
+                // to render a different map for each ride
               }
             });
             setMap(response.data);
@@ -57,7 +61,7 @@ function CreateRide() {
         paddingBottom: "20px",
         flex: "1 1 50%",
       }}>
-        <CardStack />
+        <CardStack setMap={setMapRideID}/>
       </div>
 
     </div>

@@ -2,9 +2,11 @@ import React from 'react';
 import { Card, Text, Image, Stack, Heading, Button, CardBody, CardFooter } from '@chakra-ui/react'
 import { ChakraProvider } from '@chakra-ui/react'
 
-function RideCard( { date, locationFrom, locationTo, durationInTraffic, price, numRidersAllowed } ) {
-    const handleClick = () => {
-        
+function RideCard( { rideID, date, locationFrom, locationTo, durationInTraffic, price, numRidersAllowed, setMap } ) {
+    const renderMap = () => {
+        // pass in the rideID which is the only argument required for the map api call
+        // this sets the setMapRideID useState() function in the parent CreateRide.js component
+        setMap(rideID)
     }
     
     return(
@@ -50,7 +52,7 @@ function RideCard( { date, locationFrom, locationTo, durationInTraffic, price, n
                 <Button variant='solid' colorScheme='red'>
                     Book Ride
                 </Button>
-                <Button variant='solid' colorScheme='red' onClick={handleClick}>
+                <Button variant='solid' colorScheme='red' onClick={renderMap}>
                     Display Map
                 </Button>
                 </CardFooter>

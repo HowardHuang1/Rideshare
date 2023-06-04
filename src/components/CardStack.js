@@ -11,7 +11,7 @@ import RideDatebar from "./Ride Filters/RideDatebar";
 import RideTimebar from "./Ride Filters/RideTimebar";
 import { getDropdownMenuPlacement } from "react-bootstrap/esm/DropdownMenu";
 
-function CardStack() {
+function CardStack({ setMap }) {
     const [data, setData] = useState(null);
 
     useEffect(() => {
@@ -67,8 +67,8 @@ function CardStack() {
                     align='stretch'
                 >
                 {/* <RideCard date={response.date} locationFrom={response.locationFrom} locationTo={response.locationTo} durationInTraffic={response.durationInTraffic} price={response.price} numRidersAllowed={response.numRidersAllowed} /> */}
-                <RideCard date={5/21/2023} locationFrom={"SF"} locationTo={"LAX"} duration={7} price={500} numRiders={4} />
-                {/* <RideCard date={data.date} locationFrom={data.locationFrom} locationTo={data.locationTo} duration={data.durationInTraffic} price={data.price} numRiders={data.numRidersAllowed}/> */}
+                <RideCard rideID={"647652eb719dc5143d88c399"} date={5/21/2023} locationFrom={"SF"} locationTo={"LAX"} duration={7} price={500} numRiders={4} setMap={setMap}/>
+                {/* <RideCard rideID={data._id} date={data.date} locationFrom={data.locationFrom} locationTo={data.locationTo} duration={data.durationInTraffic} price={data.price} numRiders={data.numRidersAllowed}/> */}
                 <RideCard />
                 </VStack>
             </div>
