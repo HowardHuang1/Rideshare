@@ -6,18 +6,19 @@ import axios from "axios"
 
 const username = localStorage.getItem('username'); 
 
-function Modal({ setIsOpen, rideID }) {
+function Modal({ setIsOpen, rideid, onSubmit }) {
     const [pickupLocation, setPickupLocation] = useState();
     const [destination, setDestination] = useState();
     const [rideTime, setRideTime] = useState();
     const [numRiders, setNumRiders] = useState();
     const [AM, setAmPm] = useState("AM");
+    const rideId = rideid;
 
     const putData = async (e) => {
         await axios.put('http://localhost:8000/update-ride', {
             // default username
             username: username,
-            rideID: rideID,
+            rideID: rideId,
             time: rideTime, // time is missing
             AM: "false", // default am pm
             numRidersAllowed: numRiders, // default numRiders
@@ -42,6 +43,7 @@ function Modal({ setIsOpen, rideID }) {
         console.log('Click registered');
         putData();
         setIsOpen(false);
+        onSubmit();
     }
 
     return(

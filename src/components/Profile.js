@@ -63,18 +63,19 @@ const Profile = ({username}) => {
 };
 
 const RideHistory = ({username}) => {
-  const [rideData, setRideData] = useState(null);
-  const [time, setTime] = useState('');
-  const [numRiders, setNumRiders] = useState(0);
-  const [showModal, setShowModal] = useState(false);
+  const [rideData, setRideData] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedRideID, setSelectedRideID] = useState(null);
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
-
-  const handleShowModal = () => {
-    setShowModal(true);
+  const leaveRide = async (username, rideID) => {
+    try {
+      const response = await axios.post('http://localhost:8000/leave-ride', {username: username, rideID: rideID});
+      if (response.status === 200) {
+        setRideData(prevRideData => prevRideData.filter(ride => ride._id !== rideID));
+      }
+    } catch (error) {
+      console.error('Error leaving ride:', error);
+    }
   };
 
   useEffect(() => {
@@ -89,27 +90,6 @@ const RideHistory = ({username}) => {
 
     fetchRideData();
   }, []);
-
-  const handleUpdateRide = async (rideID, time, numRiders) => {
-    try {
-      const response = await axios.post('http://localhost:8000/update-ride', {rideID: rideID, time: time, numRidersAllowed: numRiders });
-    } catch (error) {
-      console.error('Error updating ride:', error);
-    }
-
-    handleCloseModal();
-  };
-
-  const leaveRide = async (username, rideID) => {
-    try {
-      const response = await axios.post('http://localhost:8000/leave-ride', {username: username, rideID: rideID});
-      if (response.status === 200) {
-        setRideData(prevRideData => prevRideData.filter(ride => ride._id !== rideID));
-      }
-    } catch (error) {
-      console.error('Error leaving ride:', error);
-    }
-  };
   
 
   const existingRides = [];
@@ -124,6 +104,10 @@ const RideHistory = ({username}) => {
         pastRides.push(ride);
       }
     });
+  }
+
+  const handleSubmit = () => {
+    <App/>
   }
 
   return (
@@ -152,10 +136,10 @@ const RideHistory = ({username}) => {
                     <tr>
                       <td colSpan="2">
                         <div className="button-group">
-                          <button onClick={() => setIsOpen(true)}>
+                          <button onClick={() => {setIsOpen(true); setSelectedRideID(ride._id);}}>
                             Update Ride
                           </button>
-                          {isOpen && <Modal setIsOpen={setIsOpen} rideID={ride._id} /*onSubmit={() => </>} *//>}
+                          {isOpen && <Modal setIsOpen={setIsOpen} rideid={selectedRideID} onSubmit={handleSubmit}/>}
                           {/* <button className="action-button" onClick={handleShowModal}>Update Ride</button> */}
                           <button className="action-button" onClick={() => leaveRide(username, ride._id)}>Leave Ride</button>
                         </div>
