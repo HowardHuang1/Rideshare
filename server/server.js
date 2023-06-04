@@ -868,7 +868,7 @@ app.get("/search-ride", async (req, res) => {
 });
 
 app.get("/get-ride-image", async (req, res) => {
-  const { rideID } = req.body;
+  const { rideID } = req.query;
   const foundRide = await Ride.findOne({ _id: rideID });
   if (!foundRide) {
     return res.json({ error: "Invalid Ride ID" });
