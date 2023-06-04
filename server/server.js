@@ -338,7 +338,6 @@ app.post("/create-ride", async (req, res) => {
     search,
   } = req.body;
   // {"username": "john doe", "date": "09/15/2023", "time": "12:15", "AM": false, "locationFrom": "UCLA", "locationTo": "LAX", "numRidersAllowed": "3"}
-  search = false;
   if (search) {
     const timeparam = 15;
     const distparam = 0.5;
