@@ -15,15 +15,18 @@ function Modal({ setIsOpen, rideID }) {
 
     const postData = async (e) => {
         console.log("postData is hit")
-        console.log(destination)
-        await axios.put('http://localhost:8000/update-ride', {
-            // default username
-            username: "username",
-            rideID: "ds",
-            time: rideTime, // time is missing
-            AM: "false", // default am pm
-            numRidersAllowed: "4", // default numRiders
-        }).then(res => console.log('Posting data', res)).catch(err => console.log(err))
+        console.log(rideTime)
+        console.log(numRiders)
+        console.log(username)
+        console.log(rideID)
+        // await axios.put('http://localhost:8000/update-ride', {
+        //     // default username
+        //     username: username,
+        //     rideID: "ds",
+        //     time: rideTime, // time is missing
+        //     AM: "false", // default am pm
+        //     numRidersAllowed: numRiders, // default numRiders
+        // }).then(res => console.log('Posting data', res)).catch(err => console.log(err))
     }
 
     const handleInputChange = (e) => {
