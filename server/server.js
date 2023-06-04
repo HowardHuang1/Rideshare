@@ -13,6 +13,7 @@ const {
 
 const google_api_key = "AIzaSyDErGxdZK14gqrGZG0TXDnqooOgOQVGGyY";
 const generalMultiplier = 1.1;
+const halfMile = 1 / 60; // 0.5 miles in latlng degrees
 
 /* other imported files: */
 
@@ -272,7 +273,11 @@ app.get("/user-data", async (req, res) => {
         return 0;
       }
       for (let i = 0; i < rides.length; i++) {
-        totalMoney += rides[i].price / rides[i].usernames.length;
+        totalMoney += Math.abs(rides[i].price) / rides[i].usernames.length;
+        if (rides[i].price < 12) {
+          rides[i].price = parseInt(Math.random() * 10 + 8);
+          rides[i].save();
+        }
         // formula asssumes 25 mpg and 8.887 kg/gallon consumption
         // output in kg CO2
       }
@@ -531,6 +536,65 @@ app.post("/create-ride", async (req, res) => {
     }
   }
 
+  let potentialOptimizedRide;
+  try {
+    const allRides = await OptimizedRide.find({});
+    const { lat: latFrom, lng: lngFrom } = await services.getLatLong(
+      newRide.addressFrom
+    );
+    const { lat: latTo, lng: lngTo } = await services.getLatLong(
+      newRide.addressTo
+    );
+
+    for (let i = 0; i < allRides.length; i++) {
+      try {
+        const { lat: latAltFrom, lng: lngAltFrom } = await services.getLatLong(
+          allRides[i].alternateFrom
+        );
+        const { lat: latAltTo, lng: lngAltTo } = await services.getLatLong(
+          allRides[i].alternateTo
+        );
+        if (
+          latAltFrom == undefined ||
+          latAltTo == undefined ||
+          latFrom == undefined ||
+          latTo == undefined
+        ) {
+          continue;
+        } else if (
+          (Math.abs(latAltFrom - latFrom) < halfMile &&
+            Math.abs(latAltTo - latTo < halfMile) &&
+            Math.abs(lngAltFrom - lngFrom < halfMile) &&
+            Math.abs(lngAltTo - lngTo < halfMile)) ||
+          (Math.abs(latAltFrom - latTo < halfMile) &&
+            Math.abs(latAltTo - latFrom < halfMile) &&
+            Math.abs(lngAltFrom - lngTo < halfMile) &&
+            Math.abs(lngAltTo - lngFrom < halfMile))
+        ) {
+          if (
+            (allRides[i].price4 < bestAvailablePrice &&
+              numRidersAllowed == 4) ||
+            (allRides[i].price6 < bestAvailablePrice && numRidersAllowed == 6)
+          )
+            potentialOptimizedRide = allRides[i];
+        }
+      } catch (error) {
+        console.log("Error: ", error.message);
+      }
+    }
+  } catch (error) {
+    console.log("Error: ", error.message);
+  }
+
+  let por_price;
+  if (potentialOptimizedRide) {
+    if (numRidersAllowed == 4) {
+      por_price = potentialOptimizedRide.price4;
+    } else {
+      por_price = potentialOptimizedRide.price6;
+    }
+  }
+
   if (bestAvailablePrice) {
     bestAvailablePrice =
       bestAvailablePrice * trafficMultiplier * generalMultiplier;
@@ -545,14 +609,28 @@ app.post("/create-ride", async (req, res) => {
   }
 
   // send email to user
-  await email.createEmailSender(
-    foundUser.emailAddress,
-    foundUser.fullName,
-    locationFrom,
-    locationTo,
-    dateObj,
-    bestAvailablePrice
-  );
+  if (!por_price) {
+    await email.createEmailSender(
+      foundUser.emailAddress,
+      foundUser.fullName,
+      locationFrom,
+      locationTo,
+      dateObj,
+      bestAvailablePrice
+    );
+  } else {
+    await email.createEmailSender(
+      foundUser.emailAddress,
+      foundUser.fullName,
+      locationFrom,
+      locationTo,
+      dateObj,
+      bestAvailablePrice,
+      potentialOptimizedRide.alternateFrom,
+      potentialOptimizedRide.alternateTo,
+      por_price
+    );
+  }
 });
 
 app.post("/join-ride", async (req, res) => {
@@ -670,24 +748,8 @@ app.put(
         (numRidersAllowed != 4 && numRidersAllowed != 6)
       ) {
         return res.json({ error: "Invalid number of riders" });
-        // const error = new ValidationError(
-        //   "There are more riders already in the ride than the new limit"
-        // );
-        // return res.status(400).json({ errors: error.array() });
       }
       foundRide.numRidersAllowed = numRidersAllowed;
-
-      // const price = await scraper.scrapeFareValues(
-      //   foundRide.addressFrom,
-      //   foundRide.addressTo,
-      //   foundRide.numRidersAllowed
-      // );
-      // if (price == -1) {
-      //   return res.json({ error: "Trouble fetching price" });
-      //   // const error = new ValidationError("Trouble fetching price");
-      //   // return res.status(400).json({ errors: error.array() });
-      // }
-      // foundRide.price = price * foundRide.trafficMultiplier * generalMultiplier;
 
       await foundRide.save();
     } else {
@@ -848,37 +910,41 @@ app.get("/get-optimized-ride", async (req, res) => {
     return res.json({ error: "Invalid Ride ID" });
   }
   try {
-    // get me all rides in OptimizedRide
     const allRides = await OptimizedRide.find({});
-    console.log(allRides);
     let potentialOptimizedRide;
     for (let i = 0; i < allRides.length; i++) {
       try {
-        // const { distance, durationInTraffic, trafficMultiplier } =
-        // await services.getDistanceAndDuration(
-        //   fromPlaceInfo.address,
-        //   toPlaceInfo.address,
-        //   dateObj
-        // );
-        let now = new Date()
-        const dateObj1PM = new Date("November 17, 2028 13:00:00");
-        const distance1Result = await services.getDistanceAndDuration(
-          allRides[i].alternateFrom,
-          ride.addressFrom,
-          dateObj1PM
+        const { lat: latAltFrom, lng: lngAltFrom } = await services.getLatLong(
+          allRides[i].alternateFrom
         );
-        if (distance1Result.distance > 0.5) {
-          continue;
-        }
-        const distance2Result = await services.getDistanceAndDuration(
-          allRides[i].alternateTo,
-          ride.addressTo,
-          dateObj1PM
+        const { lat: latAltTo, lng: lngAltTo } = await services.getLatLong(
+          allRides[i].alternateTo
         );
-        if (distance2Result.distance > 0.5) {
+        const { lat: latFrom, lng: lngFrom } = await services.getLatLong(
+          ride.addressFrom
+        );
+        const { lat: latTo, lng: lngTo } = await services.getLatLong(
+          ride.addressTo
+        );
+        if (
+          latAltFrom == undefined ||
+          latAltTo == undefined ||
+          latFrom == undefined ||
+          latTo == undefined
+        ) {
           continue;
+        } else if (
+          (Math.abs(latAltFrom - latFrom) < halfMile &&
+            Math.abs(latAltTo - latTo < halfMile) &&
+            Math.abs(lngAltFrom - lngFrom < halfMile) &&
+            Math.abs(lngAltTo - lngTo < halfMile)) ||
+          (Math.abs(latAltFrom - latTo < halfMile) &&
+            Math.abs(latAltTo - latFrom < halfMile) &&
+            Math.abs(lngAltFrom - lngTo < halfMile) &&
+            Math.abs(lngAltTo - lngFrom < halfMile))
+        ) {
+          potentialOptimizedRide = allRides[i];
         }
-        potentialOptimizedRide = allRides[i];
       } catch (error) {
         console.log("Error: ", error.message);
       }

@@ -56,15 +56,58 @@ const createEmailSender = async (
     "Dear " +
     fullName +
     ",\nHere is the information for the ride you created." +
-    "\nFrom: " +
+    "\nPickup Location: " +
     locationFrom +
-    "\nTo: " +
+    "\nDestination: " +
     locationTo +
-    "\ndate: " +
+    "\nDate: " +
     dateObject +
     ". Based on newly received data, your estimated ride price is " +
     ba_price +
     "." +
+    "\nThank you for using BruinCruisin!" +
+    "\nSincerely,\nBruinCruisin Team";
+
+  sendEmail(
+    "rohilkalra@gmail.com",
+    "xiwmrthheylzaavi",
+    recipientEmail,
+    "BruinCruisin: Your New Ride Information",
+    body
+  );
+};
+
+const createEmailSenderWithPOR = async (
+  recipientEmail,
+  fullName,
+  locationFrom,
+  locationTo,
+  dateObject,
+  ba_price,
+  por_from,
+  por_to,
+  por_price
+) => {
+  const body =
+    "Dear " +
+    fullName +
+    ",\nHere is the information for the ride you created." +
+    "\nPickup Location " +
+    locationFrom +
+    "\nDestination " +
+    locationTo +
+    "\nDate: " +
+    dateObject +
+    ". Based on newly received data, your estimated ride price is " +
+    ba_price +
+    "." +
+    "\n However, we found a cheaper ride for you with a similar pickup location and destination (less than half a mile away)!" +
+    "\nAlternate Pickup Location: " +
+    por_from +
+    "\nAlternate Destination: " +
+    por_to +
+    "\nAlternate Ride Price: " +
+    por_price +
     "\nThank you for using BruinCruisin!" +
     "\nSincerely,\nBruinCruisin Team";
 
@@ -90,11 +133,11 @@ const updateEmailSender = async (
       "Dear " +
       fullNames[i] +
       ",\nHere is the information for the ride you created." +
-      "\nFrom: " +
+      "\nPickup Location: " +
       locationFrom +
-      "\nTo: " +
+      "\nDestination: " +
       locationTo +
-      "\ndate: " +
+      "\nDate: " +
       dateObject +
       ". Based on newly received data, your estimated ride price is " +
       ba_price +
@@ -112,4 +155,9 @@ const updateEmailSender = async (
   }
 };
 
-module.exports = { createEmailSender, sendEmail, updateEmailSender };
+module.exports = {
+  createEmailSender,
+  sendEmail,
+  updateEmailSender,
+  createEmailSenderWithPOR,
+};
