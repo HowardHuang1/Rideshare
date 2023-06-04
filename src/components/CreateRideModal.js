@@ -5,10 +5,10 @@ import "font-awesome/css/font-awesome.min.css";
 import axios from "axios";
 import { set } from "mongoose";
 
-const username = localStorage.getItem("username");
+// const username = localStorage.getItem("username");
 
 function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData }) {
-  console.log("rideid: " + setRideData);
+  // console.log("rideid: " + setRideData);
   const [pickupLocation, setPickupLocation] = useState();
   const [destination, setDestination] = useState();
   const [rideTime, setRideTime] = useState();
@@ -20,16 +20,31 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData })
 
   const putData = async (e) => {
     await axios
-      .put("http://localhost:8000/update-ride", {
+      .post("http://localhost:8000/create-ride", {
         // default username
+        // username: username,
+        // rideID: rideId,
+        // time: rideTime, // time is missing
+        // AM: "false", // default am pm
+        // numRidersAllowed: numRiders, // default numRiders
         username: username,
-        rideID: rideId,
-        time: rideTime, // time is missing
-        AM: "false", // default am pm
-        numRidersAllowed: numRiders, // default numRiders
+        date: dateOfRide,
+        time: rideTime,
+        AM: "false",
+        locationFrom: pickupLocation,
+        locationTo: destination,
+        numRidersAllowed: numRiders,
+        search: false,
       })
       .then((res) => console.log("Posting data", res))
       .catch((err) => console.log(err));
+    // console.log(username);
+    // console.log(dateOfRide);
+    // console.log(rideTime);
+    // console.log(pickupLocation);
+    // console.log(destination);
+    // console.log(numRiders);
+
   };
 
   const handleInputChange = (e) => {
@@ -38,10 +53,10 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData })
 
     if (name === "rideTime") {
       setRideTime(value);
-      console.log("rideTime: " + value);
+      // console.log("rideTime: " + value);
     } else if (name === "numRiders") {
       setNumRiders(value);
-      console.log("numRiders: " + value);
+      // console.log("numRiders: " + value);
     } else if (name === "pickupLocation"){
       setPickupLocation(value);
     } else if (name === "destination"){
@@ -51,26 +66,26 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData })
     }
   };
 
-  const callSetState = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:8000/get-rides-for-user",
-        { params: { username } }
-      );
-      setRideData(response.data);
-      console.log("SET RIDE DATA");
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  };
+  // const callSetState = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       "http://localhost:8000/get-rides-for-user",
+  //       { params: { username } }
+  //     );
+  //     setRideData(response.data);
+  //     console.log("SET RIDE DATA");
+  //   } catch (error) {
+  //     console.error("Error fetching user data:", error);
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // To prevent page reload on form submission
     console.log("Click registered");
     await putData();
-    await callSetState();
+    // await callSetState();
     setIsOpen(false);
-    onSubmit();
+    // onSubmit();
   };
 
   return (
@@ -151,10 +166,10 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData })
                 </div>
                 <div className="modalActions">
                   <div className="actionsContainer">
-                    <button className="deleteButton" type="submit">
+                    <button className="deleteButton" type="submit" onClick={() => setSearch(false)}>
                       Create Ride
                     </button>
-                    <button className="deleteButton" type="submit">
+                    <button className="deleteButton" type="submit" onClick={() => setSearch(true)}>
                       Search
                     </button>
                   </div>
