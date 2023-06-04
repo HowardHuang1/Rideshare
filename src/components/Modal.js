@@ -86,7 +86,7 @@ function Modal({ setIsOpen }) {
                             </div>
                             <div class="inputWithIcon2">
                                 <input type="text" value={rideTime} placeholder="Time of Ride, ex: 8:30" onChange={handleInputChange}/>
-                                <select onChange={e => handleInputChange(e, 'amPm')}>
+                                <select class="ampm-dropdown" onChange={e => handleInputChange(e, 'amPm')}>
                                     <option value="AM">AM</option>
                                     <option value="PM">PM</option>
                                 </select>

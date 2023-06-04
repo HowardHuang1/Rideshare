@@ -55,10 +55,14 @@ function Modal({ setIsOpen }) {
                             <input type="text" value={rideDate} placeholder="Date of Ride, ex: 06/05/23" />
                             <i class="fa fa-calendar fa-lg fa-fw" aria-hidden="true"></i>
                         </div>
-                        <div class="inputWithIcon">
-                            <input type="text" value={rideTime} placeholder="Time of Ride, ex: 8:30" />
-                            <i class="fa fa-spinner fa-lg fa-fw" aria-hidden="true"></i>
-                        </div>
+                        <div class="inputWithIcon2">
+                                <input type="text" value={rideTime} placeholder="Time of Ride, ex: 8:30" onChange={handleInputChange}/>
+                                <select class="ampm-dropdown" onChange={e => handleInputChange(e, 'amPm')}>
+                                    <option value="AM">AM</option>
+                                    <option value="PM">PM</option>
+                                </select>
+                                <i class="fa fa-spinner fa-lg fa-fw" aria-hidden="true"></i>
+                            </div>
                         <div class="inputWithIcon">
                             <input type="text" value={rideTime} placeholder="Number of Riders, ex: 5" />
                             <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
