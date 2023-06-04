@@ -14,7 +14,9 @@ function CreateRide() {
     const fetchMap = async () => {
         try {
             const response = await axios.get('http://localhost:8000/get-ride-image',{
-              rideID: "647652eb719dc5143d88c399"
+              params:{
+                rideID: "647652eb719dc5143d88c399"
+              }
             });
             setMap(response.data);
         } catch (error) {
@@ -32,8 +34,9 @@ function CreateRide() {
 
   // fetchMap();
 
+  const imageURL = "https://thumbs.dreamstime.com/b/detailed-world-map-29681182.jpg"
   return(
-    <div>
+    <div >
       <div className="container" style={{
         display: 'flex',
         flexDirection: 'column',
@@ -41,6 +44,8 @@ function CreateRide() {
         height: '100vh', // Adjust this value based on your requirements
         paddingRight: '20px', // Optional: add some right padding for spacing
         paddingTop: "100px",
+        // backgroundColor: "black",
+        backgroundImage: `url(${imageURL})`
       }}>
         <CardStack />
       </div>
