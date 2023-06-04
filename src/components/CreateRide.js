@@ -36,7 +36,7 @@ function CreateRide() {
 
   const imageURL = "https://thumbs.dreamstime.com/b/detailed-world-map-29681182.jpg"
   return(
-    <div className="jesus">
+    <div className="create-ride-interface">
       <div className="ModalButton"
       style={{
         flex: '1 1 50%',
@@ -47,7 +47,7 @@ function CreateRide() {
         {isOpen && <Modal setIsOpen={setIsOpen} />}
       </div>
       
-      <div className="stylish" style={{
+      <div className="rides" style={{
         flexDirection: 'column',
         alignItems: 'center',
         height: '100vh', // Adjust this value based on your requirements
