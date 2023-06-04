@@ -66,6 +66,8 @@ const RideHistory = ({username}) => {
   const [rideData, setRideData] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedRideID, setSelectedRideID] = useState(null);
+  const [time, setTime] = useState(null);
+  const [numRiders, setNumRiders] = useState(null);
 
   const leaveRide = async (username, rideID) => {
     try {
@@ -131,12 +133,12 @@ const RideHistory = ({username}) => {
                     </tr>
                     <tr>
                       <td><strong>Date:</strong></td>
-                      <td>{processDate(ride.date)}</td>
+                      <td>{processDate(time)}</td>
                     </tr>
                     <tr>
                       <td colSpan="2">
                         <div className="button-group">
-                          <button onClick={() => {setIsOpen(true); setSelectedRideID(ride._id);}}>
+                          <button onClick={() => {setIsOpen(true); setSelectedRideID(ride._id); setTime(ride.date); setNumRiders(ride.numRiders)}}>
                             Update Ride
                           </button>
                           {isOpen && <Modal setIsOpen={setIsOpen} rideid={selectedRideID} onSubmit={handleSubmit}/>}
