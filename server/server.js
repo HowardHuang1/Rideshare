@@ -13,7 +13,7 @@ const {
 
 const google_api_key = "AIzaSyDErGxdZK14gqrGZG0TXDnqooOgOQVGGyY";
 const generalMultiplier = 1.1;
-const halfMile = 1 / 60; // 0.5 miles in latlng degrees
+const halfMile = 1; // 0.5 miles in latlng degrees
 
 /* other imported files: */
 
@@ -539,6 +539,7 @@ app.post("/create-ride", async (req, res) => {
   let potentialOptimizedRide;
   try {
     const allRides = await OptimizedRide.find({});
+    console.log(allRides);
     const { lat: latFrom, lng: lngFrom } = await services.getLatLong(
       newRide.addressFrom
     );
@@ -563,13 +564,13 @@ app.post("/create-ride", async (req, res) => {
           continue;
         } else if (
           (Math.abs(latAltFrom - latFrom) < halfMile &&
-            Math.abs(latAltTo - latTo < halfMile) &&
-            Math.abs(lngAltFrom - lngFrom < halfMile) &&
-            Math.abs(lngAltTo - lngTo < halfMile)) ||
-          (Math.abs(latAltFrom - latTo < halfMile) &&
-            Math.abs(latAltTo - latFrom < halfMile) &&
-            Math.abs(lngAltFrom - lngTo < halfMile) &&
-            Math.abs(lngAltTo - lngFrom < halfMile))
+            Math.abs(latAltTo - latTo) < halfMile &&
+            Math.abs(lngAltFrom - lngFrom) < halfMile &&
+            Math.abs(lngAltTo - lngTo) < halfMile) ||
+          (Math.abs(latAltFrom - latTo) < halfMile &&
+            Math.abs(latAltTo - latFrom) < halfMile &&
+            Math.abs(lngAltFrom - lngTo) < halfMile &&
+            Math.abs(lngAltTo - lngFrom) < halfMile)
         ) {
           if (
             (allRides[i].price4 < bestAvailablePrice &&
@@ -619,7 +620,7 @@ app.post("/create-ride", async (req, res) => {
       bestAvailablePrice
     );
   } else {
-    await email.createEmailSender(
+    await email.createEmailSenderWithPOR(
       foundUser.emailAddress,
       foundUser.fullName,
       locationFrom,

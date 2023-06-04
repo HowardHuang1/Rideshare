@@ -1,5 +1,13 @@
 const nodemailer = require("nodemailer");
 
+const formatDate = (date) => {
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const year = String(date.getFullYear());
+
+  return `${month}/${day}/${year}`;
+};
+
 async function sendEmail(
   senderEmail,
   senderPassword,
@@ -61,9 +69,9 @@ const createEmailSender = async (
     "\nDestination: " +
     locationTo +
     "\nDate: " +
-    dateObject +
+    formatDate(dateObject) +
     ". Based on newly received data, your estimated ride price is " +
-    ba_price +
+    parseInt(ba_price) +
     "." +
     "\nThank you for using BruinCruisin!" +
     "\nSincerely,\nBruinCruisin Team";
@@ -97,17 +105,17 @@ const createEmailSenderWithPOR = async (
     "\nDestination " +
     locationTo +
     "\nDate: " +
-    dateObject +
+    formatDate(dateObject) +
     ". Based on newly received data, your estimated ride price is " +
-    ba_price +
+    parseInt(ba_price) +
     "." +
-    "\n However, we found a cheaper ride for you with a similar pickup location and destination (less than half a mile away)!" +
+    "\n\nHowever, we found a cheaper ride for you with a similar pickup location and destination (less than half a mile away)!" +
     "\nAlternate Pickup Location: " +
     por_from +
     "\nAlternate Destination: " +
     por_to +
     "\nAlternate Ride Price: " +
-    por_price +
+    parseInt(por_price) +
     "\nThank you for using BruinCruisin!" +
     "\nSincerely,\nBruinCruisin Team";
 
@@ -138,9 +146,9 @@ const updateEmailSender = async (
       "\nDestination: " +
       locationTo +
       "\nDate: " +
-      dateObject +
+      formatDate(dateObject) +
       ". Based on newly received data, your estimated ride price is " +
-      ba_price +
+      parseInt(ba_price) +
       "." +
       "\nThank you for using BruinCruisin!" +
       "\nSincerely,\nBruinCruisin Team";
@@ -160,4 +168,5 @@ module.exports = {
   sendEmail,
   updateEmailSender,
   createEmailSenderWithPOR,
+  formatDate,
 };
