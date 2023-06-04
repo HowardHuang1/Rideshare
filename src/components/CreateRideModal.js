@@ -38,12 +38,12 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData })
       })
       .then((res) => console.log("Posting data", res))
       .catch((err) => console.log(err));
-    // console.log(username);
-    // console.log(dateOfRide);
-    // console.log(rideTime);
-    // console.log(pickupLocation);
-    // console.log(destination);
-    // console.log(numRiders);
+    console.log(username);
+    console.log(dateOfRide);
+    console.log(rideTime);
+    console.log(pickupLocation);
+    console.log(destination);
+    console.log(numRiders);
 
   };
 
@@ -127,7 +127,7 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData })
                     type="text"
                     name="dateOfRide"
                     value={dateOfRide}
-                    placeholder="Date of Ride: Ex 06/05/23"
+                    placeholder="Date of Ride: Ex 06/05/2023"
                     onChange={handleInputChange}
                   />
                   <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>

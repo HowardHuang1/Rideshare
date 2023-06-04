@@ -49,7 +49,7 @@ function CardStack() {
 
     return(
         <div className="container" style ={{flexGrow: "1",}}>
-            <Searchbar />
+            {/* <Searchbar />
             <Locationbar />
             <Destinationbar />
             <RideDatebar />
@@ -59,7 +59,7 @@ function CardStack() {
                     <button className="searchButton" >
                         Search
                     </button>
-            </div>
+            </div> */}
             <div className="cardStack">
                 <VStack
                     divider={<StackDivider borderColor='gray.200' />}

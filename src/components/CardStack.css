@@ -12,7 +12,7 @@
   }
 
   .cardStack {
-    height: 300px; /* Set a fixed height to enable scrolling */
+    height: 100vh; /* Set a fixed height to enable scrolling */
     overflow: auto; /* Enable scrolling */
     background-color: white;
   }
