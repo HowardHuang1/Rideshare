@@ -27,8 +27,8 @@ function CardStack({ setMapRideID }) {
         rideData.forEach((ride) => {
             rideArray.push(
                 <RideCard
-                    key={ride.rideID} // Add a unique key prop for each item in the array
-                    rideID={ride.rideID}
+                    key={ride._id} // Add a unique key prop for each item in the array
+                    rideID={ride._id}
                     date={ride.date}
                     locationFrom={ride.locationFrom}
                     locationTo={ride.locationTo}
