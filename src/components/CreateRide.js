@@ -85,12 +85,12 @@ function CreateRide({username}) {
         <button className="openModalButton"
         style={{
           position: 'absolute',
-          top: '12%',
-          left: '65%',
+          top: '8%',
+          left: '55%',
           transform: 'translate(-50%, -50%)',
           zIndex: 1,
         }} onClick={() => setIsOpen(true)}>
-          Create New Ride
+          Create/Search Rides
         </button>
         {isOpen && <CreateRideModal 
         setIsOpen={setIsOpen} 
