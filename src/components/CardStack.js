@@ -32,16 +32,14 @@ function CardStack({ setMapRideID }) {
                     date={ride.date}
                     locationFrom={ride.locationFrom}
                     locationTo={ride.locationTo}
-                    duration={ride.duration}
+                    duration={ride.durationInTraffic}
                     price={ride.price}
-                    numRiders={ride.numRiders}
+                    numRiders={ride.numRidersAllowed}
                     setMapRideID={setMapRideID}
                 />
             );
-            console.log(ride.rideID)
         });
     }
-    console.log(rideArray);
 
     return (
         <div className="container" style={{ flexGrow: "1" }}>
@@ -51,23 +49,7 @@ function CardStack({ setMapRideID }) {
                     spacing={4}
                     align='stretch'
                 >
-                {/* <RideCard date={response.date} locationFrom={response.locationFrom} locationTo={response.locationTo} durationInTraffic={response.durationInTraffic} price={response.price} numRidersAllowed={response.numRidersAllowed} /> */}
-                <RideCard rideID={"647d4745bc13f30b012e0627"} date={5/21/2023} locationFrom={"SF"} locationTo={"LAX"} duration={7} price={500} numRiders={4} setMapRideID={setMapRideID}/>
-                {/* <RideCard rideID={data._id} date={data.date} locationFrom={data.locationFrom} locationTo={data.locationTo} duration={data.durationInTraffic} price={data.price} numRiders={data.numRidersAllowed}/> */}
-                <RideCard rideID={"647652eb719dc5143d88c399"} setMapRideID={setMapRideID}/>
-
                 {rideArray} {/* Render the rideArray components */}
-                    {/* <point /> */}
-                    {/* <RideCard
-                        rideID={"647652eb719dc5143d88c399"}
-                        date={5 / 21 / 2023}
-                        locationFrom={"SF"}
-                        locationTo={"LAX"}
-                        duration={7}
-                        price={500}
-                        numRiders={4}
-                        setMap={setMap}
-                    /> */}
                 </VStack>
             </div>
         </div>

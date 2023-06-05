@@ -10,10 +10,10 @@
     height: 100vh; /* Adjust the height as needed */
   }
   
-  .image {
+  /* .image {
     width: 100%;
     height: auto;
-  }
+  } */
 
   #ButtonToCreate {
     position: 'absolute';

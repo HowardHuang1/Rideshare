@@ -114,7 +114,7 @@ function Modal({ setIsOpen, rideid, onSubmit, setRideData }) {
                     type="text"
                     name="numRiders"
                     value={numRiders}
-                    placeholder="Number of Riders, ex: 5"
+                    placeholder="Number of Riders, only 4 or 6"
                     onChange={handleInputChange}
                   />
                   <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
