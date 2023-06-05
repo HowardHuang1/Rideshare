@@ -18,7 +18,7 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData })
   const [search, setSearch] = useState(false);
   const rideId = rideid;
 
-  const putData = async (e) => {
+  const createData = async (e) => {
     await axios
       .post("http://localhost:8000/create-ride", {
         // default username
@@ -82,7 +82,7 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData })
   const handleSubmit = async (e) => {
     e.preventDefault(); // To prevent page reload on form submission
     console.log("Click registered");
-    await putData();
+    await createData();
     // await callSetState();
     setIsOpen(false);
     // onSubmit();
