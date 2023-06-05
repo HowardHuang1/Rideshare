@@ -41,7 +41,16 @@ function CreateRide({username}) {
 
   // fetchMap();
 
-  // const imageURL = "https://i.ibb.co/6JQjLbV/Default-Blur-Image.jpg"
+  const imageURL = "https://i.ibb.co/6JQjLbV/Default-Blur-Image.jpg"
+
+  
+  const [locationFromSearchParam, setlocationFromSearchParam] = useState();
+  const [locationToSearchParam, setlocationToSearchParam] = useState();
+  const [dateSearchParam, setdateSearchParam] = useState();
+  const [timeSearchParam, settimeSearchParam] = useState();
+  const [AMSearchParam, setAMSearchParam] = useState();
+
+
   return(
     <div className="create-ride-interface">
       <div className="rides" style={{
@@ -53,7 +62,13 @@ function CreateRide({username}) {
         // paddingBottom: "20px",
         flex: "1 1 50%",
       }}>
-        <CardStack setMapRideID={setMapRideID}/>
+        <CardStack setMapRideID={setMapRideID}
+        locationFromSearchParam = {locationFromSearchParam}
+        locationToSearchParam = {locationToSearchParam}
+        dateSearchParam = {dateSearchParam}
+        timeSearchParam = {timeSearchParam}
+        AMSearchParam = {AMSearchParam} 
+        />
       </div>
 
       <div className="ModalButton"
@@ -75,7 +90,16 @@ function CreateRide({username}) {
         }} onClick={() => setIsOpen(true)}>
           Create New Ride
         </button>
-        {isOpen && <CreateRideModal setIsOpen={setIsOpen} username={username}/>}
+        {isOpen && <CreateRideModal 
+        setIsOpen={setIsOpen} 
+        username={username}
+        setlocationFromSearchParam = {setlocationFromSearchParam}
+        setlocationToSearchParam = {setlocationToSearchParam}
+        setdateSearchParam = {setdateSearchParam}
+        timeSearchParam = {timeSearchParam}
+        settimeSearchParam = {settimeSearchParam}
+        setAMSearchParam = {setAMSearchParam} 
+        />}
         <img src={map}
           alt="map"
           style={{ height: '100vh',}}

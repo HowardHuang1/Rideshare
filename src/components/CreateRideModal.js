@@ -3,11 +3,11 @@ import "./CreateRideModal.css";
 import { RiCloseLine } from "react-icons/ri";
 import "font-awesome/css/font-awesome.min.css";
 import axios from "axios";
-import { set } from "mongoose";
+import CardStack from "./CardStack";
 
 // const username = localStorage.getItem("username");
 
-function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData }) {
+function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setlocationFromSearchParam, setlocationToSearchParam, timeSearchParam, settimeSearchParam, setdateSearchParam, setAMSearchParam }) {
   // console.log("rideid: " + setRideData);
   const [pickupLocation, setPickupLocation] = useState();
   const [destination, setDestination] = useState();
@@ -53,10 +53,8 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData })
 
     if (name === "rideTime") {
       setRideTime(value);
-      // console.log("rideTime: " + value);
     } else if (name === "numRiders") {
       setNumRiders(value);
-      // console.log("numRiders: " + value);
     } else if (name === "pickupLocation"){
       setPickupLocation(value);
     } else if (name === "destination"){
@@ -79,7 +77,20 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData })
   //   }
   // };
 
-  const handleSubmit = async (e) => {
+  const handleSearchSubmit = async (e) => {
+    console.log("Click registered");
+    setlocationFromSearchParam(pickupLocation);
+    setlocationToSearchParam(destination);
+    setdateSearchParam(dateOfRide);
+    settimeSearchParam(rideTime);
+    console.log("new param: " + timeSearchParam)
+    setAMSearchParam("false")
+    setIsOpen(false);
+    // onSubmit();
+  };
+
+  
+  const handleCreateSubmit = async (e) => {
     e.preventDefault(); // To prevent page reload on form submission
     console.log("Click registered");
     await createData();
@@ -101,7 +112,7 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData })
               <RiCloseLine style={{ marginBottom: "-3px" }} />
             </button>
             <div className="modalContent">
-              <form onSubmit={handleSubmit}>
+              <form>
                 <div class="inputWithIcon">
                   <input
                     type="text"
@@ -166,10 +177,10 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData })
                 </div>
                 <div className="modalActions">
                   <div className="actionsContainer">
-                    <button className="deleteButton" type="submit" onClick={() => setSearch(false)}>
+                    <button className="deleteButton" type="submit" onClick={handleCreateSubmit}>
                       Create Ride
                     </button>
-                    <button className="deleteButton" type="submit" onClick={() => setSearch(true)}>
+                    <button className="deleteButton" type="submit" onClick={handleSearchSubmit}>
                       Search
                     </button>
                   </div>

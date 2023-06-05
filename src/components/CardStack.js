@@ -4,24 +4,37 @@ import RideCard from "./RideCard"
 import "./CardStack.css"
 import axios from "axios";
 
-function CardStack({ setMapRideID }) {
+
+
+
+function CardStack({ setMapRideID, locationFromSearchParam, locationToSearchParam, dateSearchParam, timeSearchParam, AMSearchParam }) {
     const [rideData, setRideData] = useState(null);
 
     useEffect(() => {
         const fetchRideData = async () => {
             try {
+                console.log("in the try")
                 const response = await axios.get(
-                    "http://localhost:8000/search-ride",
+                    "http://localhost:8000/search-ride", {
+                        locationFrom: locationFromSearchParam, 
+                        locationTo: locationToSearchParam, 
+                        date: dateSearchParam, 
+                        time: timeSearchParam, 
+                        AM: AMSearchParam, 
+                        open: true
+                    }
                 );
                 setRideData(response.data);
+                console.log("happened?")
             } catch (error) {
                 console.error("Error fetching user data:", error);
             }
         };
 
         fetchRideData();
-    }, []);
+    }, [locationFromSearchParam, locationToSearchParam, dateSearchParam, timeSearchParam, AMSearchParam]);
 
+    
     const rideArray = [];
     if (rideData) {
         rideData.forEach((ride) => {
