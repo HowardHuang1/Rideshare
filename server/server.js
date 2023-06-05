@@ -188,7 +188,7 @@ app.post(
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(404).json({ errors: errors.array() });
     }
 
     //extract user info from request body
@@ -366,11 +366,11 @@ app.post("/create-ride", async (req, res) => {
     let toPlaceInfo = await services.getPlaceInfo(locationTo);
 
     if (fromPlaceInfo.address == undefined) {
-      res.json({ error: "Invalid from location" });
+      res.status(404).json({ error: "Invalid from location" });
       // const error = new ValidationError("Invalid from location");
       // return res.status(400).json({ errors: error.array() });
     } else if (toPlaceInfo.address == undefined) {
-      res.json({ error: "Invalid to location" });
+      res.status(400).json({ error: "Invalid to location" });
       // const error = new ValidationError("Invalid destination");
       // return res.status(400).json({ errors: error.array() });
     }
@@ -423,7 +423,7 @@ app.post("/create-ride", async (req, res) => {
   }
   const dateObj = services.dateTimeValidator(date, time, AM);
   if (dateObj == null) {
-    return res.json({ error: "invalid date or date" });
+    return res.status(404).json({ error: "invalid date or date" });
     // const error = new ValidationError("Invalid date or time");
     // return res.status(400).json({ errors: error.array() });
   }
@@ -432,7 +432,7 @@ app.post("/create-ride", async (req, res) => {
   let toPlaceInfo = await services.getPlaceInfo(locationTo);
 
   if (fromPlaceInfo.address == undefined) {
-    return res.json({ error: "invalid from location" });
+    return res.status(404).json({ error: "invalid from location" });
     // const error = new ValidationError("Invalid from location");
     // return res.status(400).json({ errors: error.array() });
   } else if (toPlaceInfo.address == undefined) {
@@ -804,7 +804,6 @@ app.get("/search-ride", async (req, res) => {
   const { locationFrom, locationTo, date, time, AM, open } = req.body;
   const foundRides = await Ride.find({}); // store rides in local variable
 
-
   if (
     locationFrom == undefined ||
     locationTo == undefined ||
@@ -910,7 +909,7 @@ app.get("/get-optimized-ride", async (req, res) => {
   let ride = await Ride.findOne({ _id: rideID });
   console.log(ride);
   if (!ride) {
-    return res.json({ error: "Invalid Ride ID" });
+    return res.status(404).json({ error: "Invalid Ride ID" });
   }
   try {
     const allRides = await OptimizedRide.find({});
