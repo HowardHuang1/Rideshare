@@ -799,15 +799,16 @@ app.put(
 );
 
 app.get("/search-ride", async (req, res) => {
+  console.log("Search is called")
   const timeparam = 15;
   const distparam = 0.5;
-  const { locationFrom, locationTo, date, time, AM, open } = req.body;
+  const { locationFrom, locationTo, date, time, AM, open } = req.query;
   const foundRides = await Ride.find({}); // store rides in local variable
+  console.log("In Search time: " + time)
 
   if (
     locationFrom == undefined ||
     locationTo == undefined ||
-    dateObj == undefined ||
     time == undefined ||
     AM == undefined ||
     open == undefined

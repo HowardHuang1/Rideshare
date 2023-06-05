@@ -49,8 +49,6 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setlocationFro
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log("handling input");
-
     if (name === "rideTime") {
       setRideTime(value);
     } else if (name === "numRiders") {
@@ -83,7 +81,6 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setlocationFro
     setlocationToSearchParam(destination);
     setdateSearchParam(dateOfRide);
     settimeSearchParam(rideTime);
-    console.log("new param: " + timeSearchParam)
     setAMSearchParam("false")
     setIsOpen(false);
     // onSubmit();

@@ -13,19 +13,21 @@ function CardStack({ setMapRideID, locationFromSearchParam, locationToSearchPara
     useEffect(() => {
         const fetchRideData = async () => {
             try {
-                console.log("in the try")
+                console.log("in the try time is: " + timeSearchParam)
                 const response = await axios.get(
                     "http://localhost:8000/search-ride", {
-                        locationFrom: locationFromSearchParam, 
-                        locationTo: locationToSearchParam, 
-                        date: dateSearchParam, 
-                        time: timeSearchParam, 
-                        AM: AMSearchParam, 
-                        open: true
-                    }
+                        params: {
+                          locationFrom: locationFromSearchParam, 
+                          locationTo: locationToSearchParam, 
+                          date: dateSearchParam, 
+                          time: timeSearchParam, 
+                          AM: AMSearchParam, 
+                          open: true
+                        }
+                      }
                 );
                 setRideData(response.data);
-                console.log("happened?")
+                console.log(rideData)
             } catch (error) {
                 console.error("Error fetching user data:", error);
             }

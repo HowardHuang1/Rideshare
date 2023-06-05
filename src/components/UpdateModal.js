@@ -27,7 +27,6 @@ function UpdateModal({ setIsOpen }) {
     }
 
     const handleInputChange = (e) => {
-        console.log("handling input")
         setPickupLocation(pickupLocation);
         console.log("pickupLocation: " + pickupLocation)
         setDestination(destination);
