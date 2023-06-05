@@ -803,7 +803,7 @@ app.get("/search-ride", async (req, res) => {
   const distparam = 0.5;
   const { locationFrom, locationTo, date, time, AM, open } = req.body;
   const foundRides = await Ride.find({}); // store rides in local variable
-  const dateObj = services.dateTimeValidator(date, time, AM);
+
 
   if (
     locationFrom == undefined ||
@@ -819,8 +819,10 @@ app.get("/search-ride", async (req, res) => {
     } else {
       res.send(null); // no rides in database
     }
+    return;
   }
 
+  const dateObj = services.dateTimeValidator(date, time, AM);
   let fromPlaceInfo = await services.getPlaceInfo(locationFrom);
   let toPlaceInfo = await services.getPlaceInfo(locationTo);
 
