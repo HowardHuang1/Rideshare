@@ -3,11 +3,12 @@ import { Card, Text, Image, Stack, Heading, Button, CardBody, CardFooter } from 
 import { ChakraProvider } from '@chakra-ui/react'
 import { processDate } from "./PrettyDate";
 
-function RideCard( { rideID, date, locationFrom, locationTo, durationInTraffic, price, numRidersAllowed, setMap } ) {
+function RideCard( { rideID, date, locationFrom, locationTo, durationInTraffic, price, numRidersAllowed, setMapRideID } ) {
     const renderMap = () => {
         // pass in the rideID which is the only argument required for the map api call
         // this sets the setMapRideID useState() function in the parent CreateRide.js component
-        setMap(rideID)
+        console.log(rideID)
+        setMapRideID(rideID)
     }
     
     return(

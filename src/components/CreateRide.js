@@ -10,14 +10,15 @@ import axios from "axios"
 function CreateRide({username}) {
   const [isOpen, setIsOpen] = useState(false);
   const [map, setMap] = useState();
-  const [mapRideID, setMapRideID] = useState();
+  const [mapRideID, setMapRideID] = useState("647652eb719dc5143d88c399");
 
   useEffect(() => {
     const fetchMap = async () => {
         try {
             const response = await axios.get('http://localhost:8000/get-ride-image',{
               params:{
-                rideID: "647652eb719dc5143d88c399"
+                // rideID: "647652eb719dc5143d88c399"
+                rideID: mapRideID
                 // replace this parameter later with rideID: mapRideID
                 // which changes based on which ride card was selected 
                 // to render a different map for each ride
@@ -30,7 +31,7 @@ function CreateRide({username}) {
         }
     }
     fetchMap();
-  }, []);
+  }, [mapRideID]);
 
   // const fetchMap = async(e) => {
   //   await axios.get("http://localhost:8000/get-ride-image", {
@@ -52,15 +53,21 @@ function CreateRide({username}) {
         // paddingBottom: "20px",
         flex: "1 1 50%",
       }}>
-        <CardStack setMap={setMapRideID}/>
+        <CardStack setMapRideID={setMapRideID}/>
       </div>
 
       <div className="ModalButton"
       style={{
         flex: '1 1 50%',
         // backgroundImage: `url(${imageURL})`
-        backgroundImage: `url(${map})`
+        // backgroundImage: `url(${map})`
       }}> 
+        {/* <img src="https://maps.googleapis.com/maps/api/staticmap?size=600x400&path=enc:m}wnEzzypUsEgE]jBEf@AzAErBElAIj@Mh@Wt@mDpJ_@n@_@b@KLo@t@]j@KXLHP?TB^JXP|AvAtApAfB|AdAr@x@f@RB\TB@rDjBdA\VBj@JXEH@p@DrAFvCLfBLhE\fBLLAz@FlADj@@fADlBH@?JIP@nAJr@F`CPpDJlA@nAAzCKfPg@rA?fAD`CTj@J`@JfA`@hAf@hFtCnJfFdDvAhDpAvC|AlHdEvDtB|@f@pAh@pBr@vA`@nDr@tC\pCP|CDdJB~QEnUErNCzHOlNi@jHSzEOnCGnCCtEArCFvBDvDFbDF`DBbBARGT?tBChJGrMI|DBpEPnFVnEJrH@xM?fh@@fSAtQHvHDjKBjSGbFChDOxCYnDa@bLuAjJiAzAO~AKjCCdBDlEXdIh@bBFjBB|CF~C@tD@rGBlJBnEFhDLdCL^`@NBnBV|En@zAP~@JZLnAP`BRdBVr@Tl@\j@f@d@l@^v@^rAJbAD~BB`GD~EF`IRnF\lHFbBBxC?JTl@?h@@|EDbBJlCPfCNbBn@hFnChSzE`^xAxKn@`Gd@tHRzHBdEGnUAlKAlAAzOLxIH~CZpOl@tVVzJD|DKzDIxASzBg@lD]`B[tA[bAm@fBuA~C_BpC}A`CcK|OwCvEiBzCgDtG_BpDuAlDs@~By@|CeAlFW~Ac@`DUbCIvAGtACfD@bA@tAJfCPpBThBd@bCx@vDhD`PbA|EpClMzAnHd@hCZrBLrALrBHpBDhC?dLAhB?pC?pB?xDCrDKbC[fDQxASzAc@pCOlAWrB_@rCUjCIlBE|BBxGDlABpBBjCBbCA~CWrKAnAIlEI|CM^Ej@MlBOzBKxCAfIOpASl@[n@q@t@}@j@a@Lk@PyD?wB?mKAmC?cUFkNCsJGmA?HjBE`FE`IC`D?tADrA?@&key=AIzaSyDErGxdZK14gqrGZG0TXDnqooOgOQVGGyY"
+          alt="map"
+        /> */}
+        <img src={map}
+          alt="map"
+        />
         <button className="openModalButton" onClick={() => setIsOpen(true)}>
           Create New Ride
         </button>

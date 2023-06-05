@@ -6,7 +6,7 @@ import Searchbar from "./Ride Filters/Searchbar"
 import axios from "axios";
 import { getDropdownMenuPlacement } from "react-bootstrap/esm/DropdownMenu";
 
-function CardStack({ setMap }) {
+function CardStack({ setMapRideID }) {
     const [data, setData] = useState(null);
 
     useEffect(() => {
@@ -62,9 +62,9 @@ function CardStack({ setMap }) {
                     align='stretch'
                 >
                 {/* <RideCard date={response.date} locationFrom={response.locationFrom} locationTo={response.locationTo} durationInTraffic={response.durationInTraffic} price={response.price} numRidersAllowed={response.numRidersAllowed} /> */}
-                <RideCard rideID={"647652eb719dc5143d88c399"} date={5/21/2023} locationFrom={"SF"} locationTo={"LAX"} duration={7} price={500} numRiders={4} setMap={setMap}/>
+                <RideCard rideID={"647d4745bc13f30b012e0627"} date={5/21/2023} locationFrom={"SF"} locationTo={"LAX"} duration={7} price={500} numRiders={4} setMapRideID={setMapRideID}/>
                 {/* <RideCard rideID={data._id} date={data.date} locationFrom={data.locationFrom} locationTo={data.locationTo} duration={data.durationInTraffic} price={data.price} numRiders={data.numRidersAllowed}/> */}
-                <RideCard />
+                <RideCard rideID={"647652eb719dc5143d88c399"} setMapRideID={setMapRideID}/>
                 </VStack>
             </div>
         </div>
