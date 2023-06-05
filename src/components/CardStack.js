@@ -38,9 +38,9 @@ function CardStack({ setMapRideID }) {
                     setMapRideID={setMapRideID}
                 />
             );
+            console.log(ride.rideID)
         });
     }
-
     console.log(rideArray);
 
     return (

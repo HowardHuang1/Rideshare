@@ -65,13 +65,22 @@ function CreateRide({username}) {
         {/* <img src="https://maps.googleapis.com/maps/api/staticmap?size=600x400&path=enc:m}wnEzzypUsEgE]jBEf@AzAErBElAIj@Mh@Wt@mDpJ_@n@_@b@KLo@t@]j@KXLHP?TB^JXP|AvAtApAfB|AdAr@x@f@RB\TB@rDjBdA\VBj@JXEH@p@DrAFvCLfBLhE\fBLLAz@FlADj@@fADlBH@?JIP@nAJr@F`CPpDJlA@nAAzCKfPg@rA?fAD`CTj@J`@JfA`@hAf@hFtCnJfFdDvAhDpAvC|AlHdEvDtB|@f@pAh@pBr@vA`@nDr@tC\pCP|CDdJB~QEnUErNCzHOlNi@jHSzEOnCGnCCtEArCFvBDvDFbDF`DBbBARGT?tBChJGrMI|DBpEPnFVnEJrH@xM?fh@@fSAtQHvHDjKBjSGbFChDOxCYnDa@bLuAjJiAzAO~AKjCCdBDlEXdIh@bBFjBB|CF~C@tD@rGBlJBnEFhDLdCL^`@NBnBV|En@zAP~@JZLnAP`BRdBVr@Tl@\j@f@d@l@^v@^rAJbAD~BB`GD~EF`IRnF\lHFbBBxC?JTl@?h@@|EDbBJlCPfCNbBn@hFnChSzE`^xAxKn@`Gd@tHRzHBdEGnUAlKAlAAzOLxIH~CZpOl@tVVzJD|DKzDIxASzBg@lD]`B[tA[bAm@fBuA~C_BpC}A`CcK|OwCvEiBzCgDtG_BpDuAlDs@~By@|CeAlFW~Ac@`DUbCIvAGtACfD@bA@tAJfCPpBThBd@bCx@vDhD`PbA|EpClMzAnHd@hCZrBLrALrBHpBDhC?dLAhB?pC?pB?xDCrDKbC[fDQxASzAc@pCOlAWrB_@rCUjCIlBE|BBxGDlABpBBjCBbCA~CWrKAnAIlEI|CM^Ej@MlBOzBKxCAfIOpASl@[n@q@t@}@j@a@Lk@PyD?wB?mKAmC?cUFkNCsJGmA?HjBE`FE`IC`D?tADrA?@&key=AIzaSyDErGxdZK14gqrGZG0TXDnqooOgOQVGGyY"
           alt="map"
         /> */}
-        <img src={map}
-          alt="map"
-        />
-        <button className="openModalButton" onClick={() => setIsOpen(true)}>
+        <button className="openModalButton"
+        style={{
+          position: 'absolute',
+          top: '12%',
+          left: '65%',
+          transform: 'translate(-50%, -50%)',
+          zIndex: 1,
+        }} onClick={() => setIsOpen(true)}>
           Create New Ride
         </button>
         {isOpen && <CreateRideModal setIsOpen={setIsOpen} username={username}/>}
+        <img src={map}
+          alt="map"
+          style={{ height: '100vh',}}
+          // style={{ width: '100%', height: 'auto' }}
+        />
       </div>
       
       {/* <div className="rides" style={{
