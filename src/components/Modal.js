@@ -13,7 +13,7 @@ function Modal({ setIsOpen, rideid, onSubmit, setRideData }) {
   const [destination, setDestination] = useState();
   const [rideTime, setRideTime] = useState();
   const [numRiders, setNumRiders] = useState();
-  const [AM, setAmPm] = useState("AM");
+  const [isAM, setIsAM] = useState(false); // Initialize AM field as false
   const rideId = rideid;
 
   const putData = async (e) => {
@@ -23,7 +23,7 @@ function Modal({ setIsOpen, rideid, onSubmit, setRideData }) {
         username: username,
         rideID: rideId,
         time: rideTime, // time is missing
-        AM: "false", // default am pm
+        AM: isAM, // Set AM field as boolean
         numRidersAllowed: numRiders, // default numRiders
       })
       .then((res) => console.log("Posting data", res))
@@ -65,6 +65,13 @@ function Modal({ setIsOpen, rideid, onSubmit, setRideData }) {
     onSubmit();
   };
 
+  const handleAMChange = (e) => {
+    const selectedValue = e.target.value;
+    setIsAM(selectedValue !== "PM"); // Set isAM to true if selected value is "AM", otherwise set it to false
+  };
+  
+  
+
   return (
     <div>
       {/* <div className="darkBG centered" onClick={() => setIsOpen(false)}> */}
@@ -94,8 +101,9 @@ function Modal({ setIsOpen, rideid, onSubmit, setRideData }) {
                       border: "2px solid #aaa",
                       height: "80%",
                     }}
-                    onChange={(e) => handleInputChange(e, "amPm")}
+                    onChange={handleAMChange} // Call handleAMChange on change
                   >
+                    <option>AM/PM</option>
                     <option value="AM">AM</option>
                     <option value="PM">PM</option>
                   </select>
