@@ -237,9 +237,9 @@ const RideHistory = ({ username }) => {
 const App = ({ username, logout }) => {
   return (
     <div className={"container container-2"} 
-    // style={{
-    //   paddingTop: "120px"
-    // }}
+    style={{
+      paddingTop: "120px"
+    }}
     >
       <div className="flex-container">
         <Profile username={username} />
