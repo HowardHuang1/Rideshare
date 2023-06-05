@@ -1,3 +1,10 @@
+Guys, we need to modify the readme file to better document the project. Please complete the following tasks:
+  1.  Create a visual depiction of the underlying data structures (Parthiv should lead this).
+  2.  Compile that information into a Google Slides/Microsoft Powerpoint presentation, then screen grab all the slides and post them underneath.
+  3.  Include the MIT license and highlight any 3rd party code we used (Important).
+  4.  Finish the rest of your work by Monday at the latest.
+  - Rohil (from Satvik's computer)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
