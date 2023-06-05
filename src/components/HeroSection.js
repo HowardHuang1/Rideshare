@@ -4,7 +4,7 @@ import RedirectingButton from "./RedirectingButton";
 
 const HeroSection = () => {
   return (
-    <div>
+    <div classname="hompage-content">
       <div className="hero-container">
         <h1 class="red-text">Welcome to BruinCruisin</h1>
         <p>Create or find carpools with fellow Bruins in an instant!</p>

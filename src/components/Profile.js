@@ -236,7 +236,7 @@ const RideHistory = ({ username }) => {
 
 const App = ({ username, logout }) => {
   return (
-    <div className="container">
+    <div className={"container container-2"}>
       <div className="flex-container">
         <Profile username={username} />
         <RideHistory username={username} />
