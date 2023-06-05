@@ -7,7 +7,7 @@ import axios from "axios";
 
 
 
-function CardStack({ setMapRideID, locationFromSearchParam, locationToSearchParam, dateSearchParam, timeSearchParam, AMSearchParam }) {
+function CardStack({ username, setMapRideID, locationFromSearchParam, locationToSearchParam, dateSearchParam, timeSearchParam, AMSearchParam }) {
     const [rideData, setRideData] = useState(null);
 
     useEffect(() => {
@@ -42,6 +42,7 @@ function CardStack({ setMapRideID, locationFromSearchParam, locationToSearchPara
         rideData.forEach((ride) => {
             rideArray.push(
                 <RideCard
+                    username={username}
                     key={ride._id} // Add a unique key prop for each item in the array
                     rideID={ride._id}
                     date={ride.date}

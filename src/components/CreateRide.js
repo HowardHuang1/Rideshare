@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./CreateRide.css"
-import Modal from "./Modal"
+import Modal from "./UpdateModal"
 import CreateRideModal from './CreateRideModal';
 import CardStack from "./CardStack"
 import axios from "axios"
@@ -62,7 +62,9 @@ function CreateRide({username}) {
         // paddingBottom: "20px",
         flex: "1 1 50%",
       }}>
-        <CardStack setMapRideID={setMapRideID}
+        <CardStack 
+        username={username}
+        setMapRideID={setMapRideID}
         locationFromSearchParam = {locationFromSearchParam}
         locationToSearchParam = {locationToSearchParam}
         dateSearchParam = {dateSearchParam}
