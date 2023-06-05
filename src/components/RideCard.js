@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Text, Image, Stack, Heading, Button, CardBody, CardFooter } from '@chakra-ui/react'
 import { ChakraProvider } from '@chakra-ui/react'
+import { processDate } from "./PrettyDate";
 
 function RideCard( { rideID, date, locationFrom, locationTo, durationInTraffic, price, numRidersAllowed, setMap } ) {
     const renderMap = () => {
@@ -36,7 +37,7 @@ function RideCard( { rideID, date, locationFrom, locationTo, durationInTraffic, 
                 <CardBody>
                 <Heading size='md'>UberX</Heading>
                 <Text py='2'>
-                    Date: { date }
+                    Date: { processDate(date) }
                     <br />
                     Location From: { locationFrom }
                     <br />

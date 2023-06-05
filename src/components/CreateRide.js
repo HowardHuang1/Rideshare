@@ -39,7 +39,7 @@ function CreateRide({username}) {
 
   // fetchMap();
 
-  const imageURL = "https://thumbs.dreamstime.com/b/detailed-world-map-29681182.jpg"
+  const imageURL = "https://i.ibb.co/6JQjLbV/Default-Blur-Image.jpg"
   return(
     <div className="create-ride-interface">
       <div className="rides" style={{
