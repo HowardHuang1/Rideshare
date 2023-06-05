@@ -24,6 +24,7 @@ function CreateRide({username}) {
               }
             });
             setMap(response.data);
+            console.log(response.data)
         } catch (error) {
             console.error('Error fetching map: ', error)
         }
@@ -39,7 +40,7 @@ function CreateRide({username}) {
 
   // fetchMap();
 
-  const imageURL = "https://i.ibb.co/6JQjLbV/Default-Blur-Image.jpg"
+  // const imageURL = "https://i.ibb.co/6JQjLbV/Default-Blur-Image.jpg"
   return(
     <div className="create-ride-interface">
       <div className="rides" style={{
@@ -57,7 +58,8 @@ function CreateRide({username}) {
       <div className="ModalButton"
       style={{
         flex: '1 1 50%',
-        backgroundImage: `url(${imageURL})`
+        // backgroundImage: `url(${imageURL})`
+        backgroundImage: `url(${map})`
       }}> 
         <button className="openModalButton" onClick={() => setIsOpen(true)}>
           Create New Ride
