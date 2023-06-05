@@ -86,7 +86,7 @@ function CreateRide({username}) {
         style={{
           position: 'absolute',
           top: '8%',
-          left: '55%',
+          left: '55.5%',
           transform: 'translate(-50%, -50%)',
           zIndex: 1,
         }} onClick={() => setIsOpen(true)}>
