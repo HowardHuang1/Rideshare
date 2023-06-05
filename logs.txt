@@ -1,0 +1,1336 @@
+commit 51aff29b736f8224b0726f086b884d6ccebad13d
+Merge: 3f6ea9c 4b6e9d4
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Sun Jun 4 17:18:58 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit 3f6ea9c9469ac268d755044cd7d74c2fb010fbbb
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Sun Jun 4 17:18:47 2023 -0700
+
+    fixed email and server
+
+commit 4b6e9d4ae6b9d81bc62ead152230ab6cd15f5030
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Sun Jun 4 17:08:06 2023 -0700
+
+    Fixed Styling Issues on CreateRide
+
+commit 185ac484ea45b54dad79cabd0804a6e34b0ccdbd
+Merge: 0083c46 7fd88c8
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Sun Jun 4 16:27:12 2023 -0700
+
+    Merge branch 'createRide-api-connection'
+
+commit 0083c46adfde6416d100330269e5bdb9bbff8867
+Merge: c6c861c bb20f53
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Sun Jun 4 16:20:28 2023 -0700
+
+    Merge branch 'main' of github.com:HowardHuang1/Rideshare
+
+commit 7fd88c8be09e649eac959783272573ad66601427
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Sun Jun 4 16:13:15 2023 -0700
+
+    Finished Connecting CreateRideModal to backend
+
+commit 8d447fc1cf3fec53a8d0c409308782e281d7c206
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Sun Jun 4 16:03:44 2023 -0700
+
+    Connected CreateRideModal with backend
+    
+    Successfully call backend, but the new ride is not reflected in the backend
+
+commit 293b9654053b91134d5bab43cbbaef21642a3053
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Sun Jun 4 15:24:59 2023 -0700
+
+    Put Input fields for CreateRideModal
+
+commit bb20f53a12fe8b5a9ca17621a48d43fb34e70061
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Sun Jun 4 14:48:44 2023 -0700
+
+    added prop drilling to pass useState function setMapRideID from createRide.js to RideCard.js
+
+commit 76b11b1ca7aebf6233986efd593dc81edc769297
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Sun Jun 4 14:41:05 2023 -0700
+
+    Create CreateRideModal.js
+
+commit c6c861ce5480335550696d7bd2a04ed9cb8f69db
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Sun Jun 4 14:39:35 2023 -0700
+
+    added CreateRideModal.js
+
+commit c3350eaab68d1fbc015e1ba876f09d9594b49ba7
+Merge: 6e20723 a310a03
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Sun Jun 4 14:33:11 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit 6e2072344f91ce7f721278d51c4d828b61f55d07
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Sun Jun 4 14:33:09 2023 -0700
+
+    add display map button
+
+commit a310a037abdb59a0c2efa3ce8e5e50611a941705
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Sun Jun 4 14:27:25 2023 -0700
+
+    Clarified class names for CreateRide page
+    
+    I will not use arbitrary class names I will not use arbitrary class names I will not use arbitrary class names I will not use arbitrary class names I will not use arbitrary class names I will not use arbitrary class names I will not use arbitrary class names
+
+commit bcf10b2617eb3499f168168ebe71af0e4fa688d4
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Sun Jun 4 01:32:28 2023 -0700
+
+    fixed update button
+
+commit b1f9eab9432ec9aeab467e974f70be2edc583eb7
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Sun Jun 4 00:25:38 2023 -0700
+
+    hi eggert
+
+commit d8d4477d7196dce3c4db26e54e1b9312e5f312fa
+Merge: 97467e4 f75644b
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Sat Jun 3 23:40:46 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit 97467e4df0990e4112bcd523226c763aefce5588
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Sat Jun 3 23:40:41 2023 -0700
+
+    fixed update-ride button completely
+
+commit f75644ba8e5a16cad8ef82f107f6acb792504a54
+Merge: 7f1a530 81d87f2
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Sat Jun 3 23:08:10 2023 -0700
+
+    Merge branch 'createRide💀'
+
+commit 81d87f2380d3d5d9e7c67ba7db793f4a4596c648
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Sat Jun 3 23:04:56 2023 -0700
+
+    Updated CreateRide Styling
+    
+    Made CreateRide more responsive
+
+commit 7f1a53007e579708708a98b72f0483a1c0fc369b
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Sat Jun 3 22:45:53 2023 -0700
+
+    Fixed Bugs on Date Processor
+
+commit 709c5ad3dee2e26d935cb1ee94d779550d105d50
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Sat Jun 3 22:38:47 2023 -0700
+
+    Fixed Modal, integrated with Update API
+
+commit 1007f946cd6e5642cd9830056302d1b2c23d327b
+Merge: 4a653c0 ba8ec01
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Sat Jun 3 21:59:25 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit 4a653c01ca8f7aa2c6ee896f2e837199124961ce
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Sat Jun 3 21:59:11 2023 -0700
+
+    small change
+
+commit ba8ec01001722b3c5ca7e8eedad7b53db669e32d
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Sat Jun 3 21:58:58 2023 -0700
+
+    fixed rideID syntax error
+
+commit 1c1577ee2c3a1f913face3aeb7bdc63c92cec2eb
+Merge: 50c96ff 3121c6d
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Sat Jun 3 21:52:12 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit 50c96ff50aef7e736b2e6c7ddcc7adc853be7178
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Sat Jun 3 21:51:28 2023 -0700
+
+    Changing modal for update, FIXED BIG INPUT PROBLEM
+
+commit 3121c6d0941c9270ed86aa8c6982d886e2e5c625
+Merge: 912cc2d 726dfc3
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Sat Jun 3 21:50:54 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit 912cc2df3e1222d3b5459f9c49f1664ba7c59d92
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Sat Jun 3 21:50:33 2023 -0700
+
+    added gateway for ID
+
+commit 726dfc3ebfb8464d54d5e90e5fe61d2a917f929a
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Sat Jun 3 18:51:10 2023 -0700
+
+    add placeholder background image
+
+commit c296e40e3f0e9d0cd0e20f860734cd8d27682b12
+Merge: c1d6725 a20debc
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Sat Jun 3 18:34:56 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit c1d6725398b0eac312efc32b0b2877568f87ec4b
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Sat Jun 3 18:34:22 2023 -0700
+
+    changed to query
+
+commit a20debcf6fa2496a1877a2a0060c0642c640a789
+Author: inmessionante123 <dhruva.sankhe28@gmail.com>
+Date:   Sat Jun 3 18:33:57 2023 -0700
+
+    Border for CardStack am/pm
+
+commit 203b48bfe77ddb48162effd4562ef84fb8da4c09
+Merge: fe1f4e6 4e94cea
+Author: inmessionante123 <dhruva.sankhe28@gmail.com>
+Date:   Sat Jun 3 18:27:24 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit fe1f4e6fb0872eb4a79250478f1f5a261d739086
+Author: inmessionante123 <dhruva.sankhe28@gmail.com>
+Date:   Sat Jun 3 18:27:12 2023 -0700
+
+    logout login fix
+
+commit 4e94cea69e0b792169c40ce0e59032cfe2b51d99
+Merge: 36a8a9f f15e5db
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Sat Jun 3 18:24:56 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit 36a8a9f5ccc0dd0f096b838c93d5298ab1c26bb8
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Sat Jun 3 18:24:54 2023 -0700
+
+    swap fetchMap api call to useEffect
+
+commit f15e5dbf36872c9bfe5a6997c0224bec22e3277e
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Sat Jun 3 18:18:12 2023 -0700
+
+    fixed email again
+
+commit a999a4286c1d33d022566793b42bc76a84633b1c
+Merge: 75fcc8a 5be358c
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Sat Jun 3 18:12:57 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit 75fcc8ab227223f5867e7ca911fef9a46dba2306
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Sat Jun 3 18:12:38 2023 -0700
+
+    fixed email
+
+commit 5be358c38c6b54d1bea77b2d3d851c1096b9ced5
+Merge: f7b3c69 1f5cdd1
+Author: inmessionante123 <dhruva.sankhe28@gmail.com>
+Date:   Sat Jun 3 18:09:43 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit f7b3c697c67b80aba7d16ab759b85056ac25d730
+Author: inmessionante123 <dhruva.sankhe28@gmail.com>
+Date:   Sat Jun 3 18:09:35 2023 -0700
+
+    AM/PM dropdown styling
+
+commit 1f5cdd1300659e109c2ecb8c168b8106467ee4bf
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Sat Jun 3 18:01:11 2023 -0700
+
+    fixed data representation on profile page
+
+commit 361beaf4f29770c2454f2bbc9d3ab2daba7777c1
+Merge: 634fa20 b0a3029
+Author: inmessionante123 <dhruva.sankhe28@gmail.com>
+Date:   Sat Jun 3 17:59:11 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit 634fa2015d7505025718379f8ec26a452e6a2173
+Author: inmessionante123 <dhruva.sankhe28@gmail.com>
+Date:   Sat Jun 3 17:59:00 2023 -0700
+
+    AM/PM styling for modal
+
+commit b0a3029197b1c39ff13262efc2e1c2df435be492
+Merge: 581eafb 359bfe0
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Sat Jun 3 17:48:33 2023 -0700
+
+    Merge branch 'main' of github.com:HowardHuang1/Rideshare
+
+commit 359bfe0c45e480b480aef4a319142578e2614282
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Sat Jun 3 17:47:07 2023 -0700
+
+    fixed email client and money function
+
+commit 581eafb5c0fca0c87ebafd474f2df2077868f805
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Sat Jun 3 17:46:31 2023 -0700
+
+    Fixed Sign-in rerouting
+    
+    Fixed bug where signing in on Create Ride page will redirect you to the Profile Page. Now, it will redirect to create ride when you login from the create ride page.
+
+commit 2f0cde45acf512eca396e3b219bc4890beea9850
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Sat Jun 3 17:38:13 2023 -0700
+
+    add map rendering api call
+
+commit 25654d7ef77a700728bc9bbec809ae5157231eef
+Author: inmessionante123 <dhruva.sankhe28@gmail.com>
+Date:   Sat Jun 3 16:51:00 2023 -0700
+
+    Examples, modal Am/pm
+
+commit b9f5b545a53f7d790a26b5e8a80cb63583f7fa5d
+Merge: 4325255 3e769c4
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Sat Jun 3 15:44:17 2023 -0700
+
+    fixed user compatibility on profile page
+
+commit 43252557c5adcfe3a43c3c1f3aee1b763a160c29
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Sat Jun 3 15:41:40 2023 -0700
+
+    fixed user compatibility on profile page
+
+commit 3e769c4980b25bfe583c391e73894a42f476fd4b
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Sat Jun 3 15:25:45 2023 -0700
+
+    Bug Fixes on Optimized Rides
+
+commit 2acbf1873c97e2d70db542ffd4735f9c6799c41d
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Sat Jun 3 14:49:12 2023 -0700
+
+    new get-opitimized-ride endpoint
+
+commit 8a1cda5dfa7706d3f6b02997465b498699ab4c63
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Sat Jun 3 14:36:49 2023 -0700
+
+    Fixed Profile Date Formatting
+
+commit 9d678044f2d09d4a9c251a07c5014db112d41503
+Merge: ef68319 534e920
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Sat Jun 3 14:31:44 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit ef683192b498da806628a8ce5299f53ae321b44f
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Sat Jun 3 14:30:57 2023 -0700
+
+    Added Function to print Date Nicely
+
+commit 534e92020e34ca2fc76e95a74f137c2d2887ab92
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Sat Jun 3 14:30:47 2023 -0700
+
+    added username compatibility to profile page
+
+commit d8d645b9def9bbf14ea762a73a8c95d92765491a
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Sat Jun 3 14:03:01 2023 -0700
+
+    Profile CSS table changed
+
+commit 323a06b5aa81b34ce3a7d4319813b3e8f8e1fbf5
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Sat Jun 3 14:02:59 2023 -0700
+
+    Make Profile Nicer
+
+commit 41627ffd081ef54bb591ddd45eee0c94da853047
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Fri Jun 2 14:45:33 2023 -0700
+
+    Updated Login/Sign up buttons
+    
+    Updated the Styling of the Login & Signup buttons on the Login & signup pages
+
+commit a47fd86dbac90a0d52c3aefc6a15894a3471cfbb
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Fri Jun 2 14:17:09 2023 -0700
+
+    Made "Create Ride" Button Fixed;
+    
+    When scrolling, the "Create Ride" button will be fixed
+
+commit b0e795393eba4ec3055c9e606164f2fea086e54f
+Merge: 2f065cf cf05e49
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Thu Jun 1 19:49:40 2023 -0700
+
+    Merge branch 'main' of github.com:HowardHuang1/Rideshare
+
+commit cf05e4903ea91d9f313f7f060c90dfa31516eef8
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Thu Jun 1 18:56:24 2023 -0700
+
+    add scrollbar
+
+commit f75e9286cf445e99fb056e06c9fa2b70974b0c16
+Merge: 3c65ef5 ebdb633
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Thu Jun 1 18:46:48 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit 3c65ef58bdf545a0b289cf3fe03bf8f188d51303
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Thu Jun 1 18:46:46 2023 -0700
+
+    input inside form is registering but fields are undefined
+
+commit ebdb633cc83d28a796f5a4001582f24466a3e960
+Merge: edd2191 0c9104f
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Thu Jun 1 18:21:54 2023 -0700
+
+    implemeted update ride modal
+
+commit edd2191edffac4bdf9af090028d23c40f7f6acf1
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Thu Jun 1 18:20:29 2023 -0700
+
+    created update ride modal
+
+commit 0c9104f6a2dd555e22fb034eed5188cc59da46f1
+Merge: 2849d91 7300a45
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Thu Jun 1 18:14:25 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit 2849d91951d1a2baaa7531d7a16ec6e12ac41622
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Thu Jun 1 18:14:23 2023 -0700
+
+    create-ride api call working
+
+commit 2f065cfc4c5fb0ad2bd28106e57ddfc0d46a7fa4
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Thu Jun 1 17:48:51 2023 -0700
+
+    Implemented Login Dependencies for pages.
+
+commit 7300a45b9820aace9b2c6cf29d0102336284121c
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Thu Jun 1 17:46:14 2023 -0700
+
+    Price Bug Fix
+
+commit c028032919d05b8af9b2f4a8bb315ce6fd4da78e
+Merge: b875ecc 6263794
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Thu Jun 1 17:44:24 2023 -0700
+
+    implemented leave ride button completely
+
+commit b875ecc541fa6441ad65b903ba9a3fc1311c099d
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Thu Jun 1 17:43:07 2023 -0700
+
+    implemented leave ride button fully
+
+commit 626379444a763f0c719fd96a3aaa9020fc495f35
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Thu Jun 1 17:35:22 2023 -0700
+
+    Added User Registration
+
+commit 2c029dff6c9c840018a8cc0ec55854faa7b37eb7
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Thu Jun 1 16:19:44 2023 -0700
+
+    changed req body
+
+commit 516fc9c4d03c5e6d3745f6fadd6db10f05a39209
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Thu Jun 1 16:18:03 2023 -0700
+
+    added random file
+
+commit a98207dbd227159eca9a66ea901ce086f7b790c6
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Thu Jun 1 16:17:23 2023 -0700
+
+    test
+
+commit 1767bbf9ac4e4c4881f0f7ad2b4f687979c35ac5
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Thu Jun 1 15:50:20 2023 -0700
+
+    added feature :)
+
+commit dfb07142aca5c7d42bb7faa6b5e548d2cc4e37c6
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Thu Jun 1 15:44:57 2023 -0700
+
+    Added Button to Create Ride on Home Page
+
+commit 633e699c1e7843757466b803a97363b3f12b2e61
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Thu Jun 1 14:59:48 2023 -0700
+
+    Added search for similar rides before creating
+
+commit 5a2fa2cb3092dcbebecaeab831bd6e134996fae9
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Thu Jun 1 14:37:41 2023 -0700
+
+    Added text for home page
+
+commit 93f025b7be5d18334a295805d368a0c8af4b08f4
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Thu Jun 1 13:27:41 2023 -0700
+
+    made home page skeleton
+
+commit e04bca5d61766b5498fd65f7322c18da21bada39
+Author: inmessionante123 <dhruva.sankhe28@gmail.com>
+Date:   Wed May 31 23:29:09 2023 -0700
+
+    AM/PM button
+    
+    First draft
+
+commit e82a3cab73162fe8e555dd4d804789c0abf80ac3
+Author: inmessionante123 <dhruva.sankhe28@gmail.com>
+Date:   Wed May 31 22:54:24 2023 -0700
+
+    Changes discussed in meeting
+
+commit f328dd869eaa2cd2a7c602df5aacc2924b10cbf4
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Wed May 31 17:27:24 2023 -0700
+
+    Finished implementing Login logic
+    
+    error handling + redirecting when successfully logging in
+
+commit daf6fa3f78eca009ace95bae71852f6bf22bcf9a
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Wed May 31 02:14:32 2023 -0700
+
+    added leave-ride functionality on profile page
+
+commit e3e1a513b4f210ac6b32b9da5ee92776d5315e6c
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Wed May 31 02:06:12 2023 -0700
+
+    implemented code for api endpoints leave-ride and update-ride
+
+commit 3ace58fdb71d2887f0c828babede7cc61227158a
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Wed May 31 01:09:12 2023 -0700
+
+    Update profile.js
+
+commit 984ca4c10aed4459c8520b6e634e116c0cfd352f
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Tue May 30 18:38:34 2023 -0700
+
+    Implemented authentication dependencies
+
+commit 0c6eecf6dc9587564fc15b6f12a42933f2577be8
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Tue May 30 17:04:47 2023 -0700
+
+    Fixed fomrulas for user price/carbon
+
+commit 731231ba480e117c34db7632bf15f6e87e9b4f54
+Merge: ce1fcb1 5ab5746
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Tue May 30 15:49:29 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit ce1fcb1dd2e88c6453195be4b99e95c53fa1fc06
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Tue May 30 15:49:02 2023 -0700
+
+    uncommented web scraper and email client. Put such code after response statement
+
+commit 5ab5746f54d8d4122133d9909a9146cf27a8f3ef
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Tue May 30 15:43:30 2023 -0700
+
+    Connected login API
+    
+    Have not implemented the logic of what to do after submitting forms yet.
+
+commit 9fe5b06d36482136aa58bd2305b17e997db806d2
+Merge: a6d7c52 1c9e5e7
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Tue May 30 13:08:20 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit a6d7c5205b7fd91599ae0cf18567b13e781f22b0
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Tue May 30 13:08:16 2023 -0700
+
+    "Updated Money Saved to pull info from Ride Price"
+
+commit 1c9e5e7773cdeb57a2697d208b8ae0edc24c4525
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Tue May 30 13:07:50 2023 -0700
+
+    implemented get-user-rides API functionality for profile page
+
+commit 45b5bc7218f6f4ca7507706d2e70e502e9387af4
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Tue May 30 13:04:44 2023 -0700
+
+    Fixed Carbon Calculation
+
+commit ecaf2bec01532a330078b4b908698f530d078bd5
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Tue May 30 12:25:40 2023 -0700
+
+    added ride history functionality
+
+commit bae3d5d0c0debb9dee9bb664f3316b84228fc51a
+Author: inmessionante123 <dhruva.sankhe28@gmail.com>
+Date:   Tue May 30 02:22:24 2023 -0700
+
+    Filters/Search bars in CardStack
+    
+    Also made a folder for all the different search bars for each filter to group them together and make files more organized.
+
+commit 8f141070cfb1bba532c44e5e9dab03af7a6bb3e2
+Author: inmessionante123 <dhruva.sankhe28@gmail.com>
+Date:   Tue May 30 02:12:42 2023 -0700
+
+    DropDownSelector
+    
+    For selecting Open or Closed Rides
+
+commit 2b016aba5704d2aeaa45a32e7a0b6a17de24fbd6
+Author: inmessionante123 <dhruva.sankhe28@gmail.com>
+Date:   Tue May 30 01:24:34 2023 -0700
+
+    CreateRide button - homepage
+
+commit 6589b665c8f19fd3d0be04775d318528a00f42cf
+Merge: b585539 11e955a
+Author: inmessionante123 <dhruva.sankhe28@gmail.com>
+Date:   Tue May 30 01:18:56 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit b585539b349415562fdda3311f4027aaad7e1c34
+Author: inmessionante123 <dhruva.sankhe28@gmail.com>
+Date:   Tue May 30 01:18:52 2023 -0700
+
+    HeroSection on Homepage
+
+commit 11e955a030b8bb9685fe26d596b1b52d2dd39ee0
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Mon May 29 20:15:33 2023 -0700
+
+    fix issue with modal disapearing when typing form entries
+
+commit 82aadf8254a2cbbc7cbfa48318623bc817005fa8
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Mon May 29 20:08:37 2023 -0700
+
+    add create-ride api post request
+
+commit e6804f15466e6ce863f7b1a5058d873c52c5a28e
+Merge: 757ad6b 3e038c0
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Mon May 29 19:11:50 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit 757ad6b2bfad8ea1e6eddb74fc2ae19124b0dea8
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Mon May 29 19:11:48 2023 -0700
+
+    linked get-rides api get request to cardstack
+
+commit 3e038c042bd5035cb3a6fb548a2cc6cacbd9685f
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Mon May 29 18:35:45 2023 -0700
+
+    Connected user profile to API
+    
+    Note: changed req.body to req.query in app.get("/user-data"... function call.
+
+commit 48ffd0bb6bfd82d74c48c10c7018ad520e694557
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Mon May 29 16:42:03 2023 -0700
+
+    api implementation troubleshooting
+
+commit 18d7f436447679193371ba609f33ea28bdb6d525
+Merge: e3c7a54 b610bfc
+Author: inmessionante123 <dhruva.sankhe28@gmail.com>
+Date:   Mon May 29 16:25:38 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit e3c7a54c4891efa5f29ca7b9e2095f27ffb52d5c
+Author: inmessionante123 <dhruva.sankhe28@gmail.com>
+Date:   Mon May 29 16:22:23 2023 -0700
+
+    Revert "Created Home Page"
+    
+    This reverts commit 08d141f0d079726e127d87dc036aa8901ee14308.
+
+commit b610bfcf7db36c99466e3d406a00065249eca564
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Wed May 24 17:44:17 2023 -0700
+
+    Update Modal.js
+
+commit 0d6f084f883a8c3be791a99331d2ed4b3daf244c
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Wed May 24 17:44:05 2023 -0700
+
+    Fixed grey box issue when opening modal
+
+commit 07df083addc568f184da46853909fc497c7a44e8
+Merge: 08d141f 6ec5ec2
+Author: inmessionante123 <dhruva.sankhe28@gmail.com>
+Date:   Wed May 24 16:52:46 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit 08d141f0d079726e127d87dc036aa8901ee14308
+Author: inmessionante123 <dhruva.sankhe28@gmail.com>
+Date:   Wed May 24 14:17:59 2023 -0700
+
+    Created Home Page
+    
+    Note: have created a temporary new page for the tesla image, as that isnt the first page users should land on.
+
+commit 6ec5ec2262e118a9402d5f3d3764c7b4c6ac9aae
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Wed May 24 12:19:01 2023 -0700
+
+    Added getDistanceAndDuration quick evaluation
+
+commit 501e40b00275648973cbab2085693d247f284d75
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Wed May 24 12:17:41 2023 -0700
+
+    Fixed bugs in search-rides and services
+
+commit 8a71031a911f6577dee5d2c1ffb3946723564249
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Wed May 24 11:43:00 2023 -0700
+
+    Fixed First half of bugs on search ride, not done
+
+commit 22b647f4a530a34bdaa3ddd2dfdb584039377d2a
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Wed May 24 10:55:30 2023 -0700
+
+    Changed Update Ride so only Creator can change
+
+commit 4a034c5083dbc7d89ae76048ba072e9060d355d9
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Wed May 24 10:29:17 2023 -0700
+
+    Bug fixes on new additions to getuserdata function
+
+commit 52031b23f4e777c27109f67f176c805417dfe3c2
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Wed May 24 00:01:44 2023 -0700
+
+    updated profile page to include all rider attributes, added logout button, split up ride history into existing rides and past rides, and added update and leave buttons for each existing ride
+
+commit 50f9c85747982d2c02cf537ed0d88ee077de1dbb
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Tue May 23 19:35:47 2023 -0700
+
+    Added working "Login/signup" routes
+    
+    Made the "Log in" button on the sign up page & the "register" button on the login page work.
+
+commit 47515572c9612ba4e9fc5322d1e7f873dae804b1
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Tue May 23 13:15:18 2023 -0700
+
+    Fixed Airport Scraper bug but still using dummy algo
+
+commit f7145c0c1f4d26530e3748ea7fc32932f252a7ff
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Mon May 22 21:53:57 2023 -0700
+
+    Made temporary price estimation algorithm
+
+commit 46ec1237a46bdf56f619472c92f1ebb0455f7c00
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Mon May 22 20:31:32 2023 -0700
+
+    Styled Button + Standardized Font
+
+commit 910eacda3421bf7c4dc35f5f9753462112d5e14a
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Mon May 22 19:35:44 2023 -0700
+
+    Fixed color/style inconsistencies
+    
+    Color on Navbar & createRide didn't match chakra ui components
+
+commit 51a76a04d328ce20788870b4cc4d27d8ff00a1ae
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Mon May 22 19:24:10 2023 -0700
+
+    Fixed CreateRide styling
+    
+    Made search bar render below the navbar
+    
+    made create_ride button move behind the nav bar instead of over it when scrolling down
+
+commit a2384ba6468d27eba521d4d78c98dd66f7462c18
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Mon May 22 19:05:35 2023 -0700
+
+    Touched up SignUp page
+
+commit 03b062a0fedc3e398fb47f8b78ea3858ee18a1f8
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Mon May 22 18:59:52 2023 -0700
+
+    Create Signup.js
+
+commit e13a8a05ac5b1d3ff812bee212ce559b045a6d66
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Sun May 21 17:46:34 2023 -0700
+
+    Made dummy price
+
+commit 42c319947cb279101063d42cc9d316a431f1e800
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Sun May 21 17:00:20 2023 -0700
+
+    Update RideCard.js
+
+commit 31c96930d0c547001522db48b752dc51fdda2efc
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Sun May 21 16:56:11 2023 -0700
+
+    integrate apis for create ride to frontend
+
+commit 7ba16c0cc157edcfdae1dfc88e7a3dd1eae23b28
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Sun May 21 16:48:35 2023 -0700
+
+    Fixed ID Bug
+
+commit fec104b98f15ff167b3ba93ae1a0cf62df603a46
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Sun May 21 16:28:39 2023 -0700
+
+    added delete database api endpoint
+
+commit 0d5831443d34889dfe98c22f1ec914d42ddb6c10
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Sun May 21 15:14:05 2023 -0700
+
+    Changed Login Page Color
+
+commit 6cfa6faf9f63818296aaec890d2738dbeb5ecacd
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Sun May 21 14:35:41 2023 -0700
+
+    Fixed bugs to update ride, still not fully working
+
+commit 616a545bcd13486ad2ce0990baae2e5c4b7cc243
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Sun May 21 14:08:36 2023 -0700
+
+    Merged Delete and Leave API into one, fixed bug
+
+commit 9f293ed3089caafa7d6c7788ba0e9da0dc5f30a4
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Sun May 21 13:54:39 2023 -0700
+
+    Fixed get vs put on get rides for user
+
+commit 919187075405a6446127e5b08a27dfe5806477a0
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Sun May 21 13:44:04 2023 -0700
+
+    Identified bug with id's, placing holders til fix
+
+commit 3da0802d9d402125e1c57f475082f3dce9fb7994
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Sun May 21 13:30:05 2023 -0700
+
+    Fixed bug in Create Rides numriders
+
+commit 3fc838d840f95b630a2badef12f124cfaf661719
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Sun May 21 01:25:33 2023 -0700
+
+    Created Login Page
+    
+    Created login page with email and password input. Put button in the profile page to go access the login page.
+    
+    Note: for pages that import ChakraUI components, the font in the navbar switches to the chakra ui font. Non-chakraUI pages still have the default Times New Roman font in the navbar.
+
+commit 4be9ec5826c288ea842860ec872115ed9267be69
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Sun May 21 00:36:19 2023 -0700
+
+    Created Login.js & Login.css
+
+commit 3356ce4df4c2593a42c348cb0c750dc44f43c60f
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Sat May 20 19:49:49 2023 -0700
+
+    Fixed validation Error bugs
+
+commit 931762168062cb9e2fc0accd04a22764eb6b4e29
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Sat May 20 17:09:01 2023 -0700
+
+    fixed version
+
+commit 228c325eb8cf45d193fa8ff1a0629b77778f6eae
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Sat May 20 17:01:19 2023 -0700
+
+    bug fix
+
+commit f4a82aa7493dd2da0ee154b85f826e9e0b082ace
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Sat May 20 17:00:51 2023 -0700
+
+    Bug Fix
+
+commit ebfe5e895f1abc57b06db0f374ea5e7847125f3c
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Sat May 20 16:58:47 2023 -0700
+
+    added email client
+
+commit f8dadb2923b7d8fac307acb90265675eb21345aa
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Sat May 20 15:11:09 2023 -0700
+
+    Incorporated Scraper
+
+commit 7b8eb7c96beeda04c5f4db689488e63c92cf70c4
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Sat May 20 14:57:59 2023 -0700
+
+    added scraper
+
+commit d62a6abfade03618d51d7248cf2cca6eed6709d2
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Sat May 20 14:14:13 2023 -0700
+
+    Added Traffic Multiplier functionality
+
+commit c80f13d8795a6dcbce437510b8ca690613d140aa
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Thu May 18 20:53:10 2023 -0700
+
+    Minor Bug Fixes
+
+commit fa3a9ccf58963f871f13d50578c5fe887e8732f6
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Thu May 18 20:22:21 2023 -0700
+
+    Added a few new functions inside GET /user-data. Fixed a few errors
+
+commit 0df0bd9ca63c9507e8e81af6462f62f44783039f
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Thu May 18 19:51:48 2023 -0700
+
+    added searchbar
+
+commit 97c0d231ce835cf44984aaa159b8db0635c8112b
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Thu May 18 19:19:10 2023 -0700
+
+    added vstack
+
+commit c0cf29431a961a083a1aaa8083c8f6bc17ad5b1d
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Thu May 18 18:29:29 2023 -0700
+
+    added ride cards
+
+commit 2a3cfa536c73260ed8e08e5333505e67a518da6a
+Merge: ad00a66 d3ee387
+Author: inmessionante123 <dhruva.sankhe28@gmail.com>
+Date:   Thu May 18 17:10:58 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit ad00a665337be8890c4b5a919711c78cb41a0e46
+Author: inmessionante123 <dhruva.sankhe28@gmail.com>
+Date:   Thu May 18 17:10:53 2023 -0700
+
+    CreateRide Modal Styling
+    
+    Updates required: Figure out how to connect form/submit button to the new icon added input fields.
+
+commit d3ee387c4c2e80dad8753faf5d05e675b32ddfc0
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Thu May 18 14:05:46 2023 -0700
+
+    Fixed bug for getting user data
+
+commit fcc4f363ca5f349a93c00476358c52f9b595f1b7
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Thu May 18 10:34:14 2023 -0700
+
+    Fixed Issue with profile not being shown.
+    
+    Navbar.js controls the navbar component, but in App.js, the Router component handles the actual logic of moving around to different pages. Essentially, we have to import the ProfileApp component from ProfileApp.js and specify that we want to access that component when we go tothe /profile path.
+
+commit f5b6128403e489a62dd5d611dafa171915ea3e2e
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Thu May 18 09:22:20 2023 -0700
+
+    routed to profile instead of dashboard
+
+commit 59566493437e8ca343e96e4b3b2112c593a01973
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Thu May 18 08:47:43 2023 -0700
+
+    fixed bugs in profile and exported components
+
+commit 5ccbe5caea49b659ed13ee2511c2da7fa84d6037
+Merge: 0ad1d61 b38fbd7
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Tue May 16 22:21:23 2023 -0700
+
+    fixed profile page components by adding classname to returned div tags
+
+commit 0ad1d6145e5b70be6986e2b682380cc1197364e1
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Tue May 16 22:15:51 2023 -0700
+
+    fixed className of returned components in profile page
+
+commit b38fbd770451fbd465274db1425fbb95ff40bb74
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Tue May 16 15:44:08 2023 -0700
+
+    Fixed Dashboard Styling
+
+commit bdd0cf02f70c716c0a5db40c16e13298111f5bd8
+Merge: 0ba3a2f 6441508
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Tue May 16 15:38:06 2023 -0700
+
+    Merge branch 'main' of github.com:HowardHuang1/Rideshare
+
+commit 0ba3a2f0e0e783f3f8f4b21fd15981f3a497b5e5
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Tue May 16 15:37:55 2023 -0700
+
+    Fixed window scrolling issue
+    
+    Fixed issue where clicking a redirecting button would keep the user at the same position it was when clicking the button, instead of being at the top. In addition, I also made the navigation bar fixed to the top.
+
+commit 644150875325dbfa0eac0326dc2eeddbb04806a9
+Merge: 9ea0348 fb6bde6
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Tue May 16 15:35:50 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit 9ea0348de84cfd01e486cdbc524b6e6950785ec6
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Tue May 16 15:35:41 2023 -0700
+
+    Added Webscraper though it's not working
+
+commit fb6bde67ad2a4d25c3e50b779dfc6fbac7c3a4c4
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Tue May 16 15:30:03 2023 -0700
+
+    Made "Dashboard" button float to the right.
+
+commit 043bbf0543fd90ef59149b2524cbb271d87d5d40
+Merge: 3c432ef 259ac1e
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Tue May 16 14:43:34 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit 3c432ef665e347b7aed41e919d34f9777d456a24
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Tue May 16 14:43:20 2023 -0700
+
+    get-ride-image works
+
+commit 259ac1e69722f3050606576b7476318115fd29dd
+Merge: 46bfced 43fab84
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Tue May 16 14:32:18 2023 -0700
+
+    Merge branch 'main' of github.com:HowardHuang1/Rideshare
+
+commit 46bfced787013bec49d0731049018d2b776b8cb4
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Tue May 16 14:32:00 2023 -0700
+
+    Moved body's css into App.css
+    
+    Makes more sense to have the body's css in App.css, not Navbar.css
+
+commit 43fab84e4bdad4176936665403d68f22f9cac0d2
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Tue May 16 14:31:43 2023 -0700
+
+    changed mongoose.connect to await
+
+commit f08e960774c3f29276e051266c358c9570ec05da
+Merge: ecc46a3 9eaadaa
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Tue May 16 14:31:33 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit 9eaadaa7b297bd8a3383c2f53979457098003ed1
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Tue May 16 14:19:08 2023 -0700
+
+    Fixed Image overlap on HomePage
+    
+    Fixed issue where the image of the Tesla would cover the navigation bar. The fix was to make the image a background image, that way everything is placed on top of it. While doing this, I also edited body's margins to be 0, in order to make the image fit to the entire page.
+
+commit ecc46a31a770d6367ae7627774a5abc0f466d599
+Merge: 492f435 60d064e
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Tue May 16 14:11:26 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit 492f4359622cd77e3189c47a0caa336e0e5b2099
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Tue May 16 14:08:05 2023 -0700
+
+    A few bug fixes
+
+commit 60d064e045a57022b4a010fcae6f50394a4e515f
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Tue May 16 13:59:00 2023 -0700
+
+    Fixed Highlight bug w/ NavBar
+    
+    Fixed bug where "Home" was always highlighted, no matter which tab the user was on. Interestingly, the problem was the lines ".menuitems a:hover, .menuitems a:active ". changing a:active to a.active fixes these changes, because a:active applies when the link is being clicked, not when it is the current page. The current page automatically gets updated with an "active" class, so calling a.active in css will apply the proper changes.
+
+commit e76453a59d5ba382cfe25d1b0564d59e29fd3886
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Tue May 16 12:51:12 2023 -0700
+
+    Finished Search Rides for specified max distance
+
+commit 124a01914ca2d61ad6ebe78e50dccca30588a3a4
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Tue May 16 12:41:09 2023 -0700
+
+    Fixed getDistance
+
+commit e28a2834707bc637e5343846750e6620327d8379
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Tue May 16 12:37:59 2023 -0700
+
+    Added GetDistance
+
+commit 5c27e9a53a952cd5253e2e0ba2ec10317fb09d0f
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Tue May 16 12:00:23 2023 -0700
+
+    Added getDistance function
+
+commit f8cdb3851403df23d3d8a6e56de1a7062138badb
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Tue May 16 11:54:14 2023 -0700
+
+    Updated Ride Searching - Address, Riders, Time
+
+commit c94568621f6ed804404ecdba8c789c6fd2168a59
+Merge: 5193d1c cae4108
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Tue May 16 11:31:28 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit 5193d1cc800e080e62b0ec26194201cfeadb4246
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Tue May 16 11:30:54 2023 -0700
+
+    more changes
+
+commit 16ad9201c21691e55beff442adf1cfa03fc2c80e
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Tue May 16 11:30:26 2023 -0700
+
+    more api work
+
+commit cae4108608d54a120c8e2f8532596b16151d467e
+Merge: b1c6cb9 be691eb
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Tue May 16 11:25:36 2023 -0700
+
+    Merge branch 'main' of https://github.com/HowardHuang1/Rideshare
+
+commit b1c6cb9e160903030560f2834765c6bc99ccb4eb
+Author: parthivn25 <parthiv.nair@gmail.com>
+Date:   Tue May 16 11:24:19 2023 -0700
+
+    Added Get-All API for returning all rides at once
+
+commit be691ebc9c42a7a584baff8e2f158d1191a430ca
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Tue May 16 11:11:01 2023 -0700
+
+    Added 4 API Endpoints: get rides for user, get-all-rides, update-ride, leave-ride
+
+commit 5dd1a2494b4e4bf21ce129051a63e840cc237ea0
+Merge: 4597abd 262380a
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Mon May 15 23:37:15 2023 -0700
+
+    added profile page and created components for profile and ride information
+
+commit 262380a2c40cf4a5182aef26f95460ce51067ef0
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Mon May 15 23:33:34 2023 -0700
+
+    updated more API endpoints
+
+commit 4597abdaf5f6d1e4a2cb15d769a5d80e8d0d1646
+Author: Satvik Eltepu <satvik09@hotmail.com>
+Date:   Mon May 15 23:33:07 2023 -0700
+
+    created profile page and added basic components for profile and ride history
+
+commit 8a26be8a229c6f6bf1a7a11c8787828deb2d9c6b
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Mon May 15 22:15:38 2023 -0700
+
+    Worked on POST Create-Ride and created services.js page
+
+commit 2b27b9b10689cfa67e8d6ee91e961f0a787bbf17
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Mon May 15 20:27:54 2023 -0700
+
+    Added two more APIs
+
+commit 0e4cb9d32677a7beaabab310a4e34cb86a8fe315
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Mon May 15 12:48:05 2023 -0700
+
+    Just fixed a syntax bug in last commit
+
+commit 074dee323a1fa714b723e0cc62cd9f3e490e535f
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Mon May 15 12:47:32 2023 -0700
+
+    Create User and Ride Schema and worked on Create User Endpoint
+
+commit 44f162d109c911e4c88cd5c9ee84b2c824dad87c
+Author: RohilKalra <68201571+RohilKalra@users.noreply.github.com>
+Date:   Mon May 15 11:41:24 2023 -0700
+
+    Created Backend Folder
+
+commit cbd7187eb480266abadead9ff86ffe32cb640e8f
+Merge: f2e2cc7 e296b80
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Sat May 13 16:43:23 2023 -0700
+
+    Merge branch 'main' of github.com:HowardHuang1/Rideshare
+
+commit f2e2cc73c2d45000aec4ba40a9ca1f3f39bf9377
+Author: Aidan Robinson <120530116+arob26inson@users.noreply.github.com>
+Date:   Sat May 13 15:35:12 2023 -0700
+
+    Created RedirectingButton
+    
+    Created a general component  for buttons that allow for redirection. The component has 2 properties: A destination component to determine where it should move to, and a value component determining what the button should say.
+
+commit e296b80ba7b3d7ad18b4c7cfd72c6281b63882ad
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Sat May 13 15:18:28 2023 -0700
+
+    create modal and user input form
+
+commit 3460d88a8c26d87de3e66f406026e7d3c5f065f8
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Sat May 13 14:20:49 2023 -0700
+
+    fix nav
+
+commit c9932788dbcfc51ea8eca1402fa36f2fd91f5a0d
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Wed May 10 19:58:01 2023 -0700
+
+    add banner
+
+commit fd59bc679bec7ee4142e077bb6d1e72baab0f2a6
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Wed May 10 19:19:28 2023 -0700
+
+    add navbar
+
+commit 8bb9efa6e0a4ae65239fa7875653d344e21f5352
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Sun Apr 23 22:30:40 2023 -0700
+
+    create react app
+
+commit 9168f265ecd1a23d9b549c7e41c8d7a6f980f4af
+Author: Howard Huang <howardhuang2004@gmail.com>
+Date:   Sun Apr 23 22:21:32 2023 -0700
+
+    Initial commit
