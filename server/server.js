@@ -883,6 +883,7 @@ app.get("/get-ride-image", async (req, res) => {
         origin: foundRide.addressFrom,
         destination: foundRide.addressTo,
         key: google_api_key,
+        zoom: 18, // Adjust the zoom level as desired
       },
     }
   );
@@ -962,4 +963,3 @@ app.get("/get-optimized-ride", async (req, res) => {
 app.listen(8000, function (req, res) {
   console.log("Listening on port 8000");
 });
-
