@@ -13,7 +13,7 @@ const {
 
 const google_api_key = "AIzaSyDErGxdZK14gqrGZG0TXDnqooOgOQVGGyY";
 const generalMultiplier = 1.1;
-const halfMile = 1; // 0.5 miles in latlng degrees
+const halfMile = 1 / 35; // 0.5 miles in latlng degrees
 
 /* other imported files: */
 
