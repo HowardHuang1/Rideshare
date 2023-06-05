@@ -884,7 +884,6 @@ app.get("/get-ride-image", async (req, res) => {
         origin: foundRide.addressFrom,
         destination: foundRide.addressTo,
         key: google_api_key,
-        zoom: 18, // Adjust the zoom level as desired
       },
     }
   );
@@ -894,7 +893,7 @@ app.get("/get-ride-image", async (req, res) => {
   const overviewPolyline = route.overview_polyline.points;
 
   // Generate the static map image URL with the driving route
-  const mapImageURL = `https://maps.googleapis.com/maps/api/staticmap?size=600x400&path=enc:${overviewPolyline}&key=${google_api_key}`;
+  const mapImageURL = `https://maps.googleapis.com/maps/api/staticmap?size=600x600&path=enc:${overviewPolyline}&key=${google_api_key}`;
   res.send(mapImageURL);
 });
 
