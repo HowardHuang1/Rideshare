@@ -42,17 +42,6 @@ function CreateRide({username}) {
   const imageURL = "https://thumbs.dreamstime.com/b/detailed-world-map-29681182.jpg"
   return(
     <div className="create-ride-interface">
-      <div className="ModalButton"
-      style={{
-        flex: '1 1 50%',
-        backgroundImage: `url(${imageURL})`
-      }}> 
-        <button className="openModalButton" onClick={() => setIsOpen(true)}>
-          Create New Ride
-        </button>
-        {isOpen && <CreateRideModal setIsOpen={setIsOpen} username={username}/>}
-      </div>
-      
       <div className="rides" style={{
         flexDirection: 'column',
         alignItems: 'center',
@@ -64,6 +53,29 @@ function CreateRide({username}) {
       }}>
         <CardStack setMap={setMapRideID}/>
       </div>
+
+      <div className="ModalButton"
+      style={{
+        flex: '1 1 50%',
+        backgroundImage: `url(${imageURL})`
+      }}> 
+        <button className="openModalButton" onClick={() => setIsOpen(true)}>
+          Create New Ride
+        </button>
+        {isOpen && <CreateRideModal setIsOpen={setIsOpen} username={username}/>}
+      </div>
+      
+      {/* <div className="rides" style={{
+        flexDirection: 'column',
+        alignItems: 'center',
+        height: '100vh', // Adjust this value based on your requirements
+        padding: "20px",
+        paddingTop: "20px",
+        paddingBottom: "20px",
+        flex: "1 1 50%",
+      }}>
+        <CardStack setMap={setMapRideID}/>
+      </div> */}
 
     </div>
   )

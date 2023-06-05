@@ -68,12 +68,14 @@
     list-style-position: inside;
   }
 
- img {
+  .left-half img,
+  .right-half img {
     /* CSS styles for the left image */
     width: 300px; /* Adjust the width as needed */
     height: auto; /* Maintain the aspect ratio */
     margin-top: 20px; /* Add some top margin for spacing */
     margin-left: 140px;
   }
+  
   
   
