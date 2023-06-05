@@ -4,11 +4,6 @@ import RideCard from "./RideCard"
 import "./CardStack.css"
 import Searchbar from "./Ride Filters/Searchbar"
 import axios from "axios";
-import RideSelector from "./RideSelector";
-import Locationbar from "./Ride Filters/Locationbar";
-import Destinationbar from "./Ride Filters/Destinationbar";
-import RideDatebar from "./Ride Filters/RideDatebar";
-import RideTimebar from "./Ride Filters/RideTimebar";
 import { getDropdownMenuPlacement } from "react-bootstrap/esm/DropdownMenu";
 
 function CardStack({ setMap }) {
