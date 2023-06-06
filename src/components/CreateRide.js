@@ -9,7 +9,7 @@ import axios from "axios";
 //TODO: Need to add dropdown menu for number of riders (2 options: 4 or 6)
 function CreateRide({ username }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [map, setMap] = useState();
+  const [map, setMap] = useState(null);
   const [mapRideID, setMapRideID] = useState("647652eb719dc5143d88c399");
   const [mark, setMark] = useState(1);
 
