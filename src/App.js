@@ -8,6 +8,7 @@ import CreateRide from './components/CreateRide';
 import ProfileApp from './components/Profile';
 import Login from './components/Login';
 import SignUp from './components/Signup';
+import Footer from './components/Footer';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -43,6 +44,7 @@ function App() {
           <Route path="/login"   element={<Login updateUsername={updateUser} wheretoRoute={"/profile"}/>} />
           <Route path="/signup" element={<SignUp updateUsername={updateUser}/>} />
         </Routes>
+        <Footer />
       </Router>
     </div>
     :
@@ -56,6 +58,7 @@ function App() {
         <Route path="/login"   element={<Login updateUsername={updateUser} wheretoRoute={"/profile"}/>} />
         <Route path="/signup" element={<SignUp updateUsername={updateUser}/>} />
       </Routes>
+      <Footer />
     </Router>
   </div>
     

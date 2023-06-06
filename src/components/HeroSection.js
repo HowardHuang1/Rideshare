@@ -27,12 +27,18 @@ const HeroSection = () => {
         </div>
       <div className="section light-gray-background">
         <div className="left-half">
-        <div className="left-image">
-          <img
-            src={process.env.PUBLIC_URL + '/CreateRideSS.png'}
-            alt="Left Image"
-          />
-        </div>
+            <div className="left-image">
+                <img
+                src={process.env.PUBLIC_URL + '/CreateRideSS.png'}
+                alt="Left Image"
+                style={{
+                    width: "650px",
+                    height: "400px", 
+                    marginTop: "20px",
+                    marginLeft: "100px",
+                }}
+                />
+            </div>
         </div>
         <div className="right-half">
           <h2 className="light-red-text">
@@ -91,12 +97,18 @@ const HeroSection = () => {
         </div>
         </div>
         <div className="right-half">
-        <div className="right-image">
-          <img
-            src={process.env.PUBLIC_URL + '/ProfileSS.png'}
-            alt="Right Image"
-          />
-        </div>
+            <div className="right-image">
+            <img
+                src={process.env.PUBLIC_URL + '/ProfileSS.png'}
+                alt="Right Image"
+                style={{
+                    width: "450px",
+                    height: "350px", 
+                    marginTop: "20px",
+                    marginLeft: "200px",
+                }}
+            />
+            </div>
         </div>
       </div>
     </div>
