@@ -11,7 +11,7 @@ function CreateRide({ username }) {
   const [isOpen, setIsOpen] = useState(false);
   const [map, setMap] = useState(null);
   const [mapRideID, setMapRideID] = useState("647652eb719dc5143d88c399");
-  const [mark, setMark] = useState(1);
+  const [mark, setMark] = useState("");
 
   useEffect(() => {
     const fetchMap = async () => {
@@ -75,6 +75,7 @@ function CreateRide({ username }) {
           dateSearchParam={dateSearchParam}
           timeSearchParam={timeSearchParam}
           AMSearchParam={AMSearchParam}
+          mark={mark}
         />
       </div>
 
