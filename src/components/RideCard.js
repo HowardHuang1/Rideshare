@@ -120,11 +120,12 @@ function RideCard({
               <br />
               ETA: {duration} minutes
             </Text>
-            <PermIdentityIcon />
-            <PermIdentityIcon />
-            <PermIdentityIcon />
-            <PermIdentityIcon />
-            <PermIdentityIcon />
+            <PermIdentityIcon style={{color: numRiders == 4 ? "green" : "red"}}/>
+            <PermIdentityIcon style={{color: numRiders == 4 ? "green" : "red"}}/>
+            <PermIdentityIcon style={{color: numRiders == 4 ? "green" : "red"}}/>
+            <PermIdentityIcon style={{color: numRiders == 4 ? "green" : "red"}}/>
+            <PermIdentityIcon style={{color: numRiders == 4 ? "green" : "red"}}/>
+            <PermIdentityIcon style={{color: numRiders == 4 ? "green" : "red"}}/>
             <Text py="0">{RideStatement()}</Text>
           </CardBody>
           <CardFooter>
