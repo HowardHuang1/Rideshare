@@ -12,6 +12,7 @@ import {
 import { ChakraProvider } from "@chakra-ui/react";
 import { processDate } from "./PrettyDate";
 import axios from "axios";
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 
 function RideCard({
   username,
@@ -119,6 +120,11 @@ function RideCard({
               <br />
               ETA: {duration} minutes
             </Text>
+            <PermIdentityIcon />
+            <PermIdentityIcon />
+            <PermIdentityIcon />
+            <PermIdentityIcon />
+            <PermIdentityIcon />
             <Text py="0">{RideStatement()}</Text>
           </CardBody>
           <CardFooter>
