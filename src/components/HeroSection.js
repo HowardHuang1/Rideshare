@@ -27,10 +27,12 @@ const HeroSection = () => {
         </div>
       <div className="section light-gray-background">
         <div className="left-half">
+        <div className="left-image">
           <img
-            src="https://maps.googleapis.com/maps/api/staticmap?size=600x400&path=enc:m}wnEzzypUsEgE]jBEf@AzAErBElAIj@Mh@Wt@mDpJ_@n@_@b@KLo@t@]j@KXLHP?TB^JXP|AvAtApAfB|AdAr@x@f@RB\TB@rDjBdA\VBj@JPJbAJbALvD^b@LTJl@d@b@j@Zn@HTNt@Hj@TrBF|@LtDPzFLxBZvDdApIp@rFp@nGVvDJxCFrER\AtDCxIEzMC|LMz`@GbQ?|BChB?pGCfKCvHAbD@tE@jEF`EN|HLnDBxAJdBb@jHt@vJlB|V~@dMXtENtFR`K\tRRvLLdIJxHT|MRjLDvBJzBHvEZxPJzF\tSh@pWVvNF~D?dBIvFMxCOxBi@pFoA~JsDjXiEx\_AfHMzAG|@GpC@rBHzAT~B\`C^hBX`AZ|@x@dBvIdQfBpDrDnHxBnEbDtGhFjKt@lBj@jBh@tB\vB^dDJpBD|BC`CGzBwAh^e@nLgA|WSzBQ|Ae@bCw@~CoB~HYzAa@|COlBIlC?lP@xK@~J@nG?hDOl@CdCIjCOlEQ|D?b@DtANzA`@jBh@|A~@|At@|@l@f@r@d@|@b@jA\z@Lt@DvAAjAM`AWn@Wn@[bAu@`EyD^_@fCmBDa@z@k@pA_AbEwCbDcCtRqNlXcSr_@wXvl@ec@`h@o_@tSkOjRmNtTiPdj@ga@zAkAv@w@bAqAV_@ZEJE`@q@bAoBp@sAZm@X_@p@i@n@Ut@QnAYtAMf@G~B@?j@@fD@`DAdD@nHAl@C`@`@DzATnDl@\FTIpCh@hBVhHlApIxAtDh@`AL~BPnBJRFVHxBD`LDtJBpHFjTAvL?`E@nAAp@?lAR|@HvA?rASdACdAADHHFRFz@Nd@Nf@X`@\^h@N^HZJfA^nCDZR`BL\R\TTRJNBP@PFTB`ABFBNBf@Bn@BxCChDBFBLF?dA?tABz@@X&key=AIzaSyDErGxdZK14gqrGZG0TXDnqooOgOQVGGyY"
+            src={process.env.PUBLIC_URL + '/CreateRideSS.png'}
             alt="Left Image"
           />
+        </div>
         </div>
         <div className="right-half">
           <h2 className="light-red-text">
@@ -89,10 +91,12 @@ const HeroSection = () => {
         </div>
         </div>
         <div className="right-half">
+        <div className="right-image">
           <img
-            src="https://g.foolcdn.com/editorial/images/718807/growth-stock-chart.jpg"
+            src={process.env.PUBLIC_URL + '/ProfileSS.png'}
             alt="Right Image"
           />
+        </div>
         </div>
       </div>
     </div>

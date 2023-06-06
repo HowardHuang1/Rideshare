@@ -41,7 +41,7 @@
 }
   .left-half,
   .right-half {
-    width: 70%;
+    width: 100%;
   }
   .left-half{
     float: left;
@@ -64,6 +64,7 @@
   .light-red-text{
     color: #E53e3e;
     font-size: 30px;
+    margin-top: 60px;
   }
   
   p {
@@ -91,14 +92,18 @@
     list-style-position: inside;
   }
 
-  .left-half img,
-  .right-half img {
-    /* CSS styles for the left image */
-    width: 450px; 
+  .left-image img {
+    width: 700px; 
     height: auto; /* Maintain the aspect ratio */
     margin-top: 20px;
     margin-left: 100px;
-  }
-  
+}
+
+.right-image img {
+    width: 700px; 
+    height: 500px; /* Maintain the aspect ratio */
+    margin-top: 20px;
+    margin-left: 100px;
+}
 
   
