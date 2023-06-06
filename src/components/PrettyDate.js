@@ -2,8 +2,7 @@
 
 export function processDate(inputDate){
     const date = new Date(inputDate); 
-
-    const weekday = date.toLocaleDateString('en-US', { weekday: 'long' });
+    date.setMonth(date.getMonth() - 1);
     const month = date.toLocaleDateString('en-US', { month: 'long' });
     const day = date.toLocaleDateString('en-US', { day: 'numeric' });
     const year = date.getFullYear();
