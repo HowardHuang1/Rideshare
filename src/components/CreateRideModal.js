@@ -14,7 +14,7 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setlocationFro
   const [rideTime, setRideTime] = useState();
   const [numRiders, setNumRiders] = useState();
   const [dateOfRide, setDateOfRide] = useState();
-  const [AM, setAmPm] = useState("AM");
+  const [AM, setAmPm] = useState(true);
   const [search, setSearch] = useState(false);
   const rideId = rideid;
 
@@ -30,7 +30,7 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setlocationFro
         username: username,
         date: dateOfRide,
         time: rideTime,
-        AM: "false",
+        AM: AM,
         locationFrom: pickupLocation,
         locationTo: destination,
         numRidersAllowed: numRiders,
@@ -44,6 +44,7 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setlocationFro
     console.log(pickupLocation);
     console.log(destination);
     console.log(numRiders);
+    console.log(AM);
 
   };
 
@@ -60,6 +61,11 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setlocationFro
     } else if (name === "dateOfRide"){
       setDateOfRide(value);
     }
+  };
+
+  const handleAMChange = (e) => {
+    const selectedValue = e.target.value;
+    setAmPm(selectedValue !== "PM"); // Set isAM to true if selected value is "AM", otherwise set it to false
   };
 
   // const callSetState = async () => {
@@ -155,7 +161,7 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setlocationFro
                       border: "2px solid #aaa",
                       height: "80%",
                     }}
-                    onChange={(e) => handleInputChange(e, "amPm")}
+                    onChange={handleAMChange}
                   >
                     <option value="AM">AM</option>
                     <option value="PM">PM</option>
