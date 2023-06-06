@@ -87,6 +87,7 @@ function CardStack({
         displayColor = "gray";
       }
       console.log("ride ul: " + ride.usernames.length);
+      let inRide = false;
       rideArray.push(
         <RideCard
           username={username}
