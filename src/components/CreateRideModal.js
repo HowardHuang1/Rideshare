@@ -30,7 +30,6 @@ function CreateRideModal({
   const [dateOfRide, setDateOfRide] = useState();
   const [AM, setAmPm] = useState(true);
   const [search, setSearch] = useState(false);
-  const rideId = rideid;
 
   const createData = async (e) => {
     try {
