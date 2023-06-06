@@ -8,13 +8,14 @@ import axios from "axios";
 //TODO: Need to make am PM button
 //TODO: Need to add dropdown menu for number of riders (2 options: 4 or 6)
 function CreateRide({ username }) {
-  
   const blurmap = "https://i.ibb.co/6JQjLbV/Default-Blur-Image.jpg";
   const [isOpen, setIsOpen] = useState(false);
   const [map, setMap] = useState(blurmap);
   const [mapRideID, setMapRideID] = useState(null);
   const [mark, setMark] = useState("");
-  
+  const [joinRideID, setJoinRideID] = useState("");
+  const [displayRideID, setDisplayID] = useState("");
+
   useEffect(() => {
     const fetchMap = async () => {
       try {
@@ -76,6 +77,11 @@ function CreateRide({ username }) {
           timeSearchParam={timeSearchParam}
           AMSearchParam={AMSearchParam}
           mark={mark}
+          setMark={setMark}
+          setJoinRideID={setJoinRideID}
+          setDisplayID={setDisplayID}
+          displayID={displayRideID}
+          joinRideID={joinRideID}
         />
       </div>
 
@@ -110,12 +116,11 @@ function CreateRide({ username }) {
             setAMSearchParam={setAMSearchParam}
             setMark={setMark}
             mark={mark}
+            displayID={displayRideID}
+            joinRideID={joinRideID}
           />
         )}
-        <img
-          src={map ? map : blurmap}
-          style={{ height: "100vh" }}
-        />
+        <img src={map ? map : blurmap} style={{ height: "100vh" }} />
       </div>
     </div>
   );

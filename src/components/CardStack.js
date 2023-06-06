@@ -13,6 +13,11 @@ function CardStack({
   timeSearchParam,
   AMSearchParam,
   mark,
+  setMark,
+  setJoinRideID,
+  setDisplayID,
+  displayID,
+  joinRideID,
 }) {
   const [rideData, setRideData] = useState(null);
 
@@ -64,6 +69,14 @@ function CardStack({
 
   if (rideDataCopy) {
     rideDataCopy.forEach((ride) => {
+      let displayColor = "red";
+      let joinColor = "red";
+      if (ride._id == joinRideID) {
+        joinColor = "gray";
+      }
+      if (ride._id == displayID) {
+        displayColor = "gray";
+      }
       rideArray.push(
         <RideCard
           username={username}
@@ -76,6 +89,13 @@ function CardStack({
           price={ride.price}
           numRiders={ride.numRidersAllowed}
           setMapRideID={setMapRideID}
+          displayColor={displayColor}
+          joinColor={joinColor}
+          setMark={setMark}
+          setJoinRideID={setJoinRideID}
+          setDisplayID={setDisplayID}
+          displayID={displayID}
+          joinRideID={joinRideID}
         />
       );
     });

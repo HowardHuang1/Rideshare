@@ -799,12 +799,12 @@ app.put(
 );
 
 app.get("/search-ride", async (req, res) => {
-  console.log("Search is called")
+  console.log("Search is called");
   const timeparam = 15;
   const distparam = 0.5;
   const { locationFrom, locationTo, date, time, AM, open } = req.query;
   const foundRides = await Ride.find({}); // store rides in local variable
-  console.log("In Search time: " + time)
+  console.log("In Search time: " + time);
 
   if (
     locationFrom == undefined ||
@@ -894,7 +894,7 @@ app.get("/get-ride-image", async (req, res) => {
   const overviewPolyline = route.overview_polyline.points;
 
   // Generate the static map image URL with the driving route
-  const mapImageURL = `https://maps.googleapis.com/maps/api/staticmap?size=502x600&markers=color:red%7Clabel:S%7C${encodeURIComponent(
+  const mapImageURL = `https://maps.googleapis.com/maps/api/staticmap?size=530x640&markers=color:red%7Clabel:S%7C${encodeURIComponent(
     foundRide.addressFrom
   )}&markers=color:red%7Clabel:D%7C${encodeURIComponent(
     foundRide.addressTo
