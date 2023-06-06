@@ -51,9 +51,27 @@ function RideCard( { username, rideID, date, locationFrom, locationTo, duration,
         await axios.post('http://localhost:8000/join-ride',{
             username:username,
             rideID: rideID
-        }).then(res => console.log('Posting data', res)).catch(err => console.log(err))
+        }).then(res => console.log('Posting data', res)).catch(err => console.log(err))      
     }
-    
+
+
+    const joinColor = async () => {
+        return 'red'
+        await axios.get('http://localhost:8000/get')
+        let rideData;
+        try {
+            const response = await axios.get(
+              "http://localhost:8000/get-rides-for-user",
+              { params: { username } }
+            );
+            rideData = (response.data);
+          } catch (error) {
+            console.error("Error fetching user data:", error);
+        }
+        console.log(rideData)
+
+    }
+
     return(
         <ChakraProvider>
             <Card
@@ -92,7 +110,7 @@ function RideCard( { username, rideID, date, locationFrom, locationTo, duration,
                 </Text>
                 </CardBody>
                 <CardFooter>
-                <Button variant='solid' colorScheme='red' onClick={bookRide}>
+                <Button variant='solid' colorScheme={joinColor()} onClick={bookRide}>
                     Book Ride
                 </Button>
                 <Button variant='solid' colorScheme='red' onClick={renderMap}>
