@@ -55,7 +55,8 @@
     margin-top: 50px;
   }
   
-  h2 {
+  .left-half h2,
+  .right-half h2 {
     margin-top: 20px;
     text-align: left;
     padding-left: 111px;

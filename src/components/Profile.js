@@ -27,7 +27,7 @@ const Profile = ({ username }) => {
 
   return (
     <div className="profile-container">
-      <h2>Profile Information</h2>
+      <h2 style={{ textAlign: 'center' }}>Profile Information</h2>
       {userData ? (
         <table className="profile-table">
           <tbody>
@@ -135,7 +135,7 @@ const RideHistory = ({ username }) => {
 
   return (
     <div className="ride-history-container">
-      <h2>Ride History</h2>
+      <h2 style={{ textAlign: 'center' }}>Ride History</h2>
       <div className="tables-container">
         {rideData && (
           <div className="ride-history-table">
