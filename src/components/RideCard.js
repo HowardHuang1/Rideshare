@@ -2,8 +2,9 @@ import React from 'react';
 import { Card, Text, Image, Stack, Heading, Button, CardBody, CardFooter } from '@chakra-ui/react'
 import { ChakraProvider } from '@chakra-ui/react'
 import { processDate } from "./PrettyDate";
+import axios from "axios"
 
-function RideCard( { rideID, date, locationFrom, locationTo, duration, price, numRiders, setMapRideID } ) {
+function RideCard( { username, rideID, date, locationFrom, locationTo, duration, price, numRiders, setMapRideID } ) {
     const renderMap = () => {
         // pass in the rideID which is the only argument required for the map api call
         // this sets the setMapRideID useState() function in the parent CreateRide.js component
@@ -45,7 +46,32 @@ function RideCard( { rideID, date, locationFrom, locationTo, duration, price, nu
         const numPrice = Number(price)
         return numPrice.toFixed(2);
     }
-    
+
+    const bookRide = async () => {
+        await axios.post('http://localhost:8000/join-ride',{
+            username:username,
+            rideID: rideID
+        }).then(res => console.log('Posting data', res)).catch(err => console.log(err))      
+    }
+
+
+    const joinColor = async () => {
+        return 'red'
+        await axios.get('http://localhost:8000/get')
+        let rideData;
+        try {
+            const response = await axios.get(
+              "http://localhost:8000/get-rides-for-user",
+              { params: { username } }
+            );
+            rideData = (response.data);
+          } catch (error) {
+            console.error("Error fetching user data:", error);
+        }
+        console.log(rideData)
+
+    }
+
     return(
         <ChakraProvider>
             <Card
@@ -84,7 +110,7 @@ function RideCard( { rideID, date, locationFrom, locationTo, duration, price, nu
                 </Text>
                 </CardBody>
                 <CardFooter>
-                <Button variant='solid' colorScheme='red'>
+                <Button variant='solid' colorScheme={joinColor()} onClick={bookRide}>
                     Book Ride
                 </Button>
                 <Button variant='solid' colorScheme='red' onClick={renderMap}>

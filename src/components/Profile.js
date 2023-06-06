@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Profile.css";
-import Modal from "./Modal";
+import UpdateModal from "./UpdateModal";
 import { processDate } from "./PrettyDate";
 
 const username = localStorage.getItem("username");
@@ -176,7 +176,7 @@ const RideHistory = ({ username }) => {
                             Update Ride
                           </button>
                           {isOpen && (
-                            <Modal
+                            <UpdateModal
                               setIsOpen={setIsOpen}
                               rideid={selectedRideID}
                               onSubmit={handleSubmit}
@@ -236,10 +236,10 @@ const RideHistory = ({ username }) => {
 
 const App = ({ username, logout }) => {
   return (
-    <div className={"container container-2"} 
-    style={{
-      paddingTop: "120px"
-    }}
+    <div className="container-2" 
+    // style={{
+    //   paddingTop: "120px"
+    // }}
     >
       <div className="flex-container">
         <Profile username={username} />

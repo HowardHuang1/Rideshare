@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./CreateRide.css"
-import Modal from "./Modal"
+import Modal from "./UpdateModal"
 import CreateRideModal from './CreateRideModal';
 import CardStack from "./CardStack"
 import axios from "axios"
@@ -62,7 +62,9 @@ function CreateRide({username}) {
         // paddingBottom: "20px",
         flex: "1 1 50%",
       }}>
-        <CardStack setMapRideID={setMapRideID}
+        <CardStack 
+        username={username}
+        setMapRideID={setMapRideID}
         locationFromSearchParam = {locationFromSearchParam}
         locationToSearchParam = {locationToSearchParam}
         dateSearchParam = {dateSearchParam}
@@ -83,12 +85,12 @@ function CreateRide({username}) {
         <button className="openModalButton"
         style={{
           position: 'absolute',
-          top: '12%',
-          left: '65%',
+          top: '8%',
+          left: '55.5%',
           transform: 'translate(-50%, -50%)',
           zIndex: 1,
         }} onClick={() => setIsOpen(true)}>
-          Create New Ride
+          Create/Search Rides
         </button>
         {isOpen && <CreateRideModal 
         setIsOpen={setIsOpen} 
@@ -107,17 +109,6 @@ function CreateRide({username}) {
         />
       </div>
       
-      {/* <div className="rides" style={{
-        flexDirection: 'column',
-        alignItems: 'center',
-        height: '100vh', // Adjust this value based on your requirements
-        padding: "20px",
-        paddingTop: "20px",
-        paddingBottom: "20px",
-        flex: "1 1 50%",
-      }}>
-        <CardStack setMap={setMapRideID}/>
-      </div> */}
 
     </div>
   )
