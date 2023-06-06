@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import "./Modal.css";
+import "./ContinueModal.css";
 import { RiCloseLine } from "react-icons/ri";
 import "font-awesome/css/font-awesome.min.css";
 import axios from "axios";
 import { set } from "mongoose";
 
-function ContinueModal({ setIsOpen, onSubmit }) {
+function ContinueModal({ setIsOn }) {
 
   return (
     <div>
@@ -15,14 +15,14 @@ function ContinueModal({ setIsOpen, onSubmit }) {
             <div className="modalHeader">
               <h5 className="title">Alert</h5>
             </div>
-            <button className="closeButton" onClick={() => setIsOpen(false)}>
+            <button className="closeButton" onClick={() => setIsOn(false)}>
               <RiCloseLine style={{ marginBottom: "-3px" }} />
             </button>
             <div className="modalContent">
               ARE YOU SURE YOU WOULD LIKE TO CONTINUE? THERE ARE EXISTING RIDES!
             </div>
-            <div className="modalActions">
-              <button className="continueButton" onClick={() => setIsOpen(false)}>
+            <div className="modalContent">
+              <button className="deleteButton" onClick={() => setIsOn(false)}>
                 Continue
               </button>
             </div>

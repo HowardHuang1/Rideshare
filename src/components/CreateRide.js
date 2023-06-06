@@ -4,6 +4,7 @@ import Modal from "./UpdateModal";
 import CreateRideModal from "./CreateRideModal";
 import CardStack from "./CardStack";
 import axios from "axios";
+import ContinueModal from "./ContinueModal";
 
 //TODO: Need to make am PM button
 //TODO: Need to add dropdown menu for number of riders (2 options: 4 or 6)
@@ -15,6 +16,7 @@ function CreateRide({ username }) {
   const [mark, setMark] = useState("");
   const [joinRideID, setJoinRideID] = useState("");
   const [displayRideID, setDisplayID] = useState("");
+  const [isOn, setIsOn] = useState(false);
 
   useEffect(() => {
     const fetchMap = async () => {
@@ -120,6 +122,12 @@ function CreateRide({ username }) {
             mark={mark}
             displayID={displayRideID}
             joinRideID={joinRideID}
+            setIsOn={setIsOn}
+          />
+        )}
+        {isOn && (
+          <ContinueModal
+            setIsOn={setIsOn}
           />
         )}
         <img src={map ? map : blurmap} style={{ height: "100vh" }} />

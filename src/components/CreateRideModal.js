@@ -5,6 +5,7 @@ import "font-awesome/css/font-awesome.min.css";
 import axios from "axios";
 import CardStack from "./CardStack";
 import { m } from "framer-motion";
+import ContinueModal from './ContinueModal'
 
 // const username = localStorage.getItem("username");
 
@@ -21,6 +22,7 @@ function CreateRideModal({
   setAMSearchParam,
   setMark,
   mark,
+  setIsOn,
 }) {
   // console.log("rideid: " + setRideData);
   const [pickupLocation, setPickupLocation] = useState();
@@ -30,6 +32,7 @@ function CreateRideModal({
   const [dateOfRide, setDateOfRide] = useState();
   const [AM, setAmPm] = useState(true);
   const [search, setSearch] = useState(false);
+  const rideId = rideid;
 
   const createData = async (e) => {
     try {
@@ -51,6 +54,10 @@ function CreateRideModal({
       });
       console.log(response);
       if (response.status === 200) {
+        if (response.data === "There are similar rides existing, would you like to continue creating?") {
+          console.log("There are similar rides existing, would you like to continue creating?");
+          setIsOn(true);
+        }
         setMark(response.data._id);
       }
     } catch (error) {
