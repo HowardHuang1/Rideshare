@@ -23,6 +23,7 @@ const getPlaceInfo = async (location) => {
 const dateTimeValidator = (date, time, AM) => {
   let dateArray = date.split("/").map((x) => parseInt(x));
   let timeArray = time.split(":").map((x) => parseInt(x));
+  dateArray[0] = dateArray[0] -1;
   if (
     dateArray.length !== 3 ||
     dateArray[0] > 12 ||

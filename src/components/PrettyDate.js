@@ -2,7 +2,6 @@
 
 export function processDate(inputDate){
     const date = new Date(inputDate); 
-    date.setMonth(date.getMonth() - 1);
     const month = date.toLocaleDateString('en-US', { month: 'long' });
     const day = date.toLocaleDateString('en-US', { day: 'numeric' });
     const year = date.getFullYear();
