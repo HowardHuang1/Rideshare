@@ -3,22 +3,22 @@ import "./CreateRideModal.css";
 import { RiCloseLine } from "react-icons/ri";
 import "font-awesome/css/font-awesome.min.css";
 import axios from "axios";
-import { set } from "mongoose";
+import CardStack from "./CardStack";
 
 // const username = localStorage.getItem("username");
 
-function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData }) {
+function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setlocationFromSearchParam, setlocationToSearchParam, timeSearchParam, settimeSearchParam, setdateSearchParam, setAMSearchParam }) {
   // console.log("rideid: " + setRideData);
   const [pickupLocation, setPickupLocation] = useState();
   const [destination, setDestination] = useState();
   const [rideTime, setRideTime] = useState();
   const [numRiders, setNumRiders] = useState();
   const [dateOfRide, setDateOfRide] = useState();
-  const [AM, setAmPm] = useState("AM");
+  const [AM, setAmPm] = useState(true);
   const [search, setSearch] = useState(false);
   const rideId = rideid;
 
-  const putData = async (e) => {
+  const createData = async (e) => {
     await axios
       .post("http://localhost:8000/create-ride", {
         // default username
@@ -30,7 +30,7 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData })
         username: username,
         date: dateOfRide,
         time: rideTime,
-        AM: "false",
+        AM: AM,
         locationFrom: pickupLocation,
         locationTo: destination,
         numRidersAllowed: numRiders,
@@ -44,19 +44,16 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData })
     console.log(pickupLocation);
     console.log(destination);
     console.log(numRiders);
+    console.log(AM);
 
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log("handling input");
-
     if (name === "rideTime") {
       setRideTime(value);
-      // console.log("rideTime: " + value);
     } else if (name === "numRiders") {
       setNumRiders(value);
-      // console.log("numRiders: " + value);
     } else if (name === "pickupLocation"){
       setPickupLocation(value);
     } else if (name === "destination"){
@@ -64,6 +61,11 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData })
     } else if (name === "dateOfRide"){
       setDateOfRide(value);
     }
+  };
+
+  const handleAMChange = (e) => {
+    const selectedValue = e.target.value;
+    setAmPm(selectedValue !== "PM"); // Set isAM to true if selected value is "AM", otherwise set it to false
   };
 
   // const callSetState = async () => {
@@ -79,10 +81,22 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData })
   //   }
   // };
 
-  const handleSubmit = async (e) => {
+  const handleSearchSubmit = async (e) => {
+    console.log("Click registered");
+    setlocationFromSearchParam(pickupLocation);
+    setlocationToSearchParam(destination);
+    setdateSearchParam(dateOfRide);
+    settimeSearchParam(rideTime);
+    setAMSearchParam("false")
+    setIsOpen(false);
+    // onSubmit();
+  };
+
+  
+  const handleCreateSubmit = async (e) => {
     e.preventDefault(); // To prevent page reload on form submission
     console.log("Click registered");
-    await putData();
+    await createData();
     // await callSetState();
     setIsOpen(false);
     // onSubmit();
@@ -101,7 +115,7 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData })
               <RiCloseLine style={{ marginBottom: "-3px" }} />
             </button>
             <div className="modalContent">
-              <form onSubmit={handleSubmit}>
+              <form>
                 <div class="inputWithIcon">
                   <input
                     type="text"
@@ -147,7 +161,7 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData })
                       border: "2px solid #aaa",
                       height: "80%",
                     }}
-                    onChange={(e) => handleInputChange(e, "amPm")}
+                    onChange={handleAMChange}
                   >
                     <option value="AM">AM</option>
                     <option value="PM">PM</option>
@@ -159,17 +173,17 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setRideData })
                     type="text"
                     name="numRiders"
                     value={numRiders}
-                    placeholder="Number of Riders, ex: 5"
+                    placeholder="Number of Riders, only 4 or 6"
                     onChange={handleInputChange}
                   />
                   <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
                 </div>
                 <div className="modalActions">
                   <div className="actionsContainer">
-                    <button className="deleteButton" type="submit" onClick={() => setSearch(false)}>
+                    <button className="deleteButton" type="submit" onClick={handleCreateSubmit}>
                       Create Ride
                     </button>
-                    <button className="deleteButton" type="submit" onClick={() => setSearch(true)}>
+                    <button className="deleteButton" type="submit" onClick={handleSearchSubmit}>
                       Search
                     </button>
                   </div>

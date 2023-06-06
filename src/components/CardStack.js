@@ -2,69 +2,70 @@ import React, { useState, useEffect } from "react";
 import { VStack, StackDivider, Box } from '@chakra-ui/react'
 import RideCard from "./RideCard"
 import "./CardStack.css"
-import Searchbar from "./Ride Filters/Searchbar"
 import axios from "axios";
-import { getDropdownMenuPlacement } from "react-bootstrap/esm/DropdownMenu";
 
-function CardStack({ setMap }) {
-    const [data, setData] = useState(null);
+
+
+
+function CardStack({ username, setMapRideID, locationFromSearchParam, locationToSearchParam, dateSearchParam, timeSearchParam, AMSearchParam }) {
+    const [rideData, setRideData] = useState(null);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchRideData = async () => {
             try {
-                const response = await axios.get('https://localhost:8000/get-rides-for-user');
-                const json = await response.json();
-                setData(json);
+                console.log("in the try time is: " + timeSearchParam)
+                const response = await axios.get(
+                    "http://localhost:8000/search-ride", {
+                        params: {
+                          locationFrom: locationFromSearchParam, 
+                          locationTo: locationToSearchParam, 
+                          date: dateSearchParam, 
+                          time: timeSearchParam, 
+                          AM: AMSearchParam, 
+                          open: true
+                        }
+                      }
+                );
+                setRideData(response.data);
+                console.log(rideData)
             } catch (error) {
-                console.error('Error fetching ride data: ', error)
+                console.error("Error fetching user data:", error);
             }
-        }
-        fetchData();
-    }, []);
+        };
 
-    // if (data === null) {
-    //     return <div>Loading...</div>;
-    // }
+        fetchRideData();
+    }, [locationFromSearchParam, locationToSearchParam, dateSearchParam, timeSearchParam, AMSearchParam]);
 
-    // try {
-    //     const response = await axios.post('/localhost:8000/create-ride', {
-    //       username: 'parthivn',
-    //       date: '09/25/2024',
-    //       time: '12:00',
-    //       AM: false,
-    //       locationFrom: 'UCLA',
-    //       locationTo: 'LAX',
-    //       numRidersAllowed: '4'
-    //     });
-      
-    //     console.log(response);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
+    
+    const rideArray = [];
+    if (rideData) {
+        rideData.forEach((ride) => {
+            rideArray.push(
+                <RideCard
+                    username={username}
+                    key={ride._id} // Add a unique key prop for each item in the array
+                    rideID={ride._id}
+                    date={ride.date}
+                    locationFrom={ride.locationFrom}
+                    locationTo={ride.locationTo}
+                    duration={ride.durationInTraffic}
+                    price={ride.price}
+                    numRiders={ride.numRidersAllowed}
+                    setMapRideID={setMapRideID}
+                />
+            );
+        });
+    }
 
-    return(
-        <div className="container" style ={{flexGrow: "1",}}>
-            {/* <Searchbar />
-            <Locationbar />
-            <Destinationbar />
-            <RideDatebar />
-            <RideTimebar />
-            <RideSelector />
-            <div className="cardstacksearch">
-                    <button className="searchButton" >
-                        Search
-                    </button>
-            </div> */}
+    return (
+        <div className="container" style={{ flexGrow: "1" }}>
             <div className="cardStack">
                 <VStack
                     divider={<StackDivider borderColor='gray.200' />}
                     spacing={4}
                     align='stretch'
                 >
-                {/* <RideCard date={response.date} locationFrom={response.locationFrom} locationTo={response.locationTo} durationInTraffic={response.durationInTraffic} price={response.price} numRidersAllowed={response.numRidersAllowed} /> */}
-                <RideCard rideID={"647652eb719dc5143d88c399"} date={5/21/2023} locationFrom={"SF"} locationTo={"LAX"} duration={7} price={500} numRiders={4} setMap={setMap}/>
-                {/* <RideCard rideID={data._id} date={data.date} locationFrom={data.locationFrom} locationTo={data.locationTo} duration={data.durationInTraffic} price={data.price} numRiders={data.numRidersAllowed}/> */}
-                <RideCard />
+                {rideArray} {/* Render the rideArray components */}
                 </VStack>
             </div>
         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -10,7 +10,26 @@ import Login from './components/Login';
 import SignUp from './components/Signup';
 
 function App() {
-  const [user, updateUser] = useState(null);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  const updateUser = (userData) => {
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData));
+  };
+
+  // Function to clear user data and remove it from local storage
+  const logoutUser = () => {
+    setUser(null);
+    localStorage.removeItem('user');
+  };
+
 
   return (
     user ?

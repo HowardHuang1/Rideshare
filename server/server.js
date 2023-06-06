@@ -188,7 +188,7 @@ app.post(
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(404).json({ errors: errors.array() });
     }
 
     //extract user info from request body
@@ -366,11 +366,11 @@ app.post("/create-ride", async (req, res) => {
     let toPlaceInfo = await services.getPlaceInfo(locationTo);
 
     if (fromPlaceInfo.address == undefined) {
-      res.json({ error: "Invalid from location" });
+      res.status(404).json({ error: "Invalid from location" });
       // const error = new ValidationError("Invalid from location");
       // return res.status(400).json({ errors: error.array() });
     } else if (toPlaceInfo.address == undefined) {
-      res.json({ error: "Invalid to location" });
+      res.status(400).json({ error: "Invalid to location" });
       // const error = new ValidationError("Invalid destination");
       // return res.status(400).json({ errors: error.array() });
     }
@@ -423,7 +423,7 @@ app.post("/create-ride", async (req, res) => {
   }
   const dateObj = services.dateTimeValidator(date, time, AM);
   if (dateObj == null) {
-    return res.json({ error: "invalid date or date" });
+    return res.status(404).json({ error: "invalid date or date" });
     // const error = new ValidationError("Invalid date or time");
     // return res.status(400).json({ errors: error.array() });
   }
@@ -432,7 +432,7 @@ app.post("/create-ride", async (req, res) => {
   let toPlaceInfo = await services.getPlaceInfo(locationTo);
 
   if (fromPlaceInfo.address == undefined) {
-    return res.json({ error: "invalid from location" });
+    return res.status(404).json({ error: "invalid from location" });
     // const error = new ValidationError("Invalid from location");
     // return res.status(400).json({ errors: error.array() });
   } else if (toPlaceInfo.address == undefined) {
@@ -799,16 +799,16 @@ app.put(
 );
 
 app.get("/search-ride", async (req, res) => {
+  console.log("Search is called")
   const timeparam = 15;
   const distparam = 0.5;
-  const { locationFrom, locationTo, date, time, AM, open } = req.body;
+  const { locationFrom, locationTo, date, time, AM, open } = req.query;
   const foundRides = await Ride.find({}); // store rides in local variable
-  const dateObj = services.dateTimeValidator(date, time, AM);
+  console.log("In Search time: " + time)
 
   if (
     locationFrom == undefined ||
     locationTo == undefined ||
-    dateObj == undefined ||
     time == undefined ||
     AM == undefined ||
     open == undefined
@@ -819,8 +819,10 @@ app.get("/search-ride", async (req, res) => {
     } else {
       res.send(null); // no rides in database
     }
+    return;
   }
 
+  const dateObj = services.dateTimeValidator(date, time, AM);
   let fromPlaceInfo = await services.getPlaceInfo(locationFrom);
   let toPlaceInfo = await services.getPlaceInfo(locationTo);
 
@@ -892,7 +894,11 @@ app.get("/get-ride-image", async (req, res) => {
   const overviewPolyline = route.overview_polyline.points;
 
   // Generate the static map image URL with the driving route
-  const mapImageURL = `https://maps.googleapis.com/maps/api/staticmap?size=600x400&path=enc:${overviewPolyline}&key=${google_api_key}`;
+  const mapImageURL = `https://maps.googleapis.com/maps/api/staticmap?size=502x600&markers=color:red%7Clabel:S%7C${encodeURIComponent(
+    foundRide.addressFrom
+  )}&markers=color:red%7Clabel:D%7C${encodeURIComponent(
+    foundRide.addressTo
+  )}&path=enc:${overviewPolyline}&key=${google_api_key}`;
   res.send(mapImageURL);
 });
 
@@ -907,7 +913,7 @@ app.get("/get-optimized-ride", async (req, res) => {
   let ride = await Ride.findOne({ _id: rideID });
   console.log(ride);
   if (!ride) {
-    return res.json({ error: "Invalid Ride ID" });
+    return res.status(404).json({ error: "Invalid Ride ID" });
   }
   try {
     const allRides = await OptimizedRide.find({});

@@ -15,11 +15,12 @@
   justify-content: center;
   height: 100vh; /* Adjust the height as needed */
 }
-
+/* 
 .image {
   width: 100%;
   height: auto;
-}
+} */
+
 body {
   margin: 0px;
 }
