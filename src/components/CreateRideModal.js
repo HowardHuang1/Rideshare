@@ -30,7 +30,7 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setlocationFro
         username: username,
         date: dateOfRide,
         time: rideTime,
-        AM: "false",
+        AM: false,
         locationFrom: pickupLocation,
         locationTo: destination,
         numRidersAllowed: numRiders,

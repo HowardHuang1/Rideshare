@@ -109,17 +109,6 @@ function CreateRide({username}) {
         />
       </div>
       
-      {/* <div className="rides" style={{
-        flexDirection: 'column',
-        alignItems: 'center',
-        height: '100vh', // Adjust this value based on your requirements
-        padding: "20px",
-        paddingTop: "20px",
-        paddingBottom: "20px",
-        flex: "1 1 50%",
-      }}>
-        <CardStack setMap={setMapRideID}/>
-      </div> */}
 
     </div>
   )
