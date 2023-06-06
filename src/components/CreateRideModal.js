@@ -48,7 +48,7 @@ function CreateRideModal({
         locationFrom: pickupLocation,
         locationTo: destination,
         numRidersAllowed: numRiders,
-        search: false,
+        search: true,
       });
       if (response.status === 200) {
         setMark(response.data._id);
