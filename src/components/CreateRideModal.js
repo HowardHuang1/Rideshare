@@ -50,11 +50,13 @@ function CreateRideModal({
         numRidersAllowed: numRiders,
         search: true,
       });
+      console.log(response);
       if (response.status === 200) {
         setMark(response.data._id);
       }
     } catch (error) {
       console.error("Error creating ride: ", error);
+      alert(error.message);
     }
 
     console.log(username);

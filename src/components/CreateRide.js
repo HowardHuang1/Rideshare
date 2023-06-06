@@ -55,7 +55,7 @@ function CreateRide({ username }) {
   const [AMSearchParam, setAMSearchParam] = useState();
 
   return (
-    <div className="create-ride-interface">
+    <div className="create-ride-interface" style={{display: "flex"}}>
       <div
         className="rides"
         style={{
@@ -66,6 +66,7 @@ function CreateRide({ username }) {
           // paddingTop: "20px",
           // paddingBottom: "20px",
           flex: "1 1 50%",
+          width: "50vh",
         }}
       >
         <CardStack
@@ -89,6 +90,7 @@ function CreateRide({ username }) {
         className="ModalButton"
         style={{
           flex: "1 1 50%",
+          width: "50vh",
         }}
       >
         <button
