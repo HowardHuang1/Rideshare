@@ -4,6 +4,8 @@ Bruin Cruisin is an application for coordinating carpools and ridesharing on col
 
 The app primarily consists of a React frontend, Node.js backend, and a MongoDB database. We also use puppeteer to webscrape for live ride prices.
 
+![UI](https://github.com/HowardHuang1/Rideshare/blob/main/BruinCruisin%20UI.png)
+
 # How To Use
 
 To clone and run this application, you'll need [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
