@@ -12,7 +12,7 @@ import {
 import { ChakraProvider } from "@chakra-ui/react";
 import { processDate } from "./PrettyDate";
 import axios from "axios";
-import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 
 function RideCard({
   username,
@@ -32,6 +32,9 @@ function RideCard({
   setDisplayID,
   displayID,
   joinRideID,
+  nr,
+  garb,
+  setGarb,
 }) {
   const renderMap = () => {
     // pass in the rideID which is the only argument required for the map api call
@@ -82,7 +85,11 @@ function RideCard({
         username: username,
         rideID: rideID,
       });
-      setJoinRideID(rideID);
+      // if res is not false, then set joinRideID to the rideID
+      if (res.data) {
+        setJoinRideID([...joinRideID, rideID]);
+        setGarb(garb + 1);
+      }
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
@@ -118,14 +125,14 @@ function RideCard({
               <br />
               Location To: {locationTo}
               <br />
-              ETA: {duration} minutes
+              Ride Duration: {duration} minutes
             </Text>
-            <PermIdentityIcon style={{color: numRiders == 4 ? "green" : "red"}}/>
-            <PermIdentityIcon style={{color: numRiders == 4 ? "green" : "red"}}/>
-            <PermIdentityIcon style={{color: numRiders == 4 ? "green" : "red"}}/>
-            <PermIdentityIcon style={{color: numRiders == 4 ? "green" : "red"}}/>
-            <PermIdentityIcon style={{color: numRiders == 4 ? "green" : "red"}}/>
-            <PermIdentityIcon style={{color: numRiders == 4 ? "green" : "red"}}/>
+            <PermIdentityIcon style={{ color: "red" }} />
+            <PermIdentityIcon style={{ color: 2 <= nr ? "red" : "green" }} />
+            <PermIdentityIcon style={{ color: 3 <= nr ? "red" : "green" }} />
+            <PermIdentityIcon style={{ color: 4 <= nr ? "red" : "green" }} />
+            <PermIdentityIcon style={{ color: 5 <= nr ? "red" : "green" }} />
+            <PermIdentityIcon style={{ color: 6 <= nr ? "red" : "green" }} />
             <Text py="0">{RideStatement()}</Text>
           </CardBody>
           <CardFooter>

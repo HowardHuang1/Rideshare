@@ -14,8 +14,9 @@ function CreateRide({ username }) {
   const [map, setMap] = useState(blurmap);
   const [mapRideID, setMapRideID] = useState(null);
   const [mark, setMark] = useState("");
-  const [joinRideID, setJoinRideID] = useState("");
+  const [joinRideID, setJoinRideID] = useState([]);
   const [displayRideID, setDisplayID] = useState("");
+  const [garb, setGarb] = useState(5);
   const [isOn, setIsOn] = useState(false);
 
   useEffect(() => {
@@ -57,7 +58,7 @@ function CreateRide({ username }) {
   const [AMSearchParam, setAMSearchParam] = useState();
 
   return (
-    <div className="create-ride-interface" style={{display: "flex"}}>
+    <div className="create-ride-interface" style={{ display: "flex" }}>
       <div
         className="rides"
         style={{
@@ -85,6 +86,8 @@ function CreateRide({ username }) {
           setDisplayID={setDisplayID}
           displayID={displayRideID}
           joinRideID={joinRideID}
+          garb={garb}
+          setGarb={setGarb}
         />
       </div>
 
@@ -122,14 +125,13 @@ function CreateRide({ username }) {
             mark={mark}
             displayID={displayRideID}
             joinRideID={joinRideID}
+            setJoinRideID={setJoinRideID}
+            setDisplayID={setDisplayID}
+            setMapRideID={setMapRideID}
             setIsOn={setIsOn}
           />
         )}
-        {isOn && (
-          <ContinueModal
-            setIsOn={setIsOn}
-          />
-        )}
+        {isOn && <ContinueModal setIsOn={setIsOn} />}
         <img src={map ? map : blurmap} style={{ height: "100vh" }} />
       </div>
     </div>

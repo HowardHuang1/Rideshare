@@ -5,7 +5,7 @@ import "font-awesome/css/font-awesome.min.css";
 import axios from "axios";
 import CardStack from "./CardStack";
 import { m } from "framer-motion";
-import ContinueModal from './ContinueModal'
+import ContinueModal from "./ContinueModal";
 
 // const username = localStorage.getItem("username");
 
@@ -22,6 +22,11 @@ function CreateRideModal({
   setAMSearchParam,
   setMark,
   mark,
+  setJoinRideID,
+  joinRideID,
+  setDisplayID,
+  displayID,
+  setMapRideID,
   setIsOn,
 }) {
   // console.log("rideid: " + setRideData);
@@ -54,11 +59,19 @@ function CreateRideModal({
       });
       console.log(response);
       if (response.status === 200) {
-        if (response.data === "There are similar rides existing, would you like to continue creating?") {
-          console.log("There are similar rides existing, would you like to continue creating?");
+        if (
+          response.data ===
+          "There are similar rides existing, would you like to continue creating?"
+        ) {
+          console.log(
+            "There are similar rides existing, would you like to continue creating?"
+          );
           setIsOn(true);
         }
         setMark(response.data._id);
+        setDisplayID(response.data._id);
+        setJoinRideID([...joinRideID, response.data._id]);
+        setMapRideID(response.data._id);
       }
     } catch (error) {
       console.error("Error creating ride: ", error);

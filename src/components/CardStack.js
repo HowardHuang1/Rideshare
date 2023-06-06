@@ -18,6 +18,8 @@ function CardStack({
   setDisplayID,
   displayID,
   joinRideID,
+  garb,
+  setGarb,
 }) {
   const [rideData, setRideData] = useState(null);
 
@@ -50,6 +52,7 @@ function CardStack({
     timeSearchParam,
     AMSearchParam,
     mark,
+    joinRideID,
   ]);
 
   const rideArray = [];
@@ -71,12 +74,13 @@ function CardStack({
     rideDataCopy.forEach((ride) => {
       let displayColor = "red";
       let joinColor = "red";
-      if (ride._id == joinRideID) {
+      if (joinRideID.includes(ride._id)) {
         joinColor = "gray";
       }
       if (ride._id == displayID) {
         displayColor = "gray";
       }
+      console.log("ride ul: " + ride.usernames.length);
       rideArray.push(
         <RideCard
           username={username}
@@ -96,6 +100,9 @@ function CardStack({
           setDisplayID={setDisplayID}
           displayID={displayID}
           joinRideID={joinRideID}
+          nr={ride.usernames.length}
+          garb={garb}
+          setGarb={setGarb}
         />
       );
     });

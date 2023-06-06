@@ -34,7 +34,7 @@ async function scrapeFareValues(location1, location2, numRidersAllowed) {
     // console.log(`Webpage downloaded and saved as rg.html`);
   } catch (error) {
     console.error("Error:", error);
-    return -1;
+    return null;
   }
 }
 

@@ -274,10 +274,10 @@ app.get("/user-data", async (req, res) => {
       }
       for (let i = 0; i < rides.length; i++) {
         totalMoney += Math.abs(rides[i].price) / rides[i].usernames.length;
-        if (rides[i].price < 12) {
-          rides[i].price = parseInt(Math.random() * 10 + 8);
-          rides[i].save();
-        }
+        // if (rides[i].price < 12) {
+        //   rides[i].price = parseInt(Math.random() * 10 + 8);
+        //   rides[i].save();
+        // }
         // formula asssumes 25 mpg and 8.887 kg/gallon consumption
         // output in kg CO2
       }
@@ -441,7 +441,7 @@ app.post("/create-ride", async (req, res) => {
     // return res.status(400).json({ errors: error.array() });
   }
 
-  const { distance, durationInTraffic, trafficMultiplier } =
+  let { distance, durationInTraffic, trafficMultiplier } =
     await services.getDistanceAndDuration(
       fromPlaceInfo.address,
       toPlaceInfo.address,
@@ -482,12 +482,11 @@ app.post("/create-ride", async (req, res) => {
   } else {
     price = durationInTraffic;
   }
+  if (trafficMultiplier < 0.7) {
+    trafficMultiplier = 0.7;
+  }
 
   price = price * trafficMultiplier * generalMultiplier;
-
-  if (price < 0) {
-    price = durationInTraffic;
-  }
 
   console.log(fromPlaceInfo);
   const newRide = new Ride({
@@ -535,10 +534,20 @@ app.post("/create-ride", async (req, res) => {
     }
   }
 
+  if (bestAvailablePrice) {
+    if (bestAvailablePrice < 0.5 * price) {
+      bestAvailablePrice = 0.5 * price;
+    }
+    bestAvailablePrice =
+      bestAvailablePrice * trafficMultiplier * generalMultiplier;
+  } else {
+    bestAvailablePrice = price;
+  }
+
   let potentialOptimizedRide;
   try {
     const allRides = await OptimizedRide.find({});
-    console.log(allRides);
+    //console.log(allRides);
     const { lat: latFrom, lng: lngFrom } = await services.getLatLong(
       newRide.addressFrom
     );
@@ -595,19 +604,6 @@ app.post("/create-ride", async (req, res) => {
     }
   }
 
-  if (bestAvailablePrice) {
-    bestAvailablePrice =
-      bestAvailablePrice * trafficMultiplier * generalMultiplier;
-    newRide.price = bestAvailablePrice;
-    try {
-      await newRide.save();
-    } catch (error) {
-      console.log("Error: ", error.message);
-    }
-  } else {
-    bestAvailablePrice = price;
-  }
-
   // send email to user
   if (!por_price) {
     await email.createEmailSender(
@@ -637,7 +633,10 @@ app.post("/join-ride", async (req, res) => {
   const { username, rideID } = req.body;
   const foundRide = await Ride.findOne({ _id: rideID });
   if (foundRide) {
-    if (foundRide.usernames.length < foundRide.numRidersAllowed) {
+    if (
+      foundRide.usernames.length < foundRide.numRidersAllowed &&
+      !foundRide.usernames.includes(username)
+    ) {
       foundRide.usernames.push(username);
       await foundRide.save();
       res.send(true); // successfully joined ride
