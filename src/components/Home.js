@@ -18,13 +18,6 @@ function Home() {
       <HeroSection />
       <div className="photo">
       </div>
-      <div>
-        <a href="/createRide">
-          <button id="ButtonToCreate" onClick={() => setIsOpen(true)}>
-           Click here to Get Started!
-          </button>
-        </a>
-      </div>
     </div>
   );
 

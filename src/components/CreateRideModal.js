@@ -155,10 +155,10 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setlocationFro
                   />
                   <select
                     style={{
-                      borderRadius: "20px",
+                      borderRadius: "4px",
                       width: "20%",
                       border: "2px solid #aaa",
-                      height: "80%",
+                      height: "43px",
                     }}
                     onChange={handleAMChange}
                   >
