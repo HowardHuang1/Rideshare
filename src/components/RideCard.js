@@ -75,7 +75,13 @@ function RideCard({
   };
 
   const priceNice = () => {
-    const numPrice = Number(price);
+    let numPrice = Number(price);
+    if (joinColor == 'red'){
+      numPrice /= (nr+1);
+    }
+    else{
+      numPrice /= nr
+    }
     return numPrice.toFixed(2);
   };
 
@@ -136,7 +142,6 @@ function RideCard({
                 }}
               />
             ))}
-            <Text py="0">{RideStatement()}</Text>
           </CardBody>
           <CardFooter>
             <Button variant="solid" colorScheme={joinColor} onClick={bookRide}>
