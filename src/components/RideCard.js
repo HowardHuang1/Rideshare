@@ -55,20 +55,8 @@ function RideCard( { username, rideID, date, locationFrom, locationTo, duration,
     }
 
 
-    const joinColor = async () => {
+    const joinColor = () => {
         return 'red'
-        await axios.get('http://localhost:8000/get')
-        let rideData;
-        try {
-            const response = await axios.get(
-              "http://localhost:8000/get-rides-for-user",
-              { params: { username } }
-            );
-            rideData = (response.data);
-          } catch (error) {
-            console.error("Error fetching user data:", error);
-        }
-        console.log(rideData)
 
     }
 

@@ -76,7 +76,7 @@ function CreateRide({username}) {
       <div className="ModalButton"
       style={{
         flex: '1 1 50%',
-        // backgroundImage: `url(${imageURL})`
+        backgroundImage: `url(${imageURL})`
         // backgroundImage: `url(${map})`
       }}> 
         {/* <img src="https://maps.googleapis.com/maps/api/staticmap?size=600x400&path=enc:m}wnEzzypUsEgE]jBEf@AzAErBElAIj@Mh@Wt@mDpJ_@n@_@b@KLo@t@]j@KXLHP?TB^JXP|AvAtApAfB|AdAr@x@f@RB\TB@rDjBdA\VBj@JXEH@p@DrAFvCLfBLhE\fBLLAz@FlADj@@fADlBH@?JIP@nAJr@F`CPpDJlA@nAAzCKfPg@rA?fAD`CTj@J`@JfA`@hAf@hFtCnJfFdDvAhDpAvC|AlHdEvDtB|@f@pAh@pBr@vA`@nDr@tC\pCP|CDdJB~QEnUErNCzHOlNi@jHSzEOnCGnCCtEArCFvBDvDFbDF`DBbBARGT?tBChJGrMI|DBpEPnFVnEJrH@xM?fh@@fSAtQHvHDjKBjSGbFChDOxCYnDa@bLuAjJiAzAO~AKjCCdBDlEXdIh@bBFjBB|CF~C@tD@rGBlJBnEFhDLdCL^`@NBnBV|En@zAP~@JZLnAP`BRdBVr@Tl@\j@f@d@l@^v@^rAJbAD~BB`GD~EF`IRnF\lHFbBBxC?JTl@?h@@|EDbBJlCPfCNbBn@hFnChSzE`^xAxKn@`Gd@tHRzHBdEGnUAlKAlAAzOLxIH~CZpOl@tVVzJD|DKzDIxASzBg@lD]`B[tA[bAm@fBuA~C_BpC}A`CcK|OwCvEiBzCgDtG_BpDuAlDs@~By@|CeAlFW~Ac@`DUbCIvAGtACfD@bA@tAJfCPpBThBd@bCx@vDhD`PbA|EpClMzAnHd@hCZrBLrALrBHpBDhC?dLAhB?pC?pB?xDCrDKbC[fDQxASzAc@pCOlAWrB_@rCUjCIlBE|BBxGDlABpBBjCBbCA~CWrKAnAIlEI|CM^Ej@MlBOzBKxCAfIOpASl@[n@q@t@}@j@a@Lk@PyD?wB?mKAmC?cUFkNCsJGmA?HjBE`FE`IC`D?tADrA?@&key=AIzaSyDErGxdZK14gqrGZG0TXDnqooOgOQVGGyY"
