@@ -4,10 +4,24 @@ import { RiCloseLine } from "react-icons/ri";
 import "font-awesome/css/font-awesome.min.css";
 import axios from "axios";
 import CardStack from "./CardStack";
+import { m } from "framer-motion";
 
 // const username = localStorage.getItem("username");
 
-function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setlocationFromSearchParam, setlocationToSearchParam, timeSearchParam, settimeSearchParam, setdateSearchParam, setAMSearchParam }) {
+function CreateRideModal({
+  username,
+  setIsOpen,
+  rideid,
+  onSubmit,
+  setlocationFromSearchParam,
+  setlocationToSearchParam,
+  timeSearchParam,
+  settimeSearchParam,
+  setdateSearchParam,
+  setAMSearchParam,
+  setMark,
+  mark,
+}) {
   // console.log("rideid: " + setRideData);
   const [pickupLocation, setPickupLocation] = useState();
   const [destination, setDestination] = useState();
@@ -19,9 +33,9 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setlocationFro
   const rideId = rideid;
 
   const createData = async (e) => {
-    await axios
-      .post("http://localhost:8000/create-ride", {
-        // Default username
+    try {
+      const response = await axios.post("http://localhost:8000/create-ride", {
+        // default username
         // username: username,
         // rideID: rideId,
         // time: rideTime, // time is missing
@@ -34,18 +48,23 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setlocationFro
         locationFrom: pickupLocation,
         locationTo: destination,
         numRidersAllowed: numRiders,
-        search: true,
-      })
-      .then((res) => {
-        console.log("Posting data", res);
-        if (res.data === "There are similar rides existing, would you like to continue creating?") {
-          // The message is sent, do something here
-          console.log("Message sent: There are similar rides existing, would you like to continue creating?");
-        }
-      })
-      .catch((err) => console.log(err));
+        search: false,
+      });
+      if (response.status === 200) {
+        setMark(mark + 1);
+      }
+    } catch (error) {
+      console.error("Error creating ride: ", error);
+    }
+
+    console.log(username);
+    console.log(dateOfRide);
+    console.log(rideTime);
+    console.log(pickupLocation);
+    console.log(destination);
+    console.log(numRiders);
+    console.log(AM);
   };
-  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -53,11 +72,11 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setlocationFro
       setRideTime(value);
     } else if (name === "numRiders") {
       setNumRiders(value);
-    } else if (name === "pickupLocation"){
+    } else if (name === "pickupLocation") {
       setPickupLocation(value);
-    } else if (name === "destination"){
+    } else if (name === "destination") {
       setDestination(value);
-    } else if (name === "dateOfRide"){
+    } else if (name === "dateOfRide") {
       setDateOfRide(value);
     }
   };
@@ -86,12 +105,11 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setlocationFro
     setlocationToSearchParam(destination);
     setdateSearchParam(dateOfRide);
     settimeSearchParam(rideTime);
-    setAMSearchParam("false")
+    setAMSearchParam("false");
     setIsOpen(false);
     // onSubmit();
   };
 
-  
   const handleCreateSubmit = async (e) => {
     e.preventDefault(); // To prevent page reload on form submission
     console.log("Click registered");
@@ -106,7 +124,7 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setlocationFro
       {/* <div className="darkBG centered" onClick={() => setIsOpen(false)}> */}
       <div className="darkBG centered">
         <div className="centered">
-          <div className="modal">
+          <div className="modal" style={{height: "440px" }}>
             <div className="modalHeader">
               <h5 className="title">Find Your Ride</h5>
             </div>
@@ -179,10 +197,18 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setlocationFro
                 </div>
                 <div className="modalActions">
                   <div className="actionsContainer">
-                    <button className="deleteButton" type="submit" onClick={handleCreateSubmit}>
+                    <button
+                      className="deleteButton"
+                      type="submit"
+                      onClick={handleCreateSubmit}
+                    >
                       Create Ride
                     </button>
-                    <button className="deleteButton" type="submit" onClick={handleSearchSubmit}>
+                    <button
+                      className="deleteButton"
+                      type="submit"
+                      onClick={handleSearchSubmit}
+                    >
                       Search
                     </button>
                   </div>
