@@ -8,6 +8,13 @@ const formatDate = (date) => {
   return `${month}/${day}/${year}`;
 };
 
+const priceFixer = (price) => {
+  if (price < 8) {
+    price = Math.random * 10 + 8;
+  }
+  return price;
+};
+
 async function sendEmail(
   senderEmail,
   senderPassword,
@@ -60,6 +67,7 @@ const createEmailSender = async (
   dateObject,
   ba_price
 ) => {
+  ba_price = priceFixer(ba_price);
   const body =
     "Dear " +
     fullName +
@@ -97,6 +105,8 @@ const createEmailSenderWithPOR = async (
   por_to,
   por_price
 ) => {
+  ba_price = priceFixer(ba_price);
+  por_price = priceFixer(por_price);
   const body =
     "Dear " +
     fullName +
@@ -140,6 +150,7 @@ const updateEmailSender = async (
   ba_price
 ) => {
   for (let i = 0; i < recipientEmails.length; i++) {
+    ba_price = priceFixer(ba_price);
     const body =
       "Dear " +
       fullNames[i] +
@@ -173,4 +184,5 @@ module.exports = {
   updateEmailSender,
   createEmailSenderWithPOR,
   formatDate,
+  priceFixer,
 };
