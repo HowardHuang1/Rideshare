@@ -17,13 +17,14 @@ const getPlaceInfo = async (location) => {
     return { address: address, place_id: place_id }; // return undefined if couldn't find address
   } catch (error) {
     console.log("Error: ", error.message);
+    return undefined;
   }
 };
 
 const dateTimeValidator = (date, time, AM) => {
   let dateArray = date.split("/").map((x) => parseInt(x));
   let timeArray = time.split(":").map((x) => parseInt(x));
-  dateArray[0] = dateArray[0] -1;
+  dateArray[0] = dateArray[0] - 1;
   if (
     dateArray.length !== 3 ||
     dateArray[0] > 12 ||
@@ -33,7 +34,7 @@ const dateTimeValidator = (date, time, AM) => {
     dateArray[1] < 0 ||
     dateArray[2] < 0
   ) {
-    return null;
+    return undefined;
   } else if (
     timeArray.length !== 2 ||
     timeArray[0] > 12 ||
@@ -41,7 +42,7 @@ const dateTimeValidator = (date, time, AM) => {
     timeArray[0] < 0 ||
     timeArray[1] < 0
   ) {
-    return null;
+    return undefined;
   }
   if (!AM) {
     if (timeArray[0] !== 12) timeArray[0] += 12;
@@ -84,14 +85,14 @@ const getDistanceAndDuration = async (
       return { distance: 0, durationInTraffic: 0, trafficMultiplier: 0 };
     }
 
-    const distance = parseInt(response.data.rows[0].elements[0].distance.text);
-    const durationInTraffic = parseInt(
+    let distance = parseInt(response.data.rows[0].elements[0].distance.text);
+    let durationInTraffic = parseInt(
       response.data.rows[0].elements[0].duration_in_traffic.text
     );
     console.log(`Distance: ${distance}`);
     console.log(`Duration: ${durationInTraffic}`);
     //default time code
-    const dateObj1PM = new Date("November 17, 2028 13:00:00");
+    const dateObj1PM = new Date("November 17, 2028 21:00:00");
     const response1PM = await axios.get(
       "https://maps.googleapis.com/maps/api/distancematrix/json",
       {
@@ -110,7 +111,16 @@ const getDistanceAndDuration = async (
     );
 
     console.log(`Duration2: ${durationInTraffic1PM}`);
-    const trafficMultiplier = durationInTraffic / durationInTraffic1PM;
+    if (durationInTraffic < distance) {
+      durationInTraffic = parseInt(distance * 1.1 + Math.random() * 2);
+    }
+    let trafficMultiplier = durationInTraffic / durationInTraffic1PM;
+    if (trafficMultiplier > 2) {
+      trafficMultiplier = 2;
+    } else if (trafficMultiplier < 0.8) {
+      trafficMultiplier = 0.8;
+    }
+
     return { distance, durationInTraffic, trafficMultiplier };
   } catch (error) {
     console.error("Error:", error.message);

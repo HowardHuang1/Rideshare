@@ -128,7 +128,13 @@ function RideCard({
               Ride Duration: {duration} minutes
             </Text>
             {[0, ...Array(numRiders - 1)].map((_, index) => (
-               <PermIdentityIcon key={index} style={{ color: index === 0 ? "red" : (index + 1) <= nr ? "red" : "green" }} />
+              <PermIdentityIcon
+                key={index}
+                style={{
+                  color:
+                    index === 0 ? "red" : index + 1 <= nr ? "red" : "green",
+                }}
+              />
             ))}
             <Text py="0">{RideStatement()}</Text>
           </CardBody>
