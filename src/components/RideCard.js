@@ -127,12 +127,9 @@ function RideCard({
               <br />
               Ride Duration: {duration} minutes
             </Text>
-            <PermIdentityIcon style={{ color: "red" }} />
-            <PermIdentityIcon style={{ color: 2 <= nr ? "red" : "green" }} />
-            <PermIdentityIcon style={{ color: 3 <= nr ? "red" : "green" }} />
-            <PermIdentityIcon style={{ color: 4 <= nr ? "red" : "green" }} />
-            <PermIdentityIcon style={{ color: 5 <= nr ? "red" : "green" }} />
-            <PermIdentityIcon style={{ color: 6 <= nr ? "red" : "green" }} />
+            {[0, ...Array(numRiders - 1)].map((_, index) => (
+               <PermIdentityIcon key={index} style={{ color: index === 0 ? "red" : (index + 1) <= nr ? "red" : "green" }} />
+            ))}
             <Text py="0">{RideStatement()}</Text>
           </CardBody>
           <CardFooter>
