@@ -21,7 +21,7 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setlocationFro
   const createData = async (e) => {
     await axios
       .post("http://localhost:8000/create-ride", {
-        // default username
+        // Default username
         // username: username,
         // rideID: rideId,
         // time: rideTime, // time is missing
@@ -34,19 +34,18 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setlocationFro
         locationFrom: pickupLocation,
         locationTo: destination,
         numRidersAllowed: numRiders,
-        search: false,
+        search: true,
       })
-      .then((res) => console.log("Posting data", res))
+      .then((res) => {
+        console.log("Posting data", res);
+        if (res.data === "There are similar rides existing, would you like to continue creating?") {
+          // The message is sent, do something here
+          console.log("Message sent: There are similar rides existing, would you like to continue creating?");
+        }
+      })
       .catch((err) => console.log(err));
-    console.log(username);
-    console.log(dateOfRide);
-    console.log(rideTime);
-    console.log(pickupLocation);
-    console.log(destination);
-    console.log(numRiders);
-    console.log(AM);
-
   };
+  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
