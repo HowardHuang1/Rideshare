@@ -45,13 +45,13 @@ function CreateRide({ username }) {
 
   // fetchMap();
 
-  const imageURL = "https://i.ibb.co/6JQjLbV/Default-Blur-Image.jpg";
 
   const [locationFromSearchParam, setlocationFromSearchParam] = useState();
   const [locationToSearchParam, setlocationToSearchParam] = useState();
   const [dateSearchParam, setdateSearchParam] = useState();
   const [timeSearchParam, settimeSearchParam] = useState();
   const [AMSearchParam, setAMSearchParam] = useState();
+  const blurmap = "https://i.ibb.co/6JQjLbV/Default-Blur-Image.jpg";
 
   return (
     <div className="create-ride-interface">
@@ -82,7 +82,6 @@ function CreateRide({ username }) {
         className="ModalButton"
         style={{
           flex: "1 1 50%",
-          backgroundImage: `url(${imageURL})`,
           // backgroundImage: `url(${map})`
         }}
       >
@@ -117,8 +116,8 @@ function CreateRide({ username }) {
           />
         )}
         <img
-          src={map}
-          alt="map"
+          src={map ? map : blurmap}
+          // alt="asldhfjah"
           style={{ height: "100vh" }}
           // style={{ width: '100%', height: 'auto' }}
         />
