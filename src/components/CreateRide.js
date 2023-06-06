@@ -18,6 +18,7 @@ function CreateRide({ username }) {
   const [displayRideID, setDisplayID] = useState("");
   const [garb, setGarb] = useState(5);
   const [isOn, setIsOn] = useState(false);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchMap = async () => {
@@ -129,9 +130,22 @@ function CreateRide({ username }) {
             setDisplayID={setDisplayID}
             setMapRideID={setMapRideID}
             setIsOn={setIsOn}
+            setData={setData}
           />
         )}
-        {isOn && <ContinueModal setIsOn={setIsOn} />}
+        {isOn && (
+          <ContinueModal 
+            setIsOn={setIsOn} 
+            data={data}
+            setMark={setMark}
+            mark={mark}
+            displayID={displayRideID}
+            joinRideID={joinRideID}
+            setJoinRideID={setJoinRideID}
+            setDisplayID={setDisplayID}
+            setMapRideID={setMapRideID}
+          />
+        )}
         <img src={map ? map : blurmap} style={{ height: "100vh" }} />
       </div>
     </div>
