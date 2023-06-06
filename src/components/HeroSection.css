@@ -94,15 +94,15 @@
   }
 
   .left-image img {
-    width: 700px; 
-    height: auto; /* Maintain the aspect ratio */
+    width: 750px; 
+    height: 500px; 
     margin-top: 20px;
     margin-left: 100px;
 }
 
 .right-image img {
-    width: 700px; 
-    height: 500px; /* Maintain the aspect ratio */
+    width: 750px; 
+    height: 500px; 
     margin-top: 20px;
     margin-left: 100px;
 }
