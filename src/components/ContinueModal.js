@@ -19,7 +19,7 @@ function ContinueModal({ setIsOn }) {
               <RiCloseLine style={{ marginBottom: "-3px" }} />
             </button>
             <div className="modalContent">
-              ARE YOU SURE YOU WOULD LIKE TO CONTINUE? THERE ARE EXISTING RIDES!
+              There are similar rides existing! You can search for these at the previous step, or continue creating a ride below.
             </div>
             <div className="modalContent">
               <button className="deleteButton" onClick={() => setIsOn(false)}>
