@@ -106,7 +106,7 @@ function CreateRideModal({ username, setIsOpen, rideid, onSubmit, setlocationFro
       {/* <div className="darkBG centered" onClick={() => setIsOpen(false)}> */}
       <div className="darkBG centered">
         <div className="centered">
-          <div className="modal">
+          <div className="modal" style={{height: "440px" }}>
             <div className="modalHeader">
               <h5 className="title">Find Your Ride</h5>
             </div>
