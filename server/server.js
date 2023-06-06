@@ -370,7 +370,7 @@ app.post("/create-ride", async (req, res) => {
       // const error = new ValidationError("Invalid from location");
       // return res.status(400).json({ errors: error.array() });
     } else if (toPlaceInfo.address == undefined) {
-      res.status(400).json({ error: "Invalid to location" });
+      res.status(404).json({ error: "Invalid to location" });
       // const error = new ValidationError("Invalid destination");
       // return res.status(400).json({ errors: error.array() });
     }
@@ -436,7 +436,7 @@ app.post("/create-ride", async (req, res) => {
     // const error = new ValidationError("Invalid from location");
     // return res.status(400).json({ errors: error.array() });
   } else if (toPlaceInfo.address == undefined) {
-    return res.json({ error: "invalid to location" });
+    return res.status(404).json({ error: "invalid to location" });
     // const error = new ValidationError("Invalid destination");
     // return res.status(400).json({ errors: error.array() });
   }
