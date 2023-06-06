@@ -51,7 +51,7 @@ function CreateRideModal({
         search: false,
       });
       if (response.status === 200) {
-        setMark(mark + 1);
+        setMark(response.data._id);
       }
     } catch (error) {
       console.error("Error creating ride: ", error);
@@ -124,7 +124,7 @@ function CreateRideModal({
       {/* <div className="darkBG centered" onClick={() => setIsOpen(false)}> */}
       <div className="darkBG centered">
         <div className="centered">
-          <div className="modal" style={{height: "440px" }}>
+          <div className="modal" style={{ height: "440px" }}>
             <div className="modalHeader">
               <h5 className="title">Find Your Ride</h5>
             </div>
