@@ -45,10 +45,12 @@
   }
   .left-half{
     float: left;
+    padding-left: 80px;
   }
 
   .right-half {
     float: right;
+    padding-right: 80px;
   }
   
   h1 {
