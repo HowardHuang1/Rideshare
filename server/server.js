@@ -12,7 +12,7 @@ const {
 } = require("express-validator");
 
 const google_api_key = "AIzaSyDErGxdZK14gqrGZG0TXDnqooOgOQVGGyY";
-const generalMultiplier = 1.1;
+const generalMultiplier = 0.9;
 const halfMile = 1 / 35; // 0.5 miles in latlng degrees
 
 /* other imported files: */
@@ -340,7 +340,7 @@ app.post("/create-ride", async (req, res) => {
   // {"username": "john doe", "date": "09/15/2023", "time": "12:15", "AM": false, "locationFrom": "UCLA", "locationTo": "LAX", "numRidersAllowed": "3"}
   if (search) {
     const timeparam = 15;
-    const distparam = 0.5;
+    const distparam = 1;
     const { locationFrom, locationTo, date, time, AM } = req.body;
     const open = true;
     const foundRides = await Ride.find({}); // store rides in local variable
@@ -349,11 +349,9 @@ app.post("/create-ride", async (req, res) => {
       dateObj == null ||
       dateObj.getTime() < Date.now() + 1000 * 60 * 60 * 24
     ) {
-      return res
-        .status(404)
-        .json({
-          error: "Invalid date. Must be at least one day into the future",
-        });
+      return res.status(404).json({
+        error: "Invalid date. Must be at least one day into the future",
+      });
     }
 
     if (
@@ -364,11 +362,11 @@ app.post("/create-ride", async (req, res) => {
       AM == undefined ||
       open == undefined
     ) {
-      const foundRides = await Ride.find({});
+      const foundRides = await Ride.find({}); // start
       if (foundRides) {
-        return res.send(foundRides); // found rides
+        res.send(foundRides); // found rides
       } else {
-        return res.send(null); // no rides in database
+        res.send(null); // no rides in database
       }
     }
 
@@ -388,8 +386,8 @@ app.post("/create-ride", async (req, res) => {
     let foundRidesFiltered = [];
     for (const ride of foundRides) {
       let cond = true;
-      cond = cond && ride.addressFrom == fromPlaceInfo.address;
-      cond = cond && ride.addressTo == toPlaceInfo.address;
+      // cond = cond && ride.addressFrom == fromPlaceInfo.address;
+      // cond = cond && ride.addressTo == toPlaceInfo.address; // end
       // check if ride is already filled, if open is specified
       if (open) {
         cond = cond && ride.usernames.length != ride.numRidersAllowed;
@@ -408,12 +406,21 @@ app.post("/create-ride", async (req, res) => {
         dateObj
       );
       if (response == undefined) {
-        return res
-          .status(404)
-          .json({ error: "Trouble fetching Distance and Duration" });
+        continue;
       }
       console.log(response.distance);
       cond = cond && response.distance <= distparam;
+
+      const response2 = await services.getDistanceAndDuration(
+        toPlaceInfo.address,
+        ride.addressTo,
+        dateObj
+      );
+      if (response2 == undefined) {
+        continue;
+      }
+      console.log(response2.distance);
+      cond = cond && response2.distance <= distparam;
 
       if (cond) {
         foundRidesFiltered.push(ride);
@@ -438,11 +445,9 @@ app.post("/create-ride", async (req, res) => {
   }
   const dateObj = services.dateTimeValidator(date, time, AM);
   if (dateObj == null || dateObj.getTime() < Date.now() + 1000 * 60 * 60 * 24) {
-    return res
-      .status(404)
-      .json({
-        error: "Invalid date. Must be at least one day into the future",
-      });
+    return res.status(404).json({
+      error: "Invalid date. Must be at least one day into the future",
+    });
   }
 
   let fromPlaceInfo = await services.getPlaceInfo(locationFrom);
@@ -817,7 +822,7 @@ app.put(
 app.get("/search-ride", async (req, res) => {
   console.log("Search is called");
   const timeparam = 15;
-  const distparam = 0.5;
+  const distparam = 1;
   const { locationFrom, locationTo, date, time, AM, open } = req.query;
   const foundRides = await Ride.find({}); // store rides in local variable
   console.log("In Search time: " + time);
@@ -840,11 +845,9 @@ app.get("/search-ride", async (req, res) => {
 
   const dateObj = services.dateTimeValidator(date, time, AM);
   if (dateObj == null || dateObj.getTime() < Date.now() + 1000 * 60 * 60 * 24) {
-    return res
-      .status(404)
-      .json({
-        error: "Invalid date. Must be at least one day into the future",
-      });
+    return res.status(404).json({
+      error: "Invalid date. Must be at least one day into the future",
+    });
   }
   let fromPlaceInfo = await services.getPlaceInfo(locationFrom);
   let toPlaceInfo = await services.getPlaceInfo(locationTo);
@@ -862,8 +865,8 @@ app.get("/search-ride", async (req, res) => {
   let foundRidesFiltered = [];
   for (const ride of foundRides) {
     let cond = true;
-    cond = cond && ride.addressFrom == fromPlaceInfo.address;
-    cond = cond && ride.addressTo == toPlaceInfo.address;
+    // cond = cond && ride.addressFrom == fromPlaceInfo.address;
+    // cond = cond && ride.addressTo == toPlaceInfo.address;
     // check if ride is already filled, if open is specified
     if (open) {
       cond = cond && ride.usernames.length != ride.numRidersAllowed;
@@ -882,12 +885,21 @@ app.get("/search-ride", async (req, res) => {
       dateObj
     );
     if (response == null) {
-      return res
-        .status(404)
-        .json({ error: "Error fetching distance or duration" });
+      continue;
     }
     console.log(response.distance);
     cond = cond && response.distance <= distparam;
+
+    const response2 = await services.getDistanceAndDuration(
+      toPlaceInfo.address,
+      ride.addressTo,
+      dateObj
+    );
+    if (response2 == undefined) {
+      continue;
+    }
+    console.log(response2.distance);
+    cond = cond && response2.distance <= distparam;
 
     if (cond) {
       foundRidesFiltered.push(ride);

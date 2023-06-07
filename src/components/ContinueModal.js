@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import "./ContinueModal.css";
 import { RiCloseLine } from "react-icons/ri";
 import "font-awesome/css/font-awesome.min.css";
-import CreateRideModal from './CreateRideModal'
+import CreateRideModal from "./CreateRideModal";
 import axios from "axios";
 import { set } from "mongoose";
 
-function ContinueModal({ 
-  setIsOn, 
+function ContinueModal({
+  setIsOn,
   data,
   setMark,
   mark,
@@ -32,7 +32,7 @@ function ContinueModal({
   const numRiders = data[6];
 
   const createData = async (e) => {
-  setCreatedRide(false);
+    setCreatedRide(false);
     try {
       const response = await axios.post("http://localhost:8000/create-ride", {
         // default username
@@ -86,7 +86,7 @@ function ContinueModal({
     setlocationToSearchParam(destination);
     setdateSearchParam(dateOfRide);
     settimeSearchParam(rideTime);
-    setAMSearchParam("false");
+    setAMSearchParam(AM);
     setIsOn(false);
     // onSubmit();
   };
@@ -103,7 +103,8 @@ function ContinueModal({
               <RiCloseLine style={{ marginBottom: "-3px" }} />
             </button>
             <div className="modalContent">
-              There are similar rides existing! You can search for these at the previous step, or continue creating a ride below.
+              There are similar rides existing! You can search for these at the
+              previous step, or continue creating a ride below.
             </div>
             <div className="modalContent">
               <button className="deleteButton" onClick={handleCreateSubmit}>
@@ -115,6 +116,6 @@ function ContinueModal({
       </div>
     </div>
   );
-} 
+}
 
 export default ContinueModal;
