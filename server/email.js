@@ -127,10 +127,11 @@ const createEmailSenderWithPOR = async (
     "\nAlternate Destination: " +
     por_to +
     "\nAlternate Ride Price: " +
-    parseInt(por_price) +
-    "$." +
-    "\nThank you for using BruinCruisin!" +
-    "\nSincerely,\nBruinCruisin Team";
+    "$" +
+    +parseInt(por_price) +
+    "." +
+    "\nThank you for using BruinCruisin!\n" +
+    "\nBest Regards,\nBruinCruisin Team";
 
   sendEmail(
     "rohilkalra@gmail.com",
