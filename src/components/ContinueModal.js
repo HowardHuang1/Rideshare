@@ -17,6 +17,11 @@ function ContinueModal({
   displayID,
   setMapRideID,
   setCreatedRide,
+  setlocationFromSearchParam,
+  setlocationToSearchParam,
+  setdateSearchParam,
+  settimeSearchParam,
+  setAMSearchParam,
 }) {
   const username = data[0];
   const dateOfRide = data[1];
@@ -75,6 +80,17 @@ function ContinueModal({
     // onSubmit();
   };
 
+  const handleSearchSubmit = async (e) => {
+    console.log("Click registered");
+    setlocationFromSearchParam(pickupLocation);
+    setlocationToSearchParam(destination);
+    setdateSearchParam(dateOfRide);
+    settimeSearchParam(rideTime);
+    setAMSearchParam("false");
+    setIsOn(false);
+    // onSubmit();
+  };
+
   return (
     <div>
       <div className="darkBG centered">
@@ -83,7 +99,7 @@ function ContinueModal({
             <div className="modalHeader">
               <h5 className="title">Alert</h5>
             </div>
-            <button className="closeButton" onClick={() => setIsOn(false)}>
+            <button className="closeButton" onClick={handleSearchSubmit}>
               <RiCloseLine style={{ marginBottom: "-3px" }} />
             </button>
             <div className="modalContent">

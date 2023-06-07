@@ -148,6 +148,11 @@ function CreateRide({ username }) {
             setDisplayID={setDisplayID}
             setMapRideID={setMapRideID}
             setCreatedRide={setCreatedRide}
+            setlocationFromSearchParam={setlocationFromSearchParam}
+            setlocationToSearchParam={setlocationToSearchParam}
+            setdateSearchParam={setdateSearchParam}
+            settimeSearchParam={settimeSearchParam}
+            setAMSearchParam={setAMSearchParam}
           />
         )}
         {createdRide && (
