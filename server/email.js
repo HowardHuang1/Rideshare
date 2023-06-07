@@ -118,7 +118,7 @@ const createEmailSenderWithPOR = async (
     "\nDate: " +
     formatDate(dateObject) +
     ". Based on newly received data, your estimated ride price is " +
-    "$." +
+    "$" +
     parseInt(ba_price) +
     "." +
     "\n\nHowever, we found a cheaper ride for you with a similar pickup location and destination (less than half a mile away)!" +
@@ -155,7 +155,7 @@ const updateEmailSender = async (
     const body =
       "Dear " +
       fullNames[i] +
-      ",\nHere is the information for the ride you created." +
+      ",\nYour ride has been updated." +
       "\nPickup Location: " +
       locationFrom +
       "\nDestination: " +

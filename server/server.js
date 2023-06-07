@@ -557,11 +557,13 @@ app.post("/create-ride", async (req, res) => {
   }
 
   if (bestAvailablePrice) {
-    if (bestAvailablePrice < 0.5 * price) {
-      bestAvailablePrice = 0.5 * price;
-    }
     bestAvailablePrice =
       bestAvailablePrice * trafficMultiplier * generalMultiplier;
+    if (bestAvailablePrice < 0.5 * price) {
+      bestAvailablePrice = 0.5 * price;
+    } else if (bestAvailablePrice > 2 * price) {
+      bestAvailablePrice = 2 * price;
+    }
   } else {
     bestAvailablePrice = price;
   }
@@ -721,6 +723,7 @@ app.put(
   ],
   async (req, res) => {
     const { username, rideID, time, AM, numRidersAllowed } = req.body;
+    console.log("UPDATE REQ");
     // user can be any user in the ride
     const foundUser = await User.findOne({ username: username });
     if (!foundUser) {
@@ -805,16 +808,18 @@ app.put(
 
     let emailsFromUsernames = [];
     for (let i = 0; i < foundRide.usernames.length; i++) {
-      emailsFromUsernames.push(
-        await User.findOne({ username: foundRide.usernames[i] }).emailAddress
-      );
+      const person = await User.findOne({ username: foundRide.usernames[i] });
+      const emailAddy = person.emailAddress;
+      emailsFromUsernames.push(emailAddy);
     }
+    console.log("Emails: ", emailsFromUsernames);
     await email.updateEmailSender(
       emailsFromUsernames,
       foundRide.usernames,
       foundRide.locationFrom,
       foundRide.locationTo,
-      foundRide.date
+      foundRide.date,
+      bestAvailablePrice
     );
   }
 );
