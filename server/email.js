@@ -78,7 +78,7 @@ const createEmailSender = async (
     locationTo +
     "\nDate: " +
     formatDate(dateObject) +
-    ". Based on newly received data, your estimated ride price is " +
+    ". \nBased on newly received data, your estimated ride price is " +
     "$" +
     parseInt(ba_price) +
     "." +
@@ -117,7 +117,7 @@ const createEmailSenderWithPOR = async (
     locationTo +
     "\nDate: " +
     formatDate(dateObject) +
-    ". Based on newly received data, your estimated ride price is " +
+    ". \nBased on newly received data, your estimated ride price is " +
     "$" +
     parseInt(ba_price) +
     "." +
@@ -162,7 +162,7 @@ const updateEmailSender = async (
       locationTo +
       "\nDate: " +
       formatDate(dateObject) +
-      ". Based on newly received data, your estimated ride price is " +
+      ". \nBased on newly received data, your estimated ride price is " +
       "$" +
       parseInt(ba_price) +
       "." +
