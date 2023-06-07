@@ -124,6 +124,7 @@ const getDistanceAndDuration = async (
     return { distance, durationInTraffic, trafficMultiplier };
   } catch (error) {
     console.error("Error:", error.message);
+    return undefined;
   }
 };
 

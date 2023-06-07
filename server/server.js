@@ -345,6 +345,16 @@ app.post("/create-ride", async (req, res) => {
     const open = true;
     const foundRides = await Ride.find({}); // store rides in local variable
     const dateObj = services.dateTimeValidator(date, time, AM);
+    if (
+      dateObj == null ||
+      dateObj.getTime() < Date.now() + 1000 * 60 * 60 * 24
+    ) {
+      return res
+        .status(404)
+        .json({
+          error: "Invalid date. Must be at least one day into the future",
+        });
+    }
 
     if (
       locationFrom == undefined ||
@@ -356,9 +366,9 @@ app.post("/create-ride", async (req, res) => {
     ) {
       const foundRides = await Ride.find({});
       if (foundRides) {
-        res.send(foundRides); // found rides
+        return res.send(foundRides); // found rides
       } else {
-        res.send(null); // no rides in database
+        return res.send(null); // no rides in database
       }
     }
 
@@ -366,11 +376,11 @@ app.post("/create-ride", async (req, res) => {
     let toPlaceInfo = await services.getPlaceInfo(locationTo);
 
     if (fromPlaceInfo.address == undefined) {
-      res.status(404).json({ error: "Invalid from location" });
+      return res.status(404).json({ error: "Invalid from location" });
       // const error = new ValidationError("Invalid from location");
       // return res.status(400).json({ errors: error.array() });
     } else if (toPlaceInfo.address == undefined) {
-      res.status(404).json({ error: "Invalid to location" });
+      return res.status(404).json({ error: "Invalid to location" });
       // const error = new ValidationError("Invalid destination");
       // return res.status(400).json({ errors: error.array() });
     }
@@ -397,6 +407,11 @@ app.post("/create-ride", async (req, res) => {
         ride.addressFrom,
         dateObj
       );
+      if (response == undefined) {
+        return res
+          .status(404)
+          .json({ error: "Trouble fetching Distance and Duration" });
+      }
       console.log(response.distance);
       cond = cond && response.distance <= distparam;
 
@@ -422,10 +437,12 @@ app.post("/create-ride", async (req, res) => {
     return res.send(null); // user not found
   }
   const dateObj = services.dateTimeValidator(date, time, AM);
-  if (dateObj == null) {
-    return res.status(404).json({ error: "invalid date or date" });
-    // const error = new ValidationError("Invalid date or time");
-    // return res.status(400).json({ errors: error.array() });
+  if (dateObj == null || dateObj.getTime() < Date.now() + 1000 * 60 * 60 * 24) {
+    return res
+      .status(404)
+      .json({
+        error: "Invalid date. Must be at least one day into the future",
+      });
   }
 
   let fromPlaceInfo = await services.getPlaceInfo(locationFrom);
@@ -822,6 +839,13 @@ app.get("/search-ride", async (req, res) => {
   }
 
   const dateObj = services.dateTimeValidator(date, time, AM);
+  if (dateObj == null || dateObj.getTime() < Date.now() + 1000 * 60 * 60 * 24) {
+    return res
+      .status(404)
+      .json({
+        error: "Invalid date. Must be at least one day into the future",
+      });
+  }
   let fromPlaceInfo = await services.getPlaceInfo(locationFrom);
   let toPlaceInfo = await services.getPlaceInfo(locationTo);
 
@@ -857,6 +881,11 @@ app.get("/search-ride", async (req, res) => {
       ride.addressFrom,
       dateObj
     );
+    if (response == null) {
+      return res
+        .status(404)
+        .json({ error: "Error fetching distance or duration" });
+    }
     console.log(response.distance);
     cond = cond && response.distance <= distparam;
 
