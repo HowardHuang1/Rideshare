@@ -71,6 +71,7 @@ function CreateRideModal({
           );
           setIsOn(true);
         }
+        alert("Ride Created Successfully! View ride in Profile");
         setMark(response.data._id);
         setDisplayID(response.data._id);
         setJoinRideID([...joinRideID, response.data._id]);
