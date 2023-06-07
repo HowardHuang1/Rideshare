@@ -39,10 +39,11 @@ const HeroSection = () => {
                 src={process.env.PUBLIC_URL + '/CreateRideSS.png'}
                 alt="Left Image"
                 style={{
-                    width: "710px",
-                    height: "400px", 
-                    marginTop: "20px",
-                    marginLeft: "100px",
+                    width: "700px",
+                    height: "360px", 
+                    marginTop: "62px",
+                    borderRadius: "20px",
+                    marginLeft: "120px",
                 }}
                 />
             </div>
@@ -79,7 +80,7 @@ const HeroSection = () => {
       </div>
       <div className="section">
         <div className="left-half">
-          <h2 className="light-red-text2" style={{marginTop: "80px",}}>
+          <h2 className="light-red-text2" style={{marginTop: "40px"}}>
             Accessing Profile Page
           </h2>
           <div className="profile">
@@ -109,20 +110,20 @@ const HeroSection = () => {
                 src={process.env.PUBLIC_URL + '../ProfileInfo.png'}
                 alt="Right Image"
                 style={{
-                    width: "300px",
+                    width: "250px",
                     height: "200px", 
-                    marginTop: "20px",
-                    marginLeft: "100px",
+                    marginTop: "80px",
+                    marginLeft: "130px",
                 }}
             />
             <img
                 src={process.env.PUBLIC_URL + '../RideHistory.png'}
                 alt="Right Image"
                 style={{
-                    width: "300px",
+                    width: "250px",
                     height: "200px", 
-                    marginTop: "20px",
-                    marginLeft: "100px",
+                    marginTop: "70px",
+                    marginLeft: "130px",
                 }}
             />
             </div>
