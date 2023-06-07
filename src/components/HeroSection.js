@@ -39,7 +39,7 @@ const HeroSection = () => {
                 src={process.env.PUBLIC_URL + '/CreateRideSS.png'}
                 alt="Left Image"
                 style={{
-                    width: "650px",
+                    width: "710px",
                     height: "400px", 
                     marginTop: "20px",
                     marginLeft: "100px",
@@ -48,7 +48,7 @@ const HeroSection = () => {
             </div>
         </div>
         <div className="right-half">
-          <h2 className="light-red-text">
+          <h2 className="light-red-text" style={{marginTop: "60px",}}>
             Steps for searching/creating a ride
           </h2>
           <div className="steps">
@@ -79,7 +79,7 @@ const HeroSection = () => {
       </div>
       <div className="section">
         <div className="left-half">
-          <h2 className="light-red-text">
+          <h2 className="light-red-text2" style={{marginTop: "80px",}}>
             Accessing Profile Page
           </h2>
           <div className="profile">

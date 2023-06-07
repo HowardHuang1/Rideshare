@@ -77,10 +77,17 @@ function CardStack({
       if (joinRideID.includes(ride._id)) {
         joinColor = "gray";
       }
+      if (ride.usernames.length >= ride.numRidersAllowed) {
+        joinColor = "gray";
+      }
+      if (ride.usernames.includes(username)) {
+        joinColor = "gray";
+      }
       if (ride._id == displayID) {
         displayColor = "gray";
       }
       console.log("ride ul: " + ride.usernames.length);
+      let inRide = false;
       rideArray.push(
         <RideCard
           username={username}

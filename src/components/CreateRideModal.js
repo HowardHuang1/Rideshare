@@ -28,6 +28,8 @@ function CreateRideModal({
   displayID,
   setMapRideID,
   setIsOn,
+  setData,
+  setCreatedRide,
 }) {
   // console.log("rideid: " + setRideData);
   const [pickupLocation, setPickupLocation] = useState();
@@ -38,8 +40,11 @@ function CreateRideModal({
   const [AM, setAmPm] = useState(true);
   const [search, setSearch] = useState(false);
   const rideId = rideid;
+  let triggered_search = false;
 
   const createData = async (e) => {
+    const responseData = [username, dateOfRide, rideTime, AM, pickupLocation, destination, numRiders];
+    setData(responseData);
     try {
       const response = await axios.post("http://localhost:8000/create-ride", {
         // default username
@@ -66,7 +71,11 @@ function CreateRideModal({
           console.log(
             "There are similar rides existing, would you like to continue creating?"
           );
+          triggered_search=true;
           setIsOn(true);
+        }
+        if(!triggered_search){
+          setCreatedRide(true);
         }
         setMark(response.data._id);
         setDisplayID(response.data._id);
@@ -77,7 +86,6 @@ function CreateRideModal({
       console.error("Error creating ride: ", error);
       alert(error.message);
     }
-
     console.log(username);
     console.log(dateOfRide);
     console.log(rideTime);

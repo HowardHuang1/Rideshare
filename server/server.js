@@ -893,7 +893,7 @@ app.get("/get-ride-image", async (req, res) => {
   const overviewPolyline = route.overview_polyline.points;
 
   // Generate the static map image URL with the driving route
-  const mapImageURL = `https://maps.googleapis.com/maps/api/staticmap?size=530x640&markers=color:red%7Clabel:S%7C${encodeURIComponent(
+  const mapImageURL = `https://maps.googleapis.com/maps/api/staticmap?size=560x640&markers=color:red%7Clabel:S%7C${encodeURIComponent(
     foundRide.addressFrom
   )}&markers=color:red%7Clabel:D%7C${encodeURIComponent(
     foundRide.addressTo

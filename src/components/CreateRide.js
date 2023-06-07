@@ -5,6 +5,7 @@ import CreateRideModal from "./CreateRideModal";
 import CardStack from "./CardStack";
 import axios from "axios";
 import ContinueModal from "./ContinueModal";
+import SuccessModal from "./SuccessModal";
 
 //TODO: Need to make am PM button
 //TODO: Need to add dropdown menu for number of riders (2 options: 4 or 6)
@@ -18,6 +19,8 @@ function CreateRide({ username }) {
   const [displayRideID, setDisplayID] = useState("");
   const [garb, setGarb] = useState(5);
   const [isOn, setIsOn] = useState(false);
+  const [data, setData] = useState([]);
+  const [createdRide, setCreatedRide] = useState(false);
 
   useEffect(() => {
     const fetchMap = async () => {
@@ -129,9 +132,35 @@ function CreateRide({ username }) {
             setDisplayID={setDisplayID}
             setMapRideID={setMapRideID}
             setIsOn={setIsOn}
+            setData={setData}
+            setCreatedRide={setCreatedRide}
           />
         )}
-        {isOn && <ContinueModal setIsOn={setIsOn} />}
+        {isOn && (
+          <ContinueModal 
+            setIsOn={setIsOn} 
+            data={data}
+            setMark={setMark}
+            mark={mark}
+            displayID={displayRideID}
+            joinRideID={joinRideID}
+            setJoinRideID={setJoinRideID}
+            setDisplayID={setDisplayID}
+            setMapRideID={setMapRideID}
+            setCreatedRide={setCreatedRide}
+            setlocationFromSearchParam={setlocationFromSearchParam}
+            setlocationToSearchParam={setlocationToSearchParam}
+            setdateSearchParam={setdateSearchParam}
+            settimeSearchParam={settimeSearchParam}
+            setAMSearchParam={setAMSearchParam}
+          />
+        )}
+        {createdRide && (
+          <SuccessModal 
+            setCreatedRide={setCreatedRide}
+          />
+        )}
+
         <img src={map ? map : blurmap} style={{ height: "100vh" }} />
       </div>
     </div>
