@@ -20,8 +20,15 @@ const HeroSection = () => {
           </div>
           <div className="hero-image">
             <img
-              src="https://images.ctfassets.net/q8mvene1wzq4/4IBwnsnQGhWotLFtcMYJXG/76595507c8a64e686b85a8cdce605cd8/rdr_hero_pp.jpg?w=1000&q=60&fm=webp"
+              // src="https://images.ctfassets.net/q8mvene1wzq4/4IBwnsnQGhWotLFtcMYJXG/76595507c8a64e686b85a8cdce605cd8/rdr_hero_pp.jpg?w=1000&q=60&fm=webp"
+              src={process.env.PUBLIC_URL + '../banner.png'}
               alt="Hero Image"
+              style={{
+                width: "600px",
+                height: "500px", 
+                marginTop: "100px",
+                marginLeft: "100px",
+              }}
             />
           </div>
         </div>
@@ -99,13 +106,23 @@ const HeroSection = () => {
         <div className="right-half">
             <div className="right-image">
             <img
-                src={process.env.PUBLIC_URL + '/ProfileSS.png'}
+                src={process.env.PUBLIC_URL + '../ProfileInfo.png'}
                 alt="Right Image"
                 style={{
-                    width: "450px",
-                    height: "350px", 
+                    width: "300px",
+                    height: "200px", 
                     marginTop: "20px",
-                    marginLeft: "200px",
+                    marginLeft: "100px",
+                }}
+            />
+            <img
+                src={process.env.PUBLIC_URL + '../RideHistory.png'}
+                alt="Right Image"
+                style={{
+                    width: "300px",
+                    height: "200px", 
+                    marginTop: "20px",
+                    marginLeft: "100px",
                 }}
             />
             </div>
