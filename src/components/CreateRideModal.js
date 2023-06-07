@@ -29,6 +29,7 @@ function CreateRideModal({
   setMapRideID,
   setIsOn,
   setData,
+  setCreatedRide,
 }) {
   // console.log("rideid: " + setRideData);
   const [pickupLocation, setPickupLocation] = useState();
@@ -39,6 +40,7 @@ function CreateRideModal({
   const [AM, setAmPm] = useState(true);
   const [search, setSearch] = useState(false);
   const rideId = rideid;
+  let triggered_search = false;
 
   const createData = async (e) => {
     const responseData = [username, dateOfRide, rideTime, AM, pickupLocation, destination, numRiders];
@@ -69,9 +71,12 @@ function CreateRideModal({
           console.log(
             "There are similar rides existing, would you like to continue creating?"
           );
+          triggered_search=true;
           setIsOn(true);
         }
-        alert("Ride Created Successfully! View ride in Profile");
+        if(!triggered_search){
+          setCreatedRide(true);
+        }
         setMark(response.data._id);
         setDisplayID(response.data._id);
         setJoinRideID([...joinRideID, response.data._id]);

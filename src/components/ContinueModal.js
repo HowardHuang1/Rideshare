@@ -16,6 +16,7 @@ function ContinueModal({
   setDisplayID,
   displayID,
   setMapRideID,
+  setCreatedRide,
 }) {
   const username = data[0];
   const dateOfRide = data[1];
@@ -26,6 +27,7 @@ function ContinueModal({
   const numRiders = data[6];
 
   const createData = async (e) => {
+  setCreatedRide(false);
     try {
       const response = await axios.post("http://localhost:8000/create-ride", {
         // default username
@@ -68,6 +70,7 @@ function ContinueModal({
     console.log("Click registered");
     await createData();
     // await callSetState();
+    setCreatedRide(true);
     setIsOn(false);
     // onSubmit();
   };
