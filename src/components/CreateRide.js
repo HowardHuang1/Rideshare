@@ -144,6 +144,11 @@ function CreateRide({ username }) {
             setJoinRideID={setJoinRideID}
             setDisplayID={setDisplayID}
             setMapRideID={setMapRideID}
+            setlocationFromSearchParam={setlocationFromSearchParam}
+            setlocationToSearchParam={setlocationToSearchParam}
+            setdateSearchParam={setdateSearchParam}
+            settimeSearchParam={settimeSearchParam}
+            setAMSearchParam={setAMSearchParam}
           />
         )}
         <img src={map ? map : blurmap} style={{ height: "100vh" }} />
