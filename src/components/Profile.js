@@ -3,6 +3,7 @@ import axios from "axios";
 import "./Profile.css";
 import UpdateModal from "./UpdateModal";
 import { processDate } from "./PrettyDate";
+import NoUpdateModal from "./NoUpdateModal";
 
 const username = localStorage.getItem("username");
 
@@ -176,6 +177,14 @@ const RideHistory = ({ username }) => {
                             Update Ride
                           </button>
                           {isOpen && (
+                            (
+                            username !== ride.usernames[0])
+                            ?
+                            <NoUpdateModal
+                              setIsOpen={setIsOpen}
+                            />
+                            :
+
                             <UpdateModal
                               setIsOpen={setIsOpen}
                               rideid={selectedRideID}
