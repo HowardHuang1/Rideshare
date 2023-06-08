@@ -96,10 +96,10 @@ function UpdateModal({ setIsOpen, rideid, onSubmit, setRideData }) {
                   />
                   <select
                     style={{
-                      borderRadius: "20px",
+                      borderRadius: "4px",
                       width: "20%",
                       border: "2px solid #aaa",
-                      height: "80%",
+                      height: "38px",
                     }}
                     onChange={handleAMChange} // Call handleAMChange on change
                   >
