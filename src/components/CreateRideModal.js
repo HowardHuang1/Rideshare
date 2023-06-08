@@ -178,7 +178,7 @@ function CreateRideModal({
                     placeholder="Pickup Location, ex: De Neve Plaza"
                     onChange={handleInputChange}
                   />
-                  <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+                  <i class="fa fa-search fa-lg fa-fw" aria-hidden="true"></i>
                 </div>
                 <div class="inputWithIcon">
                   <input
@@ -188,7 +188,7 @@ function CreateRideModal({
                     placeholder="Destination, Ex: LAX International Airport"
                     onChange={handleInputChange}
                   />
-                  <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+                  <i class="fa fa-map fa-lg fa-fw" aria-hidden="true"></i>
                 </div>
                 <div class="inputWithIcon">
                   <input
@@ -198,7 +198,7 @@ function CreateRideModal({
                     placeholder="Date of Ride: Ex 06/05/2023"
                     onChange={handleInputChange}
                   />
-                  <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+                  <i class="fa fa-calendar fa-lg fa-fw" aria-hidden="true"></i>
                 </div>
                 <div class="inputWithIcon2">
                   <input
