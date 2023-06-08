@@ -83,6 +83,7 @@ const RideHistory = ({ username }) => {
   const [selectedRideID, setSelectedRideID] = useState(null);
   // const [time, setTime] = useState(null);
   const [numRiders, setNumRiders] = useState(null);
+  const [rideCreator, setRideCreator] = useState(null);
 
   const leaveRide = async (username, rideID) => {
     try {
@@ -171,6 +172,7 @@ const RideHistory = ({ username }) => {
                               setIsOpen(true);
                               setSelectedRideID(ride._id);
                               // setTime(ride.date);
+                              setRideCreator(ride.usernames[0])
                               setNumRiders(ride.numRiders);
                             }}
                           >
@@ -178,13 +180,12 @@ const RideHistory = ({ username }) => {
                           </button>
                           {isOpen && (
                             (
-                            username !== ride.usernames[0])
+                            username !== rideCreator)
                             ?
                             <NoUpdateModal
                               setIsOpen={setIsOpen}
                             />
                             :
-
                             <UpdateModal
                               setIsOpen={setIsOpen}
                               rideid={selectedRideID}
