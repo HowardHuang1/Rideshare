@@ -13,7 +13,7 @@ function UpdateModal({ setIsOpen, rideid, onSubmit, setRideData }) {
   const [destination, setDestination] = useState();
   const [rideTime, setRideTime] = useState();
   const [numRiders, setNumRiders] = useState();
-  const [isAM, setIsAM] = useState(false); // Initialize AM field as false
+  const [isAM, setIsAM] = useState(true); // Initialize AM field as false
   const rideId = rideid;
 
   const putData = async (e) => {
@@ -103,7 +103,6 @@ function UpdateModal({ setIsOpen, rideid, onSubmit, setRideData }) {
                     }}
                     onChange={handleAMChange} // Call handleAMChange on change
                   >
-                    <option>AM/PM</option>
                     <option value="AM">AM</option>
                     <option value="PM">PM</option>
                   </select>
