@@ -807,15 +807,18 @@ app.put(
     }
 
     let emailsFromUsernames = [];
+    let fnFromUsernames = [];
     for (let i = 0; i < foundRide.usernames.length; i++) {
       const person = await User.findOne({ username: foundRide.usernames[i] });
       const emailAddy = person.emailAddress;
+      const fn = person.fullName;
       emailsFromUsernames.push(emailAddy);
+      fnFromUsernames.push(fn);
     }
     console.log("Emails: ", emailsFromUsernames);
     await email.updateEmailSender(
       emailsFromUsernames,
-      foundRide.usernames,
+      fnFromUsernames,
       foundRide.locationFrom,
       foundRide.locationTo,
       foundRide.date,
