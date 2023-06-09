@@ -5,7 +5,7 @@ const {
   validationResult,
   ValidationError,
 } = require("express-validator");
-const google_api_key = "AIzaSyDErGxdZK14gqrGZG0TXDnqooOgOQVGGyY";
+const google_api_key = "AIzaSyDuz4l-RTHgipr8QZ5sl3q1RMOEoBUEpRk";
 
 const getPlaceInfo = async (location) => {
   try {
