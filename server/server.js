@@ -11,7 +11,7 @@ const {
   ValidationError,
 } = require("express-validator");
 
-const google_api_key = "AIzaSyDErGxdZK14gqrGZG0TXDnqooOgOQVGGyY";
+const google_api_key = "AIzaSyDuz4l-RTHgipr8QZ5sl3q1RMOEoBUEpRk";
 const generalMultiplier = 0.9;
 const halfMile = 1 / 35; // 0.5 miles in latlng degrees
 
