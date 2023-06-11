@@ -48,4 +48,4 @@ $ npm install
 $ cd server
 $ npm install
 ```
-Then make sure to restart both Rideshare and server in separate terminals using the 'npm start' command.
+Please make sure to restart both Rideshare and server in separate terminals using the 'npm start' command.
