@@ -262,6 +262,11 @@ app.post(
   }
 );
 
+
+
+
+
+
 app.get("/user-data", async (req, res) => {
   const { username } = req.query;
   const user = await User.findOne({ username: username });
@@ -949,6 +954,9 @@ app.get("/get-ride-image", async (req, res) => {
   )}&path=enc:${overviewPolyline}&key=${google_api_key}`;
   res.send(mapImageURL);
 });
+
+
+
 
 app.delete("/delete-database", async (req, res) => {
   await Ride.deleteMany({});
